@@ -1,0 +1,2 @@
+﻿  Jeu_Oie_test.cpp
+C:\Users\trist\source\repos\Titled-Goose-Game\src\Jeu_Oie_test.cpp(4,10): error C1083: Impossible d'ouvrir le fichier include : 'GL/glut.h' : No such file or directory
