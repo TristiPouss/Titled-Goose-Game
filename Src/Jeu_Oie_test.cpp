@@ -5,7 +5,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "Shapes.h"
+#include "View/Geometry/Shapes.h"
+#include "View/Geometry/Furnitures.h"
 
 static float rx = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe x
 static float sens = 1.0F;          // Sens de rotation de la scene sur elle-meme autour de l'axe x
