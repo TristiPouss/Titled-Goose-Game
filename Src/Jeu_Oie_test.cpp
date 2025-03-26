@@ -5,6 +5,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "Shapes.h"
+
 static float rx = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe x
 static float sens = 1.0F;          // Sens de rotation de la scene sur elle-meme autour de l'axe x
 static float ry = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe y
@@ -52,7 +54,7 @@ static void ambient() {
 static void spot_top() {
     GLfloat diff[] = { 1.0, 1.0, 1.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
-    GLfloat pos[] = { 0.0, 8.0, 0.0, 1.0 };
+    GLfloat pos[] = { 0.0, 12.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_POSITION, pos);
     GLfloat dir[] = { 0.0, -8.0, 0.0 };
     glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
@@ -183,6 +185,7 @@ static void display(void) {
 
     // light init
     spot_top();
+    ambient();
 
     if (culling)
         glEnable(GL_CULL_FACE);
@@ -231,7 +234,9 @@ static void display(void) {
     glScalef(zoom, zoom, zoom);
 
     // Scene
-    room_skeleton(c, n);
+    //room_skeleton(c, n);
+
+    draw_cube(c, n);
 
     glPopMatrix();
 
