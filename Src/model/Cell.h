@@ -8,6 +8,7 @@
  * It provides a virtual function `action` that can be overridden by derived classes
  * to define specific behavior for the cell.
  */
+#include "Player.h"
 class Cell {
 public:
     Cell();
@@ -17,7 +18,7 @@ private:
     /**
      * @brief The action to be performed when a player lands on this cell.
      */
-    virtual void action();
+    virtual void action(Player& player) = 0;
 };
 
 /**
@@ -29,7 +30,7 @@ class NormalCell : public Cell {
         ~NormalCell();
 
         // Does nothing since it's a normal cell
-        void action() override;
+        void action(Player& player) override;
     };
 
 /**
@@ -41,7 +42,7 @@ class GooseCell : public Cell {
         ~GooseCell();
 
         // Moves the player to the next goose cell
-        void action() override;
+        void action(Player& player) override;
     };
 
 /**
@@ -53,7 +54,7 @@ class TrapCell : public Cell {
         ~TrapCell();
 
         // Time out the player for a certain number of turns
-        void action() override;
+        void action(Player& player) override;
     };
 
 
@@ -66,7 +67,7 @@ class TeleportCell : public Cell {
         ~TeleportCell();
 
         // Moves the player to a specific cell
-        void action() override;
+        void action(Player& player) override;
     };
 
 

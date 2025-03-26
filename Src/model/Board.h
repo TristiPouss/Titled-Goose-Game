@@ -40,7 +40,7 @@ public:
      * @brief Adds a player to the board.
      * @param p The player to add.
      */
-    void addPlayer(Player p);
+    void addPlayer(Player &p);
 
     /**
      * @brief Gets the size of the board.
@@ -52,14 +52,14 @@ public:
      * @brief Gets the vector of cells on the board.
      * @return A vector containing all the cells on the board.
      */
-    std::vector<Cell> getCellsTab();
+    std::vector<Cell> &getCellsTab();
 
     /**
      * @brief Gets a specific cell on the board by index.
      * @param index The index of the cell to retrieve.
      * @return The cell at the specified index.
      */
-    Cell getCell(int index);
+    Cell &getCell(int index);
 
     /**
      * @brief Gets the list of players on the board.
