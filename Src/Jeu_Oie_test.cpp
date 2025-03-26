@@ -237,7 +237,7 @@ static void display(void) {
     // Scene
     //room_skeleton(c, n);
 
-    draw_cube(c, n);
+    drawCube(c, n);
 
     glPopMatrix();
 
