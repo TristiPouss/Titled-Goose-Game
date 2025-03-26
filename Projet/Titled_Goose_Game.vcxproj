@@ -142,13 +142,9 @@
   <ItemGroup>
     <ClCompile Include="..\src\Jeu_Oie_test.cpp" />
     <ClCompile Include="..\Src\View\Camera\Camera.cpp" />
-    <ClCompile Include="..\Src\View\Geometry\Furnitures.cpp" />
-    <ClCompile Include="..\Src\View\Geometry\Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Src\View\Camera\Camera.h" />
-    <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
-    <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
     <ClInclude Include="..\Src\View\Settings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
