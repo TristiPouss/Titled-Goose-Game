@@ -76,7 +76,7 @@ public:
 
 private:
     int size; /**< The size of the board. */
-    std::vector<Cell> cases; /**< The cells that make up the board. */
+    std::vector<Cell> cells; /**< The cells that make up the board. */
     std::vector<Player> players; /**< The players currently on the board. */
 };
 
