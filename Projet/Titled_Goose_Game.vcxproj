@@ -150,6 +150,10 @@
     <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
     <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
     <ClInclude Include="..\Src\View\Settings.h" />
+    <ClCompile Include="..\Src\Shapes.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Src\Shapes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
