@@ -8,6 +8,8 @@
 
 #include "View/Camera/Camera.h"
 #include "View/Settings.h"
+#include "View/Geometry/Shapes.h"
+#include "View/Geometry/Furnitures.h"
 
 static void init(void) {
     glDepthFunc(GL_LESS);
