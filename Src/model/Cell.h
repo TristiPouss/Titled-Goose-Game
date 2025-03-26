@@ -13,8 +13,6 @@ class Cell {
 public:
     Cell();
     ~Cell();
-
-private:
     /**
      * @brief The action to be performed when a player lands on this cell.
      */
@@ -54,8 +52,14 @@ class TrapCell : public Cell {
         ~TrapCell();
 
         // Time out the player for a certain number of turns
-        void action(Player& player) override;
+     
+       void action(Player& player) override;
+
+       private: 
+        int timeout;
     };
+
+    
 
 
 /**
@@ -68,6 +72,9 @@ class TeleportCell : public Cell {
 
         // Moves the player to a specific cell
         void action(Player& player) override;
+    
+    private:
+        int destination;
     };
 
 
