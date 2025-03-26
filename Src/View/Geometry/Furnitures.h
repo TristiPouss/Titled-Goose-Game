@@ -10,16 +10,10 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-void table_leg() {
+void table_leg();
 
-}
+void table_top();
 
-void table_top() {
-
-}
-
-void draw_table() {
-
-}
+void draw_table();
 
 #endif // !FURNITURES_H
