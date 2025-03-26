@@ -1,43 +1,30 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-static float rx = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe x
-static float sens = 1.0F;          // Sens de rotation de la scene sur elle-meme autour de l'axe x
-static float ry = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe y
-static float rz = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe z
-static float zoom = 1.0F;
-static int anim = 0;               // Flag d'activation/desactivation de l'animation
-static int mouseActive = 0;        // Flag de d'indication que la souris est active (bouton presse) ou non 
-static int mouseX = 0;             // Derniere position en x relevee pour la souris
-
-static int wTx = 480;              // Resolution horizontale de la fenetre
-static int wTy = 480;              // Resolution verticale de la fenetre
-static int wPx = 50;               // Position horizontale de la fenetre
-static int wPy = 50;               // Position verticale de la fenetre
-
-static int polygonMode = 1;        // Flag de switch entre modes d'affichage wireframe et fill 
-static int materialLightMode = 1;
-static int light1 = 1;
-static int light2 = 1;
-static int light3 = 0;
-static int light4 = 0;
-static int normalize = 1;          // Flag de switch avec et sans normalisation
-static int n = 50;                 // Niveau de facettisation
-static int fond = 1;               // Flag de switch entre couleurs de fond noir et gris clair
-static int culling = 0;            // Flag de switch entre affichages avec et sans culling
-static int fullscreen = 0;
-
-static float c = 10.0F;            // Taille de la face d'un cube
-
+#include "View/Geometry/Shapes.h"
+#include "View/Geometry/Furnitures.h"
+#include "View/Camera/Camera.h"
+#include "View/Settings.h"
 static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
                                       { 5.0,  2.0, -5.0},
                                       { 0.0,  1.0, 0.0}};
-
-static float (*cam)[3][3] = &isometricCamera;
+static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
+                                      { 5.0,  2.0, -5.0},
+                                      { 0.0,  1.0, 0.0}};
+static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
+                                      { 5.0,  2.0, -5.0},
+                                      { 0.0,  1.0, 0.0}};
+static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
+                                      { 5.0,  2.0, -5.0},
+                                      { 0.0,  1.0, 0.0}};
+static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
+                                      { 5.0,  2.0, -5.0},
+                                      { 0.0,  1.0, 0.0}};
 
 static void init(void) {
     glDepthFunc(GL_LESS);
@@ -52,7 +39,7 @@ static void ambient() {
 static void spot_top() {
     GLfloat diff[] = { 1.0, 1.0, 1.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
-    GLfloat pos[] = { 0.0, 8.0, 0.0, 1.0 };
+    GLfloat pos[] = { 0.0, 15.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_POSITION, pos);
     GLfloat dir[] = { 0.0, -8.0, 0.0 };
     glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
@@ -61,6 +48,7 @@ static void spot_top() {
 
 static void room_skeleton(float c, int n) {
     glPushMatrix();
+    glRotatef(45, 0.0, 1.0, 0.0);
 
     GLfloat wallColor[] = { 0.0, 1.0, 0.0, 1.0 }; // Couleur verte pour les murs
     GLfloat floorColor[] = { 1.0, 0.0, 0.0, 1.0 }; // Couleur rouge pour le sol
@@ -105,7 +93,7 @@ static void room_skeleton(float c, int n) {
     }
 
     glPopMatrix();
-    
+
     // Wall Right
     glPushMatrix();
 
@@ -130,7 +118,7 @@ static void room_skeleton(float c, int n) {
     glPopMatrix();
 }
 
-/* TODO 
+/* TODO
     le pied de table, il faut choisir ou on est placé au début
     puis on fait le carré bas et haut, ensuite les 4 rectangles
     de chaque cotés
@@ -162,7 +150,7 @@ static void table_leg(int c, float h_leg, float w_leg, int n) {
 
 /* TODO
     la table, il faut faire les 4 pieds et la "base"
-    il faut choisir le point de départ 
+    il faut choisir le point de départ
  */
 static void table(float h_leg, float w_leg, int n) {
     glPushMatrix();
@@ -175,12 +163,15 @@ static void table(float h_leg, float w_leg, int n) {
     glPopMatrix();
 }
 
+
+static void scene() {
+    drawCube(c, n);
+}
+
 /* Fonction executee lors d'un rafraichissement */
 /* de la fenetre de dessin                      */
 
 static void display(void) {
-    printf("D\n");
-
     // light init
     spot_top();
 
@@ -223,6 +214,7 @@ static void display(void) {
 
     glPushMatrix();
 
+    initCamera(cameraOrtho);
 
     glRotatef(rx, 1.0F, 0.0F, 0.0F);
     glRotatef(ry, 0.0F, 1.0F, 0.0F);
@@ -231,7 +223,7 @@ static void display(void) {
     glScalef(zoom, zoom, zoom);
 
     // Scene
-    room_skeleton(c, n);
+    scene();
 
     glPopMatrix();
 
@@ -250,26 +242,12 @@ static void reshape(int wx, int wy) {
     wTx = wx;
     wTy = wy;
     glViewport(0, 0, wx, wy);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    double ratio = (double)wx / wy;
-    if (wx > wy)
-        glOrtho(-10.0 * ratio, 10.0 * ratio, -10.0, 10.0, -250.0, 250.0);
-    else
-        glOrtho(-10.0, 10.0, -10.0 / ratio, 10.0 / ratio, -250.0, 250.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt((*cam)[0][0], (*cam)[0][1], (*cam)[0][2],
-              (*cam)[1][0], (*cam)[1][1], (*cam)[1][2],
-              (*cam)[2][0], (*cam)[2][1], (*cam)[2][2]);
 }
 
 /* Fonction executee lorsqu'aucun evenement     */
 /* n'est en file d'attente                      */
 
 static void idle(void) {
-    printf("I\n");
-
     //glutPostRedisplay();
 }
 
@@ -300,7 +278,7 @@ static void keyboard(unsigned char key, int x, int y) {
         zoom *= 1.01;
         glutPostRedisplay();
         break;
-    break;
+        break;
     case 'f':
     case 'F':
         if (fullscreen) {
@@ -327,6 +305,10 @@ static void keyboard(unsigned char key, int x, int y) {
         culling = !culling;
         glutPostRedisplay();
         break;
+    case 'C':
+        cameraOrtho = !cameraOrtho;
+        glutPostRedisplay();
+        break;
     case 'm':
         polygonMode = !polygonMode;
         glutPostRedisplay();
@@ -349,11 +331,23 @@ static void keyboard(unsigned char key, int x, int y) {
 static void special(int specialKey, int x, int y) {
     switch (specialKey) {
     case GLUT_KEY_RIGHT:
-        ry += 2.0F;
+        ry -= 0.5F;
+        if (ry < -50.0) ry = -50.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_LEFT:
-        ry -= 2.0F;
+        ry += 0.5F;
+        if (ry > 50.0) ry = 50.0;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_UP:
+        rx -= 0.5F;
+        if (rx < -50.0) rx = -50.0;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        rx += 0.5F;
+        if (rx > 50.0) rx = 50.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_F10:
