@@ -1,14 +1,14 @@
 #include "Furnitures.h"
 
-void table_leg() {
+void tableLeg() {
 
 }
 
-void table_top() {
+void tableTop() {
 
 }
 
-void draw_table() {
+void drawTable() {
 
 }
 
