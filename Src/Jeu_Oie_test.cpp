@@ -6,25 +6,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "View/Geometry/Shapes.h"
-#include "View/Geometry/Furnitures.h"
 #include "View/Camera/Camera.h"
 #include "View/Settings.h"
-static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
-                                      { 5.0,  2.0, -5.0},
-                                      { 0.0,  1.0, 0.0}};
-static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
-                                      { 5.0,  2.0, -5.0},
-                                      { 0.0,  1.0, 0.0}};
-static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
-                                      { 5.0,  2.0, -5.0},
-                                      { 0.0,  1.0, 0.0}};
-static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
-                                      { 5.0,  2.0, -5.0},
-                                      { 0.0,  1.0, 0.0}};
-static float isometricCamera[3][3] = {{-5.0, 5.0, 5.0}, 
-                                      { 5.0,  2.0, -5.0},
-                                      { 0.0,  1.0, 0.0}};
 
 static void init(void) {
     glDepthFunc(GL_LESS);
@@ -165,7 +148,7 @@ static void table(float h_leg, float w_leg, int n) {
 
 
 static void scene() {
-    drawCube(c, n);
+    glutSolidCube(c);
 }
 
 /* Fonction executee lors d'un rafraichissement */
