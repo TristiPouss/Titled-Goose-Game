@@ -1,0 +1,83 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
+#include <string>
+
+/**
+ * @class Player
+ * @brief Represents a player in the game.
+ */
+class Player {
+    public:
+        /**
+         * @brief Default constructor.
+         */
+        Player();
+
+        /**
+         * @brief Destructor.
+         */
+        ~Player();
+
+        /**
+         * @brief Moves the player a given number of steps.
+         * @param steps Number of steps to move (positive or negative).
+         */
+        void move(int steps);
+
+        /**
+         * @brief Sets the timeout for the player's turn.
+         * @param timeout Timeout value in turns.
+         */
+        void setTimeout(int timeout);
+
+        /**
+         * @brief Gets the timeout for the player's turn.
+         * @return Timeout value in turns.
+         */
+        int getTimeout();
+
+        /**
+         * @brief Sets the player's position on the board.
+         * @param position Position value on the board.
+         */
+        void setPosition(int position);
+
+        /**
+         * @brief Gets the player's position on the board.
+         * @return Position value on the board.
+         */
+        int getPosition();
+
+        /**
+         * @brief Sets the player's name.
+         * @param name Name of the player.
+         */
+        void setName(std::string name);
+
+        /**
+         * @brief Gets the player's name.
+         * @return Name of the player.
+         */
+        std::string getName();
+
+        /**
+         * @brief Gets the character representation of the player.
+         * @return Character representing the player.
+         */
+        char getChar();
+
+        /**
+         * @brief Sets the character representation of the player.
+         * @param c Character representing the player.
+         */
+        void setChar(char c);
+
+    private:
+        int timeout; ///< Timeout for the player's turn in turns.
+        int position; ///< Position of the player on the board.
+        std::string name; ///< Name of the player.
+        char c; ///< Character representation of the player.
+};
+
+#endif
