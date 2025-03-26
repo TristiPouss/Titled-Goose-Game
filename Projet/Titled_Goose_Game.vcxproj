@@ -151,9 +151,12 @@
     <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
     <ClInclude Include="..\Src\View\Settings.h" />
     <ClCompile Include="..\Src\Shapes.cpp" />
+    <ClCompile Include="..\Src\View\Geometry\Furnitures.cpp" />
+    <ClCompile Include="..\Src\View\Geometry\Shapes.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Src\Shapes.h" />
+    <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
+    <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
