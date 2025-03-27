@@ -6,6 +6,9 @@
 #include <tuple>
 
 
+namespace gooseGameModel {
+
+
 /**
  * @class Game
  * @brief Represents the main game logic and state.
@@ -65,5 +68,7 @@ class Game{
         int turn;
 
 };
+
+} // namespace
 
 #endif

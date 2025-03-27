@@ -1,6 +1,7 @@
 #ifndef DICE_H
 #define DICE_H
 
+namespace gooseGameModel {
 /**
  * @class Dice
  * @brief Represents a dice that can be rolled to generate random numbers.
@@ -37,4 +38,5 @@ class Dice {
         int max_value;
 };
 
+}
 #endif

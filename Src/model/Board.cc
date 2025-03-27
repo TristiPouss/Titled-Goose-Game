@@ -2,6 +2,9 @@
 #include "Cell.h"
 
 
+namespace gooseGameModel {
+
+
 Board::Board() : size(DEFAULT_SIZE)  {
     init();
 }
@@ -54,7 +57,7 @@ std::vector<Cell> &Board::getCellsTab() {
     return cells;
 }
 
-Cell &Board::getCell(int index) {
+Cell &Board::getCell(unsigned long index) {
     return cells[index];
 }
 
@@ -73,7 +76,8 @@ std::vector<Player> Board::getPlayers() {
 }
 
 void Board::movePlayer(int playerIndex, int diceValue){
-    Player p = players[playerIndex];
+    Player p = players[static_cast<std::vector<Player>::size_type>(playerIndex)];
     p.move(diceValue);
-    cells[p.getPosition()].action(p);
+    cells[static_cast<std::vector<Cell>::size_type>(p.getPosition())].action(p);
+}
 }

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(Testing_GooseGame
   LANGUAGES CXX
 )
@@ -17,6 +17,7 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(testGooseGameModel
   hello_test.cc
+  unit_test.cc
 )
 
 target_include_directories(testGooseGameModel

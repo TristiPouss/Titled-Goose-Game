@@ -1,6 +1,10 @@
 #ifndef CELL_H
 #define CELL_H
 
+#include "Player.h"
+
+namespace gooseGameModel {
+
 /**
  * @brief Represents a cell in the game model.
  * 
@@ -8,7 +12,6 @@
  * It provides a virtual function `action` that can be overridden by derived classes
  * to define specific behavior for the cell.
  */
-#include "Player.h"
 class Cell {
 public:
     Cell();
@@ -29,6 +32,8 @@ class NormalCell : public Cell {
 
         // Does nothing since it's a normal cell
         void action(Player& player) override;
+
+        // 
     };
 
 /**
@@ -77,6 +82,6 @@ class TeleportCell : public Cell {
         int destination;
     };
 
-
+}
 
 #endif

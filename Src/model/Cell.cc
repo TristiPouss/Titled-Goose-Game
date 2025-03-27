@@ -2,6 +2,10 @@
 #include "Player.h"
 
 
+namespace gooseGameModel {
+
+
+
 void NormalCell::action(Player &player){
     // Do Nothing
 }
@@ -25,3 +29,5 @@ TrapCell::TrapCell(int turns) : timeout(turns) {
 void TrapCell::action(Player &player){
     player.setTimeout(timeout);
 }
+
+} //namespace

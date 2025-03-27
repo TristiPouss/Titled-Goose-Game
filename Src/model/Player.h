@@ -3,6 +3,10 @@
 
 #include <string>
 
+
+namespace gooseGameModel {
+
+
 /**
  * @class Player
  * @brief Represents a player in the game.
@@ -80,4 +84,5 @@ class Player {
         char c; ///< Character representation of the player.
 };
 
+} //namespace
 #endif
