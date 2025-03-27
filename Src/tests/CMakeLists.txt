@@ -15,9 +15,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+file(GLOB MODEL_SOURCES "../model/*.cc")
+file(GLOB MODEL_HEADERS "../model/*.h")
+
 add_executable(testGooseGameModel
-  hello_test.cc
   unit_test.cc
+  ${MODEL_SOURCES}
+  ${MODEL_HEADERS}
 )
 
 target_include_directories(testGooseGameModel

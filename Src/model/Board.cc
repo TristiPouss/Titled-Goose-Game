@@ -5,7 +5,7 @@
 namespace gooseGameModel {
 
 
-Board::Board() : size(DEFAULT_SIZE)  {
+Board::Board() : size(DEFAULT_SIZE_BOARD)  {
     init();
 }
 
@@ -16,6 +16,7 @@ Board::~Board() {
 
 
 void Board::init() {
+    cells.clear();
     for (int i = 0; i < size; i++) {
         switch (i) {
             // Add special cells to the board - Goose, Teleport, Trap, etc.
@@ -41,7 +42,11 @@ void Board::init() {
             case 39:
                 cells.push_back(TeleportCell(1));
                 break;
-        }
+            default:
+                cells.push_back(Cell());
+            }
+        
+
     }
 }
 
@@ -61,6 +66,8 @@ Cell &Board::getCell(unsigned long index) {
     return cells[index];
 }
 
+
+// TO CHANGE
 void Board::toString() {
     std::cout << "Board: " << std::endl;
     for (int i = 0; i < size; i++) {

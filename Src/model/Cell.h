@@ -12,40 +12,38 @@ namespace gooseGameModel {
  * It provides a virtual function `action` that can be overridden by derived classes
  * to define specific behavior for the cell.
  */
-class Cell {
-public:
-    Cell();
-    ~Cell();
-    /**
-     * @brief The action to be performed when a player lands on this cell.
-     */
-    virtual void action(Player& player) = 0;
+enum CellType{
+    NORMAL,
+    TRAP,
+    TELEPORT,
+    GOOSE,
 };
 
+
 /**
- * @brief Represents a normal cell in the game model.
- */
-class NormalCell : public Cell {
+  * @brief Represents a cell in the game model.
+*/
+class Cell {
     public:
-        NormalCell();
-        ~NormalCell();
-
         // Does nothing since it's a normal cell
-        void action(Player& player) override;
+        virtual void action(Player& player);
 
-        // 
-    };
+        // Return the type of the cell
+        virtual CellType getType() { return CellType::NORMAL; };
+};
+
 
 /**
  * @brief Represents a goose cell in the game model.
  */
 class GooseCell : public Cell {
     public:
-        GooseCell();
-        ~GooseCell();
-
+        
         // Moves the player to the next goose cell
         void action(Player& player) override;
+
+        // Return the type of the cell
+        CellType getType() override { return CellType::GOOSE; };
     };
 
 /**
@@ -54,11 +52,13 @@ class GooseCell : public Cell {
 class TrapCell : public Cell {
     public:
         TrapCell(int turns);
-        ~TrapCell();
-
+        
         // Time out the player for a certain number of turns
      
        void action(Player& player) override;
+
+       // Return the type of the cell
+       CellType getType() override { return CellType::TRAP; };
 
        private: 
         int timeout;
@@ -73,10 +73,12 @@ class TrapCell : public Cell {
 class TeleportCell : public Cell {
     public:
         TeleportCell(int destination);
-        ~TeleportCell();
-
+    
         // Moves the player to a specific cell
         void action(Player& player) override;
+
+        // Return the type of the cell
+        CellType getType() override { return CellType::TELEPORT; };
     
     private:
         int destination;
