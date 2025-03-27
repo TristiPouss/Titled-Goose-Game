@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <memory>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -58,14 +59,14 @@ public:
      * @brief Gets the vector of cells on the board.
      * @return A vector containing all the cells on the board.
      */
-    std::vector<Cell> &getCellsTab();
+    std::vector<std::shared_ptr<Cell>> &getCellsTab();
 
     /**
      * @brief Gets a specific cell on the board by index.
      * @param index The index of the cell to retrieve.
      * @return The cell at the specified index.
      */
-    Cell &getCell(unsigned long index);
+    std::shared_ptr<Cell> &getCell(unsigned long index);
 
     /**
      * @brief Gets the list of players on the board.
@@ -82,7 +83,7 @@ public:
 
 private:
     int size; /**< The size of the board. */
-    std::vector<Cell> cells; /**< The cells that make up the board. */
+    std::vector<std::shared_ptr<Cell>> cells; /**< The cells that make up the board. */
     std::vector<Player> players; /**< The players currently on the board. */
 };
 

@@ -1,5 +1,7 @@
 #include "Board.h"
 #include "Cell.h"
+#include <iostream>
+#include <memory>
 
 
 namespace gooseGameModel {
@@ -28,22 +30,22 @@ void Board::init() {
             case 27:
             case 32:
             case 36:
-                cells.push_back(GooseCell());
+                cells.push_back(std::make_shared<GooseCell>());
                 break;
             case 6:
-                cells.push_back(TeleportCell(12));
+                cells.push_back(std::make_shared<TeleportCell>(12));
                 break;
             case 19:
-                cells.push_back(TrapCell(2));
+                cells.push_back(std::make_shared<TrapCell>(2));
                 break;
             case 31:
-                cells.push_back(TeleportCell(20));
+                cells.push_back(std::make_shared<TeleportCell>(20));
                 break;
             case 39:
-                cells.push_back(TeleportCell(1));
+                cells.push_back(std::make_shared<TeleportCell>(1));
                 break;
             default:
-                cells.push_back(Cell());
+                cells.push_back(std::make_shared<Cell>());
             }
         
 
@@ -58,11 +60,11 @@ int Board::getSize() {
     return size;
 }
 
-std::vector<Cell> &Board::getCellsTab() {
+std::vector<std::shared_ptr<Cell>> &Board::getCellsTab() {
     return cells;
 }
 
-Cell &Board::getCell(unsigned long index) {
+std::shared_ptr<Cell> &Board::getCell(unsigned long index) {
     return cells[index];
 }
 
@@ -85,6 +87,6 @@ std::vector<Player> Board::getPlayers() {
 void Board::movePlayer(int playerIndex, int diceValue){
     Player p = players[static_cast<std::vector<Player>::size_type>(playerIndex)];
     p.move(diceValue);
-    cells[static_cast<std::vector<Cell>::size_type>(p.getPosition())].action(p);
+    cells[static_cast<std::vector<Cell>::size_type>(p.getPosition())]->action(p);
 }
 }

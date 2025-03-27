@@ -254,28 +254,32 @@ TEST(TestBoard, ConstructorInit) {
     gooseGameModel::Board b;
 
     b.init();
-    std::vector<gooseGameModel::Cell> cells = b.getCellsTab();
+    std::vector<std::shared_ptr<gooseGameModel::Cell>> cells = b.getCellsTab();
 
     EXPECT_EQ(cells.size(), DEFAULT_SIZE_BOARD);
     EXPECT_EQ(b.getSize(), cells.size());
 
     for (unsigned long i = 0; i < cells.size(); i++) {
         if (i == 5 || i == 9 || i == 14 || i == 18 || i == 23 || i == 27 || i == 32 || i == 36) {
-            EXPECT_EQ(cells[i].getType(), gooseGameModel::CellType::GOOSE);
+            EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::GOOSE);
         } else if (i == 6 || i == 31 || i == 39) {
-            EXPECT_EQ(cells[i].getType(), gooseGameModel::CellType::TELEPORT);
+            EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::TELEPORT);
         } else if (i == 19) {
-            EXPECT_EQ(cells[i].getType(), gooseGameModel::CellType::TRAP);
+            EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::TRAP);
         } else {
-            EXPECT_EQ(cells[i].getType(), gooseGameModel::CellType::NORMAL);
-        }
+            EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::NORMAL);
+        } 
     }
 }
 
 TEST(TestBoard, AddPlayer) {
     gooseGameModel::Board b;
-    gooseGameModel::Player p;
+    gooseGameModel::Player p("AAA",'a');
     b.addPlayer(p);
+
+    std::vector<gooseGameModel::Player> players = b.getPlayers();
+    EXPECT_EQ(players[0].getChar(), 'a');
+    EXPECT_EQ(players[0].getName(), "AAA");
 }
 
 TEST(TestBoard,getPlayers) {
@@ -299,12 +303,12 @@ TEST(TestBoard, GetSize) {
 
 TEST(TestBoard, GetCellsTab) {
     gooseGameModel::Board b;
-    std::vector<gooseGameModel::Cell> cells = b.getCellsTab();
-    std::vector<gooseGameModel::Cell> cells2 = b.getCellsTab();
+    std::vector<std::shared_ptr<gooseGameModel::Cell>> cells = b.getCellsTab();
+    std::vector<std::shared_ptr<gooseGameModel::Cell>> cells2= b.getCellsTab();
 
     EXPECT_EQ(cells.size(), cells2.size());
     for (unsigned long i = 0; i<cells.size();i++){
-        EXPECT_EQ(cells[i].getType(), cells2[i].getType());
+        EXPECT_EQ(cells[i]->getType(), cells2[i]->getType());
     }
 }
 
