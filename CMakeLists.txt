@@ -14,7 +14,9 @@ set(CMAKE_C_COMPILER clang)
 project(TitledGooseGame)
 
 # Add the executable
-add_executable(test Src/Jeu_Oie_test.cpp)
+
+file(GLOB_RECURSE GAME_SOURCES Src/*.cpp)
+add_executable(test ${GAME_SOURCES})
 
 # Include directory for libPNG headers (si nécessaire)
 include_directories(${CMAKE_SOURCE_DIR}/Include/)
