@@ -15,7 +15,7 @@ void tableTop(float tableTopLength, float tableTopWidth, int facetNumber) {
 	glPushMatrix();
 
 	glTranslatef(0.0F, tableTopWidth, 0.0F);
-	glScalef(1.0F, tableTopWidth, 1.0F);
+	glScalef(1.0F, tableTopWidth / tableTopLength, 1.0F);
 	drawCube(tableTopLength, facetNumber);
 
 	glPopMatrix();
@@ -33,7 +33,7 @@ void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNu
 
 		glRotatef(90 * i, 0.0F, 1.0F, 0.0F);
 		glTranslatef(horizontalEdgeLength / 2 - tableLegWidth, 0.0F, horizontalEdgeLength / 2 - tableLegWidth);
-		tableLeg(tableLegHeight, tableLegWidth, facetNumber);
+		tableLeg(tableLegHeight, tableLegWidth / verticalEdgeLength, facetNumber);
 
 		glPopMatrix();
 	}
