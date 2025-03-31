@@ -3,10 +3,17 @@
 
 #include "Board.h"
 #include "Dice.h"
+#include <memory>
 #include <tuple>
 
 
 namespace gooseGameModel {
+
+enum stateGame {
+    WAITING,
+    PLAYING,
+    END
+};
 
 
 /**
@@ -25,11 +32,8 @@ class Game{
     Game();
 
     /**
-    * @brief Destructor for the Game class.
-    * 
-    * Cleans up any resources used by the game.
+    * @brief Add a player to the game
     */
-    ~Game();
     
     /**
     * @brief Advances the game to the next turn.
@@ -51,21 +55,16 @@ class Game{
     * @return The current state of the game board.
     */
     Board getBoard();
-    
-    /**
-    * @brief Sets the game board to a new state.
-    * 
-    * @param b The new board state to set.
-    * @return The updated game board.
-    */
-    Board setBoard(Board b);
  
     private:
 
         // Variables
-        Board board;
+        std::unique_ptr<Board> board;
         std::tuple<Dice , Dice> dices;
-        int turn;
+        stateGame g_state;
+        
+        int turn; // Current turn number
+
 
 };
 

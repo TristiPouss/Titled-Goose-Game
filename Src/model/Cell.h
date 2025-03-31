@@ -2,6 +2,7 @@
 #define CELL_H
 
 #include "Player.h"
+#include <memory>
 
 namespace gooseGameModel {
 
@@ -26,7 +27,7 @@ enum CellType{
 class Cell {
     public:
         // Does nothing since it's a normal cell
-        virtual void action(Player& player);
+        virtual void action(std::shared_ptr<Player> player);
 
         // Return the type of the cell
         virtual CellType getType() { return CellType::NORMAL; };
@@ -40,7 +41,7 @@ class GooseCell : public Cell {
     public:
         
         // Moves the player to the next goose cell
-        void action(Player& player) override;
+        void action(std::shared_ptr<Player> player) override;
 
         // Return the type of the cell
         CellType getType() override { return CellType::GOOSE; };
@@ -55,7 +56,7 @@ class TrapCell : public Cell {
         
         // Time out the player for a certain number of turns
      
-       void action(Player& player) override;
+       void action(std::shared_ptr<Player> player) override;
 
        // Return the type of the cell
        CellType getType() override { return CellType::TRAP; };
@@ -75,7 +76,7 @@ class TeleportCell : public Cell {
         TeleportCell(int destination);
     
         // Moves the player to a specific cell
-        void action(Player& player) override;
+        void action(std::shared_ptr<Player> player) override;
 
         // Return the type of the cell
         CellType getType() override { return CellType::TELEPORT; };
