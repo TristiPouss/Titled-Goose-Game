@@ -104,7 +104,14 @@ static void room_skeleton(float c, int n) {
 }
 
 static void scene() {
-    glutSolidCube(c);
+    glPushMatrix();
+
+    room_skeleton(c, n);
+
+    //glTranslatef(c / 2, 0.0, c / 2);
+    drawTable(c/15, c/12, n);
+
+    glPopMatrix();
 }
 
 /* Fonction executee lors d'un rafraichissement */
@@ -163,7 +170,9 @@ static void display(void) {
     glScalef(zoom, zoom, zoom);
 
     // Scene
-    room_skeleton(c, n);
+    //room_skeleton(c, n);
+
+    scene();
 
     glPopMatrix();
 
