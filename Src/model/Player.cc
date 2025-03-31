@@ -37,8 +37,8 @@ namespace gooseGameModel {
     }
 
 
-    int Player::getPosition() const{
-        return this->position;
+    unsigned Player::getPosition() const{
+        return static_cast<unsigned int>(this->position);
     }
 
 

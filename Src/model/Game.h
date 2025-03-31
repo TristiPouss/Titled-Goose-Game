@@ -55,14 +55,32 @@ class Game{
     * @return The current state of the game board.
     */
     Board getBoard();
- 
+
+    /**
+    * @brief Retrieves the current state of the game.
+    *
+    * @return The current state of the game (WAITING, PLAYING, END).
+    */
+
+    stateGame getState() const;
+
+    /**
+      * @brief Launches the game
+      */
+    void launchGame();
+
+    /**
+      * @brief Reset the game
+      */
+    void resetGame();
+
     private:
 
         // Variables
         std::unique_ptr<Board> board;
         std::tuple<Dice , Dice> dices;
         stateGame g_state;
-        
+        unsigned curr_player; 
         int turn; // Current turn number
 
 

@@ -20,7 +20,7 @@ Board::~Board() {
 
 void Board::init() {
     cells.clear();
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         switch (i) {
             // Add special cells to the board - Goose, Teleport, Trap, etc.
             case 5:
@@ -58,7 +58,7 @@ void Board::addPlayer(std::shared_ptr<Player> p) {
     nb_players++;
 }
 
-int Board::getSize() {
+unsigned Board::getSize() {
     return size;
 }
 
@@ -84,7 +84,7 @@ unsigned long Board::getNbPlayer(){
 // TO CHANGE
 void Board::toString() {
     std::cout << "Board: " << std::endl;
-    for (int i = 0; i < size; i++) {
+    for (unsigned i = 0; i < size; i++) {
         if (i % 10 == 0) {
             std::cout << std::endl;
         }
