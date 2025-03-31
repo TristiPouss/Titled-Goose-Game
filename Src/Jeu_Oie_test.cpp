@@ -24,9 +24,9 @@ static void ambient() {
 static void spot_top() {
     GLfloat diff[] = { 1.0, 1.0, 1.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
-    GLfloat pos[] = { 0.0, 15.0, 0.0, 1.0 };
+    GLfloat pos[] = { 0.0, 80.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_POSITION, pos);
-    GLfloat dir[] = { 0.0, -8.0, 0.0 };
+    GLfloat dir[] = { 0.0, -60.0, 0.0 };
     glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
     glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 90);
 }
@@ -108,8 +108,7 @@ static void scene() {
 
     room_skeleton(c, n);
 
-    //glTranslatef(c / 2, 0.0, c / 2);
-    drawTable(c/15, c/12, n);
+    drawTable(c*0.1, c*0.1, n);
 
     glPopMatrix();
 }
@@ -118,10 +117,6 @@ static void scene() {
 /* de la fenetre de dessin                      */
 
 static void display(void) {
-    // light init
-    spot_top();
-    ambient();
-
     if (culling)
         glEnable(GL_CULL_FACE);
     else
@@ -161,7 +156,9 @@ static void display(void) {
 
     glPushMatrix();
 
-    initCamera(cameraOrtho);
+    initCamera(cameraPerspect);
+
+    glTranslatef(0.0F, 0.0F, -100.0F);
 
     glRotatef(rx, 1.0F, 0.0F, 0.0F);
     glRotatef(ry, 0.0F, 1.0F, 0.0F);
@@ -169,9 +166,11 @@ static void display(void) {
 
     glScalef(zoom, zoom, zoom);
 
-    // Scene
-    //room_skeleton(c, n);
+    // light init
+    spot_top();
+    ambient();
 
+    // Scene
     scene();
 
     glPopMatrix();
@@ -218,13 +217,13 @@ static void keyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
     case 'k':
-        zoom /= 1.01;
+        zoom /= 1.1;
         if (zoom <= 0.1)
             zoom = 0.1;
         glutPostRedisplay();
         break;
     case 'K':
-        zoom *= 1.01;
+        zoom *= 1.1;
         glutPostRedisplay();
         break;
     case 'f':
@@ -254,7 +253,7 @@ static void keyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
     case 'C':
-        cameraOrtho = !cameraOrtho;
+        cameraPerspect = !cameraPerspect;
         glutPostRedisplay();
         break;
     case 'm':
@@ -279,23 +278,23 @@ static void keyboard(unsigned char key, int x, int y) {
 static void special(int specialKey, int x, int y) {
     switch (specialKey) {
     case GLUT_KEY_RIGHT:
-        ry -= 0.5F;
+        ry -= 1.0F;
         if (ry < -50.0) ry = -50.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_LEFT:
-        ry += 0.5F;
+        ry += 1.0F;
         if (ry > 50.0) ry = 50.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_UP:
-        rx -= 0.5F;
-        if (rx < -50.0) rx = -50.0;
+        rx += 1.0F;
+        if (rx > 30.0) rx = 30.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
-        rx += 0.5F;
-        if (rx > 50.0) rx = 50.0;
+        rx -= 1.0F;
+        if (rx < -30.0) rx = -30.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_F10:
@@ -325,7 +324,7 @@ static void special(int specialKey, int x, int y) {
 /* de la souris sur la fenetre                  */
 
 static void mouse(int button, int state, int x, int y) {
-    if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN)) {
+    /*if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN)) {
         mouseX = x;
         mouseActive = 1;
     }
@@ -333,7 +332,7 @@ static void mouse(int button, int state, int x, int y) {
         mouseActive = 0;
     }
     if ((button == GLUT_RIGHT_BUTTON) && (state == GLUT_UP))
-        sens *= -1.0F;
+        sens *= -1.0F;*/
 }
 
 /* Fonction executee lors du passage            */
