@@ -16,5 +16,8 @@ project(TitledGooseGame)
 # Add the executable
 add_executable(test Src/Jeu_Oie_test.cpp)
 
+# Include directory for libPNG headers (si nécessaire)
+include_directories(${CMAKE_SOURCE_DIR}/Include/)
+
 # Link the necessary libraries
-target_link_libraries(test GL GLU glut)
+target_link_libraries(test GL GLU glut ${CMAKE_SOURCE_DIR}/Lib/libPNG.so)
