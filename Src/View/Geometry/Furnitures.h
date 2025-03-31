@@ -10,10 +10,10 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-void tableLeg();
+void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber);
 
-void tableTop();
+void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);
 
-void drawTable();
+void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNumber);
 
 #endif // !FURNITURES_H

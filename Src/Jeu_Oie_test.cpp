@@ -133,47 +133,13 @@ static void room_skeleton(float c, int n) {
     glPopMatrix();
 }
 
-/* TODO 
-    le pied de table, il faut choisir ou on est placé au début
-    puis on fait le carré bas et haut, ensuite les 4 rectangles
-    de chaque cotés
- */
-static void table_leg(int c, float h_leg, float w_leg, int n) {
+static void scene() {
     glPushMatrix();
 
-    glPushMatrix();
+    room_skeleton(c, n);
 
-    glTranslatef(-c / 2, 0, -c / 2);
-    glRotatef(-90, 0.0F, 1.0F, 0.0F);
-    for (int j = 0; j < h_leg; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= w_leg; i++) {
-            glNormal3f(0.0F, 1.0F, 0.0F);
-            glColor3f(1.0F, 0.0F, 1.0F);
-
-            glVertex3f(0, i * (c / n), 0);
-            glVertex3f(c / n, i * (c / n), 0);
-        }
-        glEnd();
-        glTranslatef(c / n, 0.0, 0.0);
-    }
-
-    glPopMatrix();
-
-    glPopMatrix();
-}
-
-/* TODO
-    la table, il faut faire les 4 pieds et la "base"
-    il faut choisir le point de départ 
- */
-static void table(float h_leg, float w_leg, int n) {
-    glPushMatrix();
-
-    for (size_t i = 0; i < 4; i++)
-    {
-        table_leg(c, h_leg, w_leg, n);
-    }
+    //glTranslatef(c / 2, 0.0, c / 2);
+    drawTable(c/15, c/12, n);
 
     glPopMatrix();
 }
@@ -235,9 +201,8 @@ static void display(void) {
     glScalef(zoom, zoom, zoom);
 
     // Scene
-    //room_skeleton(c, n);
 
-    drawCube(c, n);
+    scene();
 
     glPopMatrix();
 
@@ -265,9 +230,9 @@ static void reshape(int wx, int wy) {
         glOrtho(-10.0, 10.0, -10.0 / ratio, 10.0 / ratio, -250.0, 250.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt((*cam)[0][0], (*cam)[0][1], (*cam)[0][2],
+    /*gluLookAt((*cam)[0][0], (*cam)[0][1], (*cam)[0][2],
               (*cam)[1][0], (*cam)[1][1], (*cam)[1][2],
-              (*cam)[2][0], (*cam)[2][1], (*cam)[2][2]);
+              (*cam)[2][0], (*cam)[2][1], (*cam)[2][2]);*/
 }
 
 /* Fonction executee lorsqu'aucun evenement     */
