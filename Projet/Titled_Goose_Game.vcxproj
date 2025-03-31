@@ -147,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Src\View\Camera\Camera.h" />
+    <ClInclude Include="..\Src\View\Colors.h" />
     <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
     <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
     <ClInclude Include="..\Src\View\Settings.h" />

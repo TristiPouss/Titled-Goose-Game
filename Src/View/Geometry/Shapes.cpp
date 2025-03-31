@@ -1,6 +1,9 @@
 #include "Shapes.h"
+#include "../Colors.h"
 
-void drawCube(float edgeLength, int facetNumber) {
+void drawCube(float edgeLength, int facetNumber, int normalDirection) {
+    float normal = (normalDirection) ? -0.1F : 0.1F;
+
     glPushMatrix();
 
     // Origin setup
@@ -14,8 +17,8 @@ void drawCube(float edgeLength, int facetNumber) {
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, -1.0F);
-            //glColor3f(0.0F, 0.0F, 1.0F);
+            glNormal3f(0.0F, 0.0F, normal);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE, red);
 
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
@@ -34,8 +37,8 @@ void drawCube(float edgeLength, int facetNumber) {
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, -1.0F);
-            //glColor3f(1.0F, 0.0F, 0.0F);
+            glNormal3f(0.0F, 0.0F, normal);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE,blue);
 
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
@@ -54,8 +57,8 @@ void drawCube(float edgeLength, int facetNumber) {
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, -1.0F);
-            //glColor3f(0.0F, 0.0F, 1.0F);
+            glNormal3f(0.0F, 0.0F, normal);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE,green);
 
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
@@ -74,8 +77,8 @@ void drawCube(float edgeLength, int facetNumber) {
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, -1.0F);
-            //glColor3f(0.0F, 0.0F, 1.0F);
+            glNormal3f(0.0F, 0.0F, normal);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE,pink);
 
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
@@ -94,8 +97,8 @@ void drawCube(float edgeLength, int facetNumber) {
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, -1.0F);
-            //glColor3f(0.0F, 0.0F, 1.0F);
+            glNormal3f(0.0F, 0.0F, normal);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE,darkPurple);
 
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
@@ -113,8 +116,8 @@ void drawCube(float edgeLength, int facetNumber) {
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, -1.0F);
-            //glColor3f(0.0F, 1.0F, 0.0F);
+            glNormal3f(0.0F, 0.0F, normal);
+            glMaterialfv(GL_FRONT, GL_DIFFUSE,cyan);
 
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);

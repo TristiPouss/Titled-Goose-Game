@@ -17,7 +17,9 @@ static void init(void) {
 }
 
 static void ambient() {
-    GLfloat light1Ambient[] = { 0.5, 0.5, 0.5 };
+    GLfloat light1Pos[] = { 1.0, 1.0, 1.0, 0.0 };
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light1Pos);
+    GLfloat light1Ambient[] = { 1.0, 1.0, 1.0 };
     glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
 }
 
@@ -26,90 +28,33 @@ static void spot_top() {
     glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
     GLfloat pos[] = { 0.0, 80.0, 0.0, 1.0 };
     glLightfv(GL_LIGHT2, GL_POSITION, pos);
-    GLfloat dir[] = { 0.0, -60.0, 0.0 };
+    GLfloat dir[] = { 0.0, -80.0, 0.0 };
     glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
-    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 90);
+    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 90.0);
 }
 
-static void room_skeleton(float c, int n) {
-    glPushMatrix();
-    glRotatef(45, 0.0, 1.0, 0.0);
-
-    GLfloat wallColor[] = { 0.0, 1.0, 0.0, 1.0 }; // Couleur verte pour les murs
-    GLfloat floorColor[] = { 1.0, 0.0, 0.0, 1.0 }; // Couleur rouge pour le sol
-
-    // Floor
-    glPushMatrix();
-
-    glTranslatef(-c / 2, 0, c / 2);
-    glRotatef(-90, 1.0F, 0.0F, 0.0F);
-    for (int j = 0; j < n; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= n; i++) {
-            glNormal3f(0.0F, 0.0F, 1.0F);
-            glColor3f(1.0F, 0.0F, 0.0F);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, floorColor);
-
-            glVertex3f(0, i * (c / n), 0);
-            glVertex3f(c / n, i * (c / n), 0);
-        }
-        glEnd();
-        glTranslatef(c / n, 0.0, 0.0);
-    }
-
-    glPopMatrix();
-
-    // Wall Left
-    glPushMatrix();
-
-    glTranslatef(-c / 2, 0, -c / 2);
-    for (int j = 0; j < n; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= n; i++) {
-            glNormal3f(0.0F, 1.0F, 0.0F);
-            glColor3f(0.0F, 1.0F, 0.0F);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, wallColor);
-
-            glVertex3f(0, i * (c / n), 0);
-            glVertex3f(c / n, i * (c / n), 0);
-        }
-        glEnd();
-        glTranslatef(c / n, 0.0, 0.0);
-    }
-
-    glPopMatrix();
-
-    // Wall Right
-    glPushMatrix();
-
-    glTranslatef(c / 2, 0, -c / 2);
-    glRotatef(-90, 0.0F, 1.0F, 0.0F);
-    for (int j = 0; j < n; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= n; i++) {
-            glNormal3f(0.0F, 1.0F, 0.0F);
-            glColor3f(0.0F, 0.0F, 1.0F);
-            glMaterialfv(GL_FRONT, GL_DIFFUSE, wallColor);
-
-            glVertex3f(0, i * (c / n), 0);
-            glVertex3f(c / n, i * (c / n), 0);
-        }
-        glEnd();
-        glTranslatef(c / n, 0.0, 0.0);
-    }
-
-    glPopMatrix();
-
-    glPopMatrix();
+static void diffuse() {
+    GLfloat light3Pos[] = { 1.0, 1.0, 1.0, 1.0 };
+    glLightfv(GL_LIGHT3, GL_DIFFUSE, light3Pos);
+    GLfloat light3Diffuse[] = { 1.0, 1.0, 1.0 };
+    glLightfv(GL_LIGHT3, GL_DIFFUSE, light3Diffuse);
 }
 
 static void scene() {
     glPushMatrix();
+    
+    glTranslatef(0.0, -c*0.1, 0.0);
 
-    room_skeleton(c, n);
+    glPushMatrix();
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(0.0, c/2, 0.0);
 
-    drawTable(c*0.1, c*0.1, n);
+    //room_skeleton(c, n);
+    drawCube(c, n, 0);
+    glPopMatrix();
 
+    drawTable(c*0.1, c*0.12, n/5);
+    
     glPopMatrix();
 }
 
@@ -156,7 +101,7 @@ static void display(void) {
 
     glPushMatrix();
 
-    initCamera(cameraPerspect);
+    initCamera(cameraPerspect, wTx, wTy);
 
     glTranslatef(0.0F, 0.0F, -100.0F);
 
@@ -165,10 +110,13 @@ static void display(void) {
     glRotatef(rz, 0.0F, 0.0F, 1.0F);
 
     glScalef(zoom, zoom, zoom);
+    printf("%f\n", zoom);
 
     // light init
-    spot_top();
+    //spot_top();
     ambient();
+    diffuse();
+    spot_top();
 
     // Scene
     scene();
@@ -218,8 +166,8 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'k':
         zoom /= 1.1;
-        if (zoom <= 0.1)
-            zoom = 0.1;
+        if (zoom <= 2.6)
+            zoom = 2.6;
         glutPostRedisplay();
         break;
     case 'K':

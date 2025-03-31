@@ -9,6 +9,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-void initCamera(bool isCameraPerspect);
+void initCamera(bool isCameraPerspect, int wx, int wy);
 
 #endif // !CAMERA_H

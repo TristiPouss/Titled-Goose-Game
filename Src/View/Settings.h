@@ -5,7 +5,7 @@ static float rx = 0.0F;            // Angle de rotation de la scene sur elle-mem
 static float ry = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe y
 static float rz = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe z
 static float sens = 1.0F;          // Sens de rotation de la scene sur elle-meme autour de l'axe x
-static float zoom = 2.0F;
+static float zoom = 2.6F;
 
 static int mouseActive = 0;        // Flag de d'indication que la souris est active (bouton presse) ou non 
 static int mouseX = 0;             // Derniere position en x relevee pour la souris
@@ -20,7 +20,7 @@ static int polygonMode = 1;        // Flag de switch entre modes d'affichage wir
 static int materialLightMode = 1;
 static int light1 = 1;
 static int light2 = 1;
-static int light3 = 0;
+static int light3 = 1;
 static int light4 = 0;
 static int normalize = 1;          // Flag de switch avec et sans normalisation
 static int fond = 1;               // Flag de switch entre couleurs de fond noir et gris clair

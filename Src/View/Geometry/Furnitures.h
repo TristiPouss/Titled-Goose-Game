@@ -16,4 +16,6 @@ void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);
 
 void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNumber);
 
+void room_skeleton(float edgeLength, int facetNumber);
+
 #endif // !FURNITURES_H
