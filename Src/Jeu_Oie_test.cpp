@@ -52,18 +52,23 @@ static void scene() {
     glTranslatef(0.0, -c*0.1, 0.0);
 
     glPushMatrix();
+    // For isometric view
     glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(0.0, c/2, 0.0);
 
-    //room_skeleton(c, n);
+    // Room
     drawCube(c, n, 0);
     glPopMatrix();
 
-    //drawTable(c*0.1, c*0.12, n/5);
+    drawTable(c*0.1, c*0.12, n/5);
 
-    //drawCylinder(10, 2, 20, n, n);
+    // Cube for scale
+    glTranslatef(10.0F, 0.0F, 10.0F);
+    drawCube(c * 0.1, n);
    
-    drawPawn(5, n);
+    // Put pawn on the table
+    glTranslatef(-10.0F, 0.0F, -10.0F);
+    glTranslatef(0.0F, c * 0.1, 0.0F);
+    drawPawn(2, n);
 
     glPopMatrix();
 }
