@@ -30,9 +30,8 @@ unsigned int chargementTexturePNG(char *filename) {
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
 	glPushMatrix();
 
-	//glTranslatef(0.0F, tableLegHeight /2, 0.0F);
 	glScalef(tableLegWidth, 1.0F, tableLegWidth);
-	drawCube(tableLegHeight, facetNumber);
+	drawCube(tableLegHeight - 1.0F, facetNumber);
 
 	glPopMatrix();
 }
@@ -40,7 +39,6 @@ void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
 void tableTop(float tableTopLength, float tableTopWidth, int facetNumber) {
 	glPushMatrix();
 
-	//glTranslatef(0.0F, tableTopWidth, 0.0F);
 	glScalef(1.0F, tableTopWidth / tableTopLength, 1.0F);
     GLuint temp[6];
     temp[0] = chargementTexturePNG("../Assets/Bois.png");

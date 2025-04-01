@@ -17,11 +17,11 @@
 */
 void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr);
 
-void drawCircle(float cx, float cy, float r, int num_segments);
+void drawCircle(float originX, float originY, float radius, int facetNumber);
 
 /*
     Function to draw a cylinder
 */
-void drawCylinder(float rTop, float rBot, float h, int n, int m);
+void drawCylinder(float topRadius, float botRadius, float height, int facetNumberX, int facetNumberY);
 
 #endif // !SHAPES_H

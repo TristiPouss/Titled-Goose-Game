@@ -82,6 +82,12 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\Temp\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>..\Temp\$(Configuration)\$(ProjectName)\</IntDir>
+    <PublicIncludeDirectories>
+    </PublicIncludeDirectories>
+    <IncludePath>../Include;../Assets;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>../Lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <SourcePath>../Src;$(VC_SourcePath);</SourcePath>
+    <ExternalIncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -112,7 +118,7 @@
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>../Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
@@ -120,7 +126,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>../Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies />
     </Link>
     <PostBuildEvent>
@@ -140,11 +146,62 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Include\PNG\ChargePngFile.h" />
+    <ClInclude Include="..\Include\PNG\Espace3UC.h" />
+    <ClInclude Include="..\Include\PNG\Image.h" />
+    <ClInclude Include="..\Include\PNG\ImageUtils.h" />
+    <ClInclude Include="..\Include\PNG\PngFile.h" />
+    <ClInclude Include="..\Include\PNG\Png\cexcept.h" />
+    <ClInclude Include="..\Include\PNG\Png\crc32.h" />
+    <ClInclude Include="..\Include\PNG\Png\deflate.h" />
+    <ClInclude Include="..\Include\PNG\Png\inffast.h" />
+    <ClInclude Include="..\Include\PNG\Png\inffixed.h" />
+    <ClInclude Include="..\Include\PNG\Png\inflate.h" />
+    <ClInclude Include="..\Include\PNG\Png\inftrees.h" />
+    <ClInclude Include="..\Include\PNG\Png\png.h" />
+    <ClInclude Include="..\Include\PNG\Png\pngconf.h" />
+    <ClInclude Include="..\Include\PNG\Png\trees.h" />
+    <ClInclude Include="..\Include\PNG\Png\zconf.h" />
+    <ClInclude Include="..\Include\PNG\Png\zconf.in.h" />
+    <ClInclude Include="..\Include\PNG\Png\zlib.h" />
+    <ClInclude Include="..\Include\PNG\Png\zutil.h" />
     <ClInclude Include="..\Src\View\Camera\Camera.h" />
     <ClInclude Include="..\Src\View\Colors.h" />
     <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
     <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
     <ClInclude Include="..\Src\View\Settings.h" />
+    <ClCompile Include="..\Include\PNG\ChargePngFile.cpp" />
+    <ClCompile Include="..\Include\PNG\Espace3UC.cpp" />
+    <ClCompile Include="..\Include\PNG\Image.cpp" />
+    <ClCompile Include="..\Include\PNG\ImageUtils.cpp" />
+    <ClCompile Include="..\Include\PNG\PngFile.cpp" />
+    <ClCompile Include="..\Include\PNG\Png\adler32.c" />
+    <ClCompile Include="..\Include\PNG\Png\compress.c" />
+    <ClCompile Include="..\Include\PNG\Png\crc32.c" />
+    <ClCompile Include="..\Include\PNG\Png\deflate.c" />
+    <ClCompile Include="..\Include\PNG\Png\gzio.c" />
+    <ClCompile Include="..\Include\PNG\Png\infback.c" />
+    <ClCompile Include="..\Include\PNG\Png\inffast.c" />
+    <ClCompile Include="..\Include\PNG\Png\inflate.c" />
+    <ClCompile Include="..\Include\PNG\Png\inftrees.c" />
+    <ClCompile Include="..\Include\PNG\Png\png.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngerror.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngget.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngmem.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngpread.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngread.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngrio.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngrtran.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngrutil.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngset.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngtrans.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngwio.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngwrite.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngwtran.c" />
+    <ClCompile Include="..\Include\PNG\Png\pngwutil.c" />
+    <ClCompile Include="..\Include\PNG\Png\trees.c" />
+    <ClCompile Include="..\Include\PNG\Png\uncompr.c" />
+    <ClCompile Include="..\Include\PNG\Png\zutil.c" />
     <ClCompile Include="..\Src\Jeu_Oie_test.cpp" />
     <ClCompile Include="..\Src\View\Camera\Camera.cpp" />
     <ClCompile Include="..\Src\View\Geometry\Furnitures.cpp" />

@@ -6,9 +6,6 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
 
     glPushMatrix();
 
-    // Origin setup
-    //glTranslatef(0.0F, -edgeLength / 2, 0.0F);
-
     // Up
     glPushMatrix();
     glTranslatef(-edgeLength / 2, edgeLength, -edgeLength / 2);
@@ -161,36 +158,36 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
     glPopMatrix();
 }
 
-void drawCircle(float cx, float cy, float r, int num_segments) {
+void drawCircle(float originX, float originY, float radius, int facetNumber) {
     glPushMatrix();
     double twicePi = 2.0 * M_PI;
     glBegin(GL_TRIANGLE_FAN); //BEGIN CIRCLE
-    glVertex2f(cx, cy); // center of circle
-    for (int i = 0; i <= num_segments; i++) {
+    glVertex2f(originX, originY); // center of circle
+    for (int i = 0; i <= facetNumber; i++) {
         glVertex2f(
-            (cy + (r * sin(i * twicePi / num_segments))), (cx + (r * cos(i * twicePi / num_segments)))
+            (originY + (radius * sin(i * twicePi / facetNumber))), (originX + (radius * cos(i * twicePi / facetNumber)))
         );
     }
     glEnd(); //END
     glPopMatrix();
 }
 
-void drawCylinder(float rTop, float rBot, float h, int n, int m) {
+void drawCylinder(float topRadius, float botRadius, float height, int facetNumberX, int facetNumberY) {
     glPushMatrix();
 
     glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
-    glTranslatef(0.0F, 0.0F, -h);
+    glTranslatef(0.0F, 0.0F, -height);
 
     glPushMatrix();
-    drawCircle(0.0F, 0.0F, rTop, n); // Top Circle
-    glTranslatef(0.0F, 0.0F, h);
-    drawCircle(0.0F, 0.0F, rBot, n); // Bottom Circle
+    drawCircle(0.0F, 0.0F, topRadius, facetNumberX); // Top Circle
+    glTranslatef(0.0F, 0.0F, height);
+    drawCircle(0.0F, 0.0F, botRadius, facetNumberX); // Bottom Circle
     glPopMatrix();
 
     glPushMatrix();
     GLUquadricObj* qobj = gluNewQuadric();
     gluQuadricDrawStyle(qobj, GLU_FILL);
-    gluCylinder(qobj, rTop, rBot, h, n, m);
+    gluCylinder(qobj, topRadius, botRadius, height, facetNumberX, facetNumberY);
     gluDeleteQuadric(qobj);
     glPopMatrix();
 
