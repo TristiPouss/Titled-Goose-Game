@@ -54,6 +54,8 @@ static void scene() {
     glPopMatrix();
 
     drawTable(c*0.1, c*0.12, n/5);
+
+    drawCylinder(10, 20, n, n);
     
     glPopMatrix();
 }

@@ -130,3 +130,39 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection) {
 
     glPopMatrix();
 }
+
+void drawCircle(float cx, float cy, float r, int num_segments) {
+    glPushMatrix();
+    double twicePi = 2.0 * M_PI;
+    glBegin(GL_TRIANGLE_FAN); //BEGIN CIRCLE
+    glVertex2f(cx, cy); // center of circle
+    for (int i = 0; i <= num_segments; i++) {
+        glVertex2f(
+            (cy + (r * sin(i * twicePi / num_segments))), (cx + (r * cos(i * twicePi / num_segments)))
+        );
+    }
+    glEnd(); //END
+    glPopMatrix();
+}
+
+void drawCylinder(float r, float h, int n, int m) {
+    glPushMatrix();
+
+    glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+    glTranslatef(0.0F, 0.0F, -h);
+
+    glPushMatrix();
+    drawCircle(0.0F, 0.0F, r, n);
+    glTranslatef(0.0F, 0.0F, h);
+    drawCircle(0.0F, 0.0F, r, n);
+    glPopMatrix();
+
+    glPushMatrix();
+    GLUquadricObj* qobj = gluNewQuadric();
+    gluQuadricDrawStyle(qobj, GLU_FILL);
+    gluCylinder(qobj, r, r, h, n, m);
+    gluDeleteQuadric(qobj);
+    glPopMatrix();
+
+    glPopMatrix();
+}
