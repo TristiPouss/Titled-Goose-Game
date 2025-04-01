@@ -16,7 +16,7 @@ namespace gooseGameModel {
 
     void Game::nextTurn() {
         if (g_state == END || g_state == WAITING) {
-            std::cout << "Game is not in a playable state." << std::endl;
+            if (DEV) std::cout << "Game is not in a playable state." << std::endl;
             return;
         }
         turn++;
@@ -26,7 +26,7 @@ namespace gooseGameModel {
         // Logic for playing the turn
         // This would include rolling the dice, moving players, etc.
        if (g_state == END || g_state == WAITING) {
-            std::cout << "Game is not in a playable state." << std::endl;
+            if (DEV)std::cout << "Game is not in a playable state." << std::endl;
             return;
         }
         int diceValue1 = std::get<0>(dices).roll();
@@ -36,7 +36,9 @@ namespace gooseGameModel {
         std::shared_ptr<Cell> currentCell = board->getCell(currentPlayer->getPosition());
         if (currentPlayer->getTimeout() > 0) {
             currentPlayer->setTimeout(currentPlayer->getTimeout() - 1);
-            std::cout << "Player " << currentPlayer->getName() << " is trapped for " << currentPlayer->getTimeout() << " turns." << std::endl;
+            if (DEV) std::cout << "Player " << currentPlayer->getName() << " is trapped for " << currentPlayer->getTimeout() << " turns." << std::endl;
+            curr_player = (curr_player + 1) % board->getNbPlayer();
+            if (curr_player == 0) nextTurn();
             return;
         }
 
@@ -47,7 +49,7 @@ namespace gooseGameModel {
         // Check for victory conditions
         if (currentPlayer->getPosition() == board->getSize() - 1) {
             g_state = END;
-            std::cout << "Player " << currentPlayer->getName() << " wins!" << std::endl;
+            if (DEV) std::cout << "Player " << currentPlayer->getName() << " wins!" << std::endl;
         } else {
             curr_player = (curr_player + 1) % board->getNbPlayer();
             if (curr_player == 0) nextTurn();
