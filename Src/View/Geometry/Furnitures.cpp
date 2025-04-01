@@ -4,7 +4,7 @@
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
 	glPushMatrix();
 
-	glTranslatef(0.0F, tableLegHeight /2, 0.0F);
+	//glTranslatef(0.0F, tableLegHeight /2, 0.0F);
 	glScalef(tableLegWidth, 1.0F, tableLegWidth);
 	drawCube(tableLegHeight, facetNumber);
 
@@ -14,7 +14,7 @@ void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
 void tableTop(float tableTopLength, float tableTopWidth, int facetNumber) {
 	glPushMatrix();
 
-	glTranslatef(0.0F, tableTopWidth, 0.0F);
+	//glTranslatef(0.0F, tableTopWidth, 0.0F);
 	glScalef(1.0F, tableTopWidth / tableTopLength, 1.0F);
 	drawCube(tableTopLength, facetNumber);
 

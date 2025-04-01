@@ -7,7 +7,7 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection) {
     glPushMatrix();
 
     // Origin setup
-    glTranslatef(0.0F, -edgeLength / 2, 0.0F);
+    //glTranslatef(0.0F, -edgeLength / 2, 0.0F);
 
     // Up
     glPushMatrix();
