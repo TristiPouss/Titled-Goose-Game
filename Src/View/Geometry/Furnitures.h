@@ -16,4 +16,6 @@ void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);
 
 void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNumber);
 
+void drawPawn(float horizontalEdgeLength, int facetNumber);
+
 #endif // !FURNITURES_H

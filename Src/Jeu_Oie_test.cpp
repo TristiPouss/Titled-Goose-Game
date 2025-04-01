@@ -40,6 +40,12 @@ static void diffuse() {
     glLightfv(GL_LIGHT3, GL_DIFFUSE, light3Diffuse);
 }
 
+static void initLight() {
+    ambient();
+    diffuse();
+    spot_top();
+}
+
 static void scene() {
     glPushMatrix();
     
@@ -53,10 +59,12 @@ static void scene() {
     drawCube(c, n, 0);
     glPopMatrix();
 
-    drawTable(c*0.1, c*0.12, n/5);
+    //drawTable(c*0.1, c*0.12, n/5);
 
-    drawCylinder(10, 20, n, n);
-    
+    //drawCylinder(10, 2, 20, n, n);
+   
+    drawPawn(5, n);
+
     glPopMatrix();
 }
 
@@ -115,10 +123,7 @@ static void display(void) {
     printf("%f\n", zoom);
 
     // light init
-    //spot_top();
-    ambient();
-    diffuse();
-    spot_top();
+    initLight();
 
     // Scene
     scene();
@@ -168,8 +173,8 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'k':
         zoom /= 1.1;
-        if (zoom <= 2.6)
-            zoom = 2.6;
+        if (zoom <= 2.86)
+            zoom = 2.86;
         glutPostRedisplay();
         break;
     case 'K':
@@ -229,22 +234,22 @@ static void special(int specialKey, int x, int y) {
     switch (specialKey) {
     case GLUT_KEY_RIGHT:
         ry -= 1.0F;
-        if (ry < -50.0) ry = -50.0;
+        //if (ry < -50.0) ry = -50.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_LEFT:
         ry += 1.0F;
-        if (ry > 50.0) ry = 50.0;
+        //if (ry > 50.0) ry = 50.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_UP:
         rx += 1.0F;
-        if (rx > 30.0) rx = 30.0;
+        //if (rx > 30.0) rx = 30.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
         rx -= 1.0F;
-        if (rx < -30.0) rx = -30.0;
+        //if (rx < -30.0) rx = -30.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_F10:

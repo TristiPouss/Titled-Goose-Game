@@ -145,22 +145,22 @@ void drawCircle(float cx, float cy, float r, int num_segments) {
     glPopMatrix();
 }
 
-void drawCylinder(float r, float h, int n, int m) {
+void drawCylinder(float rTop, float rBot, float h, int n, int m) {
     glPushMatrix();
 
     glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
     glTranslatef(0.0F, 0.0F, -h);
 
     glPushMatrix();
-    drawCircle(0.0F, 0.0F, r, n);
+    drawCircle(0.0F, 0.0F, rTop, n); // Top Circle
     glTranslatef(0.0F, 0.0F, h);
-    drawCircle(0.0F, 0.0F, r, n);
+    drawCircle(0.0F, 0.0F, rBot, n); // Bottom Circle
     glPopMatrix();
 
     glPushMatrix();
     GLUquadricObj* qobj = gluNewQuadric();
     gluQuadricDrawStyle(qobj, GLU_FILL);
-    gluCylinder(qobj, r, r, h, n, m);
+    gluCylinder(qobj, rTop, rBot, h, n, m);
     gluDeleteQuadric(qobj);
     glPopMatrix();
 

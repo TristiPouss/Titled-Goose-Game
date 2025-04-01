@@ -47,3 +47,41 @@ void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNu
 	glPopMatrix();
 }
 
+void drawPawn(float horizontalEdgeLength, int facetNumber) {
+	glPushMatrix();
+
+	float verticalEdgeLength = horizontalEdgeLength * 2.5;
+
+	// Head Sphere
+	float headRadius = horizontalEdgeLength / 2;
+	float headHeight = verticalEdgeLength - headRadius;
+	
+	glPushMatrix();
+	glTranslatef(0.0F, headHeight, 0.0F);
+	glutSolidSphere(headRadius, facetNumber, facetNumber);
+	glPopMatrix();
+
+	// Base Cylinder
+	float baseHeight = headHeight - headRadius;
+	float baseRadius = horizontalEdgeLength;
+
+	drawCylinder(headRadius / 2, baseRadius, baseHeight, facetNumber, facetNumber);
+
+	// Head Torus
+	float headTorusInnerRadius = headRadius / 5;
+	float headTorusOuterRadius = headRadius / 2;
+
+	glPushMatrix();
+	glTranslatef(0.0F, baseHeight, 0.0F);
+	glRotatef(90.0, 1.0F, 0.0F, 0.0F);
+	glutSolidTorus(headTorusInnerRadius, headTorusOuterRadius, facetNumber, facetNumber);
+	glPopMatrix();
+
+	// Base Cylinder 2
+
+	glPushMatrix();
+	drawCylinder(baseRadius, baseRadius, baseHeight / 7, facetNumber, facetNumber);
+	glPopMatrix();
+
+	glPopMatrix();
+}

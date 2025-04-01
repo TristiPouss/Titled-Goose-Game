@@ -22,6 +22,6 @@ void drawCircle(float cx, float cy, float r, int num_segments);
 /*
     Function to draw a cylinder
 */
-void drawCylinder(float r, float h, int n, int m);
+void drawCylinder(float rTop, float rBot, float h, int n, int m);
 
 #endif // !SHAPES_H
