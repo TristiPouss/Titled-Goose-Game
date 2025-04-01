@@ -1,6 +1,9 @@
 #include "Cell.h"
 #include "Player.h"
 #include "Board.h"
+
+#define DEV 1
+
 #include <iostream>
 
 namespace gooseGameModel {
@@ -13,6 +16,7 @@ void Cell::action(std::shared_ptr<Player> player){
 }
 
 void GooseCell::action(std::shared_ptr<Player> player){
+    if (DEV) std::cout << "Goose Cell: Moving player " << player->getName() << " forward 9 spaces." << std::endl;
     player->move(9);
 
 }

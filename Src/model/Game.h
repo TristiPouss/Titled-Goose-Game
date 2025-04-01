@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "Dice.h"
 #include <memory>
+#include <string>
 #include <tuple>
 
 
@@ -24,6 +25,7 @@ enum stateGame {
  * It provides methods to advance the game state and access or modify its components.
  */
 class Game{
+    public:
     /**
     * @brief Default constructor for the Game class.
     * 
@@ -34,7 +36,23 @@ class Game{
     /**
     * @brief Add a player to the game
     */
-    
+    void addPlayer(std::string name, char representation);
+
+    /**
+     * @brief Get the current Turn
+     */ 
+
+    unsigned getTurn() const {
+        return turn;
+    }
+
+    /**
+    * @brief Get the current player 
+    */
+    unsigned getCurrentPlayer() const {
+        return curr_player;
+    }
+
     /**
     * @brief Advances the game to the next turn.
     * 
@@ -81,7 +99,7 @@ class Game{
         std::tuple<Dice , Dice> dices;
         stateGame g_state;
         unsigned curr_player; 
-        int turn; // Current turn number
+        unsigned turn; // Current turn number
 
 
 };
