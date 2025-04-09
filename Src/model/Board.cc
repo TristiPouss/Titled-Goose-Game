@@ -42,7 +42,7 @@ void Board::init() {
     }
 }
 
-void Board::addPlayer(Player p) {
+void Board::addPlayer(Player &p) {
     players.push_back(p);
 }
 
@@ -50,10 +50,29 @@ int Board::getSize() {
     return size;
 }
 
-std::vector<Cell> Board::getCellsTab() {
+std::vector<Cell> &Board::getCellsTab() {
     return cells;
 }
 
-Cell Board::getCell(int index) {
+Cell &Board::getCell(int index) {
     return cells[index];
+}
+
+void Board::toString() {
+    std::cout << "Board: " << std::endl;
+    for (int i = 0; i < size; i++) {
+        if (i % 10 == 0) {
+            std::cout << std::endl;
+        }
+        std::cout << i << " ";
+    }
+}
+
+std::vector<Player> Board::getPlayers() {
+    return players;
+}
+
+void Board::movePlayer(int playerIndex, int diceValue){
+    Player p = players[playerIndex];
+    p.move(diceValue);
 }
