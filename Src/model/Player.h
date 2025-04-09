@@ -16,13 +16,14 @@ class Player {
         /**
          * @brief Default constructor.
          */
-        Player();
+        Player() : timeout(0), position(0), name("[]"), c('!') {};
 
         /**
-         * @brief Destructor.
+         * @brief Constructor with name args
          */
-        ~Player();
-
+        Player(std::string name, char representation) :timeout(0), position(0), name(name), c(representation) {} ;
+        
+     
         /**
          * @brief Moves the player a given number of steps.
          * @param steps Number of steps to move (positive or negative).
@@ -33,49 +34,49 @@ class Player {
          * @brief Sets the timeout for the player's turn.
          * @param timeout Timeout value in turns.
          */
-        void setTimeout(int timeout);
+        void setTimeout(int to_wait);
 
         /**
          * @brief Gets the timeout for the player's turn.
          * @return Timeout value in turns.
          */
-        int getTimeout();
+        int getTimeout() const;
 
         /**
          * @brief Sets the player's position on the board.
          * @param position Position value on the board.
          */
-        void setPosition(int position);
+        void setPosition(int new_pos);
 
         /**
          * @brief Gets the player's position on the board.
          * @return Position value on the board.
          */
-        int getPosition();
+        int getPosition() const;
 
         /**
          * @brief Sets the player's name.
          * @param name Name of the player.
          */
-        void setName(std::string name);
+        void setName(std::string new_name);
 
         /**
          * @brief Gets the player's name.
          * @return Name of the player.
          */
-        std::string getName();
+        std::string getName() const;
 
         /**
          * @brief Gets the character representation of the player.
          * @return Character representing the player.
          */
-        char getChar();
+        char getChar() const;
 
         /**
          * @brief Sets the character representation of the player.
          * @param c Character representing the player.
          */
-        void setChar(char c);
+        void setChar(char new_c);
 
     private:
         int timeout; ///< Timeout for the player's turn in turns.
