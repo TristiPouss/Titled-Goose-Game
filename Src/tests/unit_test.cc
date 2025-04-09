@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <iostream>
 #include <memory>
 #include <vector>
 #include "../model/Board.h"
@@ -382,6 +383,103 @@ TEST(TestDice, RollMaxValue) {
 
     EXPECT_GE(r, 1);
     EXPECT_LE(r, 10);
+}
+
+TEST(TestGame, Constructor) {
+    gooseGameModel::Game g;
+    EXPECT_EQ(g.getState(), gooseGameModel::stateGame::WAITING);
+}
+
+TEST(TestGame, LaunchGame) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    EXPECT_EQ(g.getState(), gooseGameModel::stateGame::PLAYING);
+}
+
+TEST(TestGame, ResetGame) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    g.resetGame();
+    EXPECT_EQ(g.getState(), gooseGameModel::stateGame::WAITING);
+}
+TEST(TestGame, GetBoard) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    EXPECT_EQ(g.getBoard().getSize(), DEFAULT_SIZE_BOARD);
+}
+TEST(TestGame, GetTurn) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    EXPECT_EQ(g.getTurn(), 0);
+}
+
+TEST(TestGame, GetTurnAfterNextTurn) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    g.nextTurn();
+    EXPECT_EQ(g.getTurn(), 1);
+}
+
+TEST(TestGame, addPlayer) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    g.addPlayer("AAA", 'A');
+    std::vector<std::shared_ptr<gooseGameModel::Player>> players = g.getBoard().getPlayers();
+    EXPECT_EQ("AAA", players[0]->getName());
+    EXPECT_EQ('A',players[0]->getChar());
+}
+
+TEST(TestGame, GetCurrentPlayer) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    EXPECT_EQ(g.getCurrentPlayer(), 0);
+}
+
+TEST(TestGame, NextTurnWaiting) {
+    gooseGameModel::Game g;
+    g.nextTurn();
+    EXPECT_EQ(g.getState(), gooseGameModel::stateGame::WAITING);
+}
+
+TEST(TestGame, NextTurnPlaying) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    g.nextTurn();
+    EXPECT_EQ(g.getState(), gooseGameModel::stateGame::PLAYING);
+}
+
+TEST(TestGame, PlayTurn) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    g.addPlayer("AAA", 'A');
+    g.addPlayer("BBB", 'B');
+    g.playTurn();
+    EXPECT_EQ(g.getCurrentPlayer(), 1);
+}
+
+TEST(TestGame, VerifyEndConditions) {
+    gooseGameModel::Game g;
+    g.launchGame();
+    g.addPlayer("AAA", 'A');
+    g.addPlayer("BBB", 'B');
+    g.addPlayer("CCC", 'C');
+    g.addPlayer("DDD", 'D');
+    
+
+    while (g.getState() != gooseGameModel::stateGame::END) { 
+        std::cout << "---------------------------------------------" << std::endl;
+        if (g.getCurrentPlayer() == 0) std::cout << "Turn: " << g.getTurn() << std::endl;
+        std::cout << "Current Player: " << g.getCurrentPlayer() << std::endl;
+        std::cout << "---------------------------------------------" << std::endl;
+        g.playTurn(); 
+        for (auto p : g.getBoard().getPlayers()){
+            std::cout << "Player " << p->getName() << " " << p->getPosition() << std::endl;
+        }
+        std::cout << "---------------------------------------------" << std::endl;
+        if (g.getCurrentPlayer() == 0) g.getBoard().toString();
+        std::cout << "---------------------------------------------" << std::endl;
+
+    }
 }
 
 

@@ -42,7 +42,7 @@ void Board::init() {
             case 31:
                 cells.push_back(std::make_shared<TeleportCell>(20));
                 break;
-            case 39:
+            case 38:
                 cells.push_back(std::make_shared<TeleportCell>(1));
                 break;
             default:
