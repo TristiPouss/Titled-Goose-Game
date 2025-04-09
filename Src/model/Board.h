@@ -8,7 +8,13 @@
 #include "Cell.h"
 #include "Player.h"
 
+
+namespace gooseGameModel {
+
+
 #define DEFAULT_SIZE 40
+
+
 
 /**
  * @class Board
@@ -59,7 +65,7 @@ public:
      * @param index The index of the cell to retrieve.
      * @return The cell at the specified index.
      */
-    Cell &getCell(int index);
+    Cell &getCell(unsigned long index);
 
     /**
      * @brief Gets the list of players on the board.
@@ -80,4 +86,5 @@ private:
     std::vector<Player> players; /**< The players currently on the board. */
 };
 
+} //namespace
 #endif
