@@ -55,7 +55,7 @@ public:
      * @brief Gets the size of the board.
      * @return The size of the board.
      */
-    int getSize();
+    unsigned getSize();
 
     /**
      * @brief Gets the number of players 
@@ -90,7 +90,7 @@ public:
     void movePlayer(unsigned playerIndex, int diceValue);
 
 private:
-    int size; /**< The size of the board. */
+    unsigned size; /**< The size of the board. */
     unsigned long nb_players;
     std::vector<std::shared_ptr<Cell>> cells; /**< The cells that make up the board. */
     std::vector<std::shared_ptr<Player>> players; /**< The players currently on the board. */

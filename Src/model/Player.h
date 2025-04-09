@@ -52,7 +52,7 @@ class Player {
          * @brief Gets the player's position on the board.
          * @return Position value on the board.
          */
-        int getPosition() const;
+        unsigned getPosition() const;
 
         /**
          * @brief Sets the player's name.

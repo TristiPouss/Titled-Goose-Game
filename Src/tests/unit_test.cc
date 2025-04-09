@@ -351,6 +351,11 @@ TEST(TestBoard,MovePlayer){
 
 TEST(TestBoard, ToString) {
     gooseGameModel::Board b;
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>("AAA",'a');
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>("AAA",'b');
+    p2->setPosition(1);
+    b.addPlayer(p);
+    b.addPlayer(p2);
     b.toString();
 }
 
