@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Src\View\Geometry\Texture.cpp" />
     <ClInclude Include="..\Include\PNG\ChargePngFile.h" />
     <ClInclude Include="..\Include\PNG\Espace3UC.h" />
     <ClInclude Include="..\Include\PNG\Image.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="..\Src\View\Colors.h" />
     <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
     <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
+    <ClInclude Include="..\Src\View\Geometry\Texture.h" />
     <ClInclude Include="..\Src\View\Settings.h" />
     <ClCompile Include="..\Include\PNG\ChargePngFile.cpp" />
     <ClCompile Include="..\Include\PNG\Espace3UC.cpp" />
