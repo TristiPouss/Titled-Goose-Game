@@ -75,4 +75,5 @@ std::vector<Player> Board::getPlayers() {
 void Board::movePlayer(int playerIndex, int diceValue){
     Player p = players[playerIndex];
     p.move(diceValue);
+    cells[p.getPosition()].action(p);
 }
