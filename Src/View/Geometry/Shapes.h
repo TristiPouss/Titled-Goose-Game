@@ -15,7 +15,7 @@
 /*
     Function to draw a edge_length*edge_length cube with a facetisation level of facet_number
 */
-void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr);
+void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1);
 
 void drawCircle(float originX, float originY, float radius, int facetNumber);
 

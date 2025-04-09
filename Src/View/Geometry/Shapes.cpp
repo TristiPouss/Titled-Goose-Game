@@ -1,7 +1,7 @@
 #include "Shapes.h"
 #include "../Colors.h"
 
-void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint textures[6]) {
+void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint textures[6], float ratioTexture) {
     float normal = (normalDirection) ? -0.1F : 0.1F;
 
     glPushMatrix();
@@ -18,9 +18,9 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
             glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
         }
         glEnd();
@@ -43,9 +43,9 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
             glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f(j / (float)facetNumber * 2 * ratioTexture, i / (float)facetNumber * 2 * ratioTexture);
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f((j + 1) / (float)facetNumber * 2 * ratioTexture, i / (float)facetNumber * 2 * ratioTexture);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
         }
         glEnd();
@@ -68,9 +68,9 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
             glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
         }
         glEnd();
@@ -93,9 +93,9 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
             glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
         }
         glEnd();
@@ -118,9 +118,9 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
             glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
         }
         glEnd();
@@ -142,9 +142,9 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
             glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber, i / (float)facetNumber);
+            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
             glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
         }
         glEnd();

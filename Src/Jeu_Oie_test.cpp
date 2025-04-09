@@ -59,7 +59,7 @@ static void scene() {
     glRotatef(45, 0.0, 1.0, 0.0);
 
     // Room
-    drawCube(c, n, 0, texturesRoom);
+    drawCube(c, n, 0, texturesRoom, 3);
     glPopMatrix();
 
 
