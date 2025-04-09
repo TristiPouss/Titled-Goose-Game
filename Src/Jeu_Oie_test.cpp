@@ -50,27 +50,45 @@ static void initLight() {
 }
 
 static void scene() {
+    float roomLength = scenerySize;
+
+    float tableHeight = roomLength * 0.1;
+    float tableWidth = roomLength * 0.12;
+
+    float cylSize = roomLength * 0.1;
+
+    float pawnWidth = 0.2;
+
+    float litVoitureWidth = roomLength * 0.1;
+
+    // Draw
     glPushMatrix();
-    
-    glTranslatef(0.0, -c*0.1, 0.0);
+
+    // Camera placement on the table
+    glTranslatef(0.0, -tableHeight, 0.0);
 
     glPushMatrix();
     // For isometric view
     glRotatef(45, 0.0, 1.0, 0.0);
-
     // Room
-    drawCube(c, n, 0, texturesRoom, 3);
+    drawCube(roomLength, facetNumber, 0, texturesRoom, 3);
+    glPopMatrix();    
+
+    glPushMatrix();
+    drawTable(tableHeight, tableWidth, facetNumber);
     glPopMatrix();
-    
-    drawTable(c*0.1, c*0.12, n/5);
-    
-    glTranslatef(10.0F, 0.0F, 10.0F);
-    drawCylinder(c*0.1, c*0.1, c*0.1, n, n, textureTest, textureTest, textureTest);
-    
+
+
     // Put pawn on the table
-    glTranslatef(-10.0F, 0.0F, -10.0F);
-    glTranslatef(0.0F, c * 0.1, 0.0F);
-    drawPawn(2, n, textureRed);
+    glPushMatrix();
+    glTranslatef(0.0F, tableHeight, 0.0F);
+    drawPawn(pawnWidth, facetNumber);
+    glPopMatrix();
+
+    // LitVoiture on the side of the room
+    //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
+    //glRotatef(45, 0.0, 1.0, 0.0);
+    //drawLitVoiture(litVoitureWidth, facetNumber);
 
     glPopMatrix();
 }
@@ -122,6 +140,9 @@ static void display(void) {
 
     glTranslatef(0.0F, 0.0F, -100.0F);
 
+    // Camera movements, rotation and zoom
+    glTranslatef(mx, my, mz);
+
     glRotatef(rx, 1.0F, 0.0F, 0.0F);
     glRotatef(ry, 0.0F, 1.0F, 0.0F);
     glRotatef(rz, 0.0F, 0.0F, 1.0F);
@@ -129,7 +150,7 @@ static void display(void) {
     glScalef(zoom, zoom, zoom);
     printf("%f\n", zoom);
 
-    // light init
+    // Light init
     initLight();
 
     // Scene
@@ -155,7 +176,7 @@ static void reshape(int wx, int wy) {
 }
 
 /* Fonction executee lorsqu'aucun evenement     */
-/* n'est en file d'attente                      */
+/* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
     //glutPostRedisplay();
@@ -169,13 +190,13 @@ static void keyboard(unsigned char key, int x, int y) {
     printf("K  %4c %4d %4d\n", key, x, y);
     switch (key) {
     case 'n':
-        n--;
-        if (n < 1)
-            n = 1;
+        facetNumber--;
+        if (facetNumber < 1)
+            facetNumber = 1;
         glutPostRedisplay();
         break;
     case 'N':
-        n++;
+        facetNumber++;
         glutPostRedisplay();
         break;
     case 'k':
@@ -186,6 +207,26 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'K':
         zoom *= 1.1;
+        glutPostRedisplay();
+        break;
+    case 'Z':
+    case 'z':
+        mz+= 2.0F;
+        glutPostRedisplay();
+        break;
+    case 'S':
+    case 's':
+        mz-= 2.0F;
+        glutPostRedisplay();
+        break;
+    case 'Q':
+    case 'q':
+        mx+= 2.0F;
+        glutPostRedisplay();
+        break;
+    case 'D':
+    case 'd':
+        mx-= 2.0F;
         glutPostRedisplay();
         break;
     case 'f':
@@ -205,11 +246,9 @@ static void keyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
     case 0x0D:
-    {
         anim = !anim;
         glutIdleFunc((anim) ? idle : NULL);
-    }
-    break;
+        break;
     case 'c':
         culling = !culling;
         glutPostRedisplay();
