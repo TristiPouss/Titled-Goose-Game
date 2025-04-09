@@ -1,6 +1,30 @@
 #include "Shapes.h"
 #include "../Colors.h"
 
+unsigned int chargementTexturePNG(char *filename) {
+    unsigned int textureID = 0;
+    glGenTextures(1,&textureID);
+    int rx;
+    int ry;
+    unsigned char *img = chargeImagePng(filename,&rx,&ry);
+    if ( img && textureID ) {
+        glBindTexture(GL_TEXTURE_2D,textureID);
+        glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+        glTexImage2D(GL_TEXTURE_2D,0,3,rx,ry,0,GL_RGB,GL_UNSIGNED_BYTE,img); 
+        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT); 
+        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST); 
+        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+        free(img); }
+    else {
+    if ( img ) {
+        free(img); }
+    if ( textureID ) {
+        glDeleteTextures(1,&textureID);
+        textureID = 0; } }
+    return textureID;
+}
+
 void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint textures[6]) {
     float normal = (normalDirection) ? -0.1F : 0.1F;
 
@@ -158,36 +182,62 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
     glPopMatrix();
 }
 
-void drawCircle(float originX, float originY, float radius, int facetNumber) {
+void drawCircle(float originX, float originY, float radius, int facetNumber, GLuint textureID = 0) {
     glPushMatrix();
     double twicePi = 2.0 * M_PI;
-    glBegin(GL_TRIANGLE_FAN); //BEGIN CIRCLE
+
+    if (textureID != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textureID);
+    }
+
+    glBegin(GL_TRIANGLE_FAN); // BEGIN CIRCLE
     glVertex2f(originX, originY); // center of circle
     for (int i = 0; i <= facetNumber; i++) {
-        glVertex2f(
-            (originY + (radius * sin(i * twicePi / facetNumber))), (originX + (radius * cos(i * twicePi / facetNumber)))
-        );
+        float x = originX + (radius * cos(i * twicePi / facetNumber));
+        float y = originY + (radius * sin(i * twicePi / facetNumber));
+        glTexCoord2f((x + radius) / (2 * radius), (y + radius) / (2 * radius));
+        glVertex2f(x, y);
     }
-    glEnd(); //END
+    glEnd(); // END
+
+    if (textureID != 0) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
     glPopMatrix();
 }
 
-void drawCylinder(float topRadius, float botRadius, float height, int facetNumberX, int facetNumberY) {
+void drawCylinder(float topRadius, float botRadius, float height, int facetNumberX, int facetNumberY, GLuint sideTexture, GLuint topTexture, GLuint botTexture) {
     glPushMatrix();
 
     glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
     glTranslatef(0.0F, 0.0F, -height);
 
+    // Draw top circle with texture
     glPushMatrix();
-    drawCircle(0.0F, 0.0F, topRadius, facetNumberX); // Top Circle
+    drawCircle(0.0F, 0.0F, topRadius, facetNumberX, topTexture); // Top Circle
     glTranslatef(0.0F, 0.0F, height);
-    drawCircle(0.0F, 0.0F, botRadius, facetNumberX); // Bottom Circle
+    drawCircle(0.0F, 0.0F, botRadius, facetNumberX, botTexture); // Bottom Circle
     glPopMatrix();
 
+    // Draw cylinder body with texture
     glPushMatrix();
     GLUquadricObj* qobj = gluNewQuadric();
+    gluQuadricTexture(qobj, GL_TRUE);
     gluQuadricDrawStyle(qobj, GLU_FILL);
+
+    if (sideTexture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, sideTexture);
+    }
+
     gluCylinder(qobj, topRadius, botRadius, height, facetNumberX, facetNumberY);
+
+    if (sideTexture != 0) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
     gluDeleteQuadric(qobj);
     glPopMatrix();
 

@@ -11,6 +11,8 @@
 #include "View/Geometry/Shapes.h"
 #include "View/Geometry/Furnitures.h"
 
+#include "PNG/ChargePngFile.h"
+
 static void init(void) {
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
@@ -59,12 +61,13 @@ static void scene() {
     drawCube(c, n, 0);
     glPopMatrix();
 
-    drawTable(c*0.1, c*0.12, n/5);
 
-    // Cube for scale
+    
+    drawTable(c*0.1, c*0.12, n/5);
+    
     glTranslatef(10.0F, 0.0F, 10.0F);
-    drawCube(c * 0.1, n);
-   
+    drawCylinder(c*0.1, c*0.1, c*0.1, n, n, chargementTexturePNG("../Assets/Test.png"), chargementTexturePNG("../Assets/Test.png"), chargementTexturePNG("../Assets/Test.png"));
+    
     // Put pawn on the table
     glTranslatef(-10.0F, 0.0F, -10.0F);
     glTranslatef(0.0F, c * 0.1, 0.0F);
