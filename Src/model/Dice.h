@@ -12,19 +12,14 @@ class Dice {
          * @brief Default constructor for the Dice class.
          * Initializes the dice with a default maximum value of 6.
          */
-        Dice();
+        Dice() : max_value(6) {};
 
         /**
          * @brief Parameterized constructor for the Dice class.
          * @param max_value The maximum value the dice can roll.
          */
-        Dice(int max_value);
-
-        /**
-         * @brief Destructor for the Dice class.
-         */
-        ~Dice();
-
+        Dice(int max_value) : max_value(max_value) {};
+        
         /**
          * @brief Rolls the dice and generates a random number between 1 and max_value.
          * @return A random integer between 1 and max_value.

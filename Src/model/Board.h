@@ -28,6 +28,8 @@ public:
      */
     Board();
 
+    Board(unsigned long nb_players);
+
     /**
      * @brief Destroys the Board object.
      */
@@ -47,13 +49,19 @@ public:
      * @brief Adds a player to the board.
      * @param p The player to add.
      */
-    void addPlayer(Player &p);
+    void addPlayer(std::shared_ptr<Player> p);
 
     /**
      * @brief Gets the size of the board.
      * @return The size of the board.
      */
     int getSize();
+
+    /**
+     * @brief Gets the number of players 
+     * @return The number of players
+     */
+    unsigned long getNbPlayer();
 
     /**
      * @brief Gets the vector of cells on the board.
@@ -72,19 +80,21 @@ public:
      * @brief Gets the list of players on the board.
      * @return A vector containing all the players on the board.
      */
-    std::vector<Player> getPlayers();
+    std::vector<std::shared_ptr<Player>> getPlayers();
 
     /**
      * @brief Moves a player on the board based on a dice roll.
      * @param playerIndex The index of the player to move.
      * @param diceValue The value of the dice roll.
      */
-    void movePlayer(int playerIndex, int diceValue);
+    void movePlayer(unsigned playerIndex, int diceValue);
 
 private:
     int size; /**< The size of the board. */
+    unsigned long nb_players;
     std::vector<std::shared_ptr<Cell>> cells; /**< The cells that make up the board. */
-    std::vector<Player> players; /**< The players currently on the board. */
+    std::vector<std::shared_ptr<Player>> players; /**< The players currently on the board. */
+
 };
 
 } //namespace

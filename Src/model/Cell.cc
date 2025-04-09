@@ -1,17 +1,20 @@
 #include "Cell.h"
 #include "Player.h"
 #include "Board.h"
+#include <iostream>
 
 namespace gooseGameModel {
 
 
 
-void Cell::action(Player &player){
-    // Do Nothing
+void Cell::action(std::shared_ptr<Player> player){
+    // Does nothing, supress warning
+    player->move(0);
 }
 
-void GooseCell::action(Player &player){
-    player.move(9);
+void GooseCell::action(std::shared_ptr<Player> player){
+    player->move(9);
+
 }
 
 TeleportCell::TeleportCell(int destination){
@@ -24,8 +27,8 @@ TeleportCell::TeleportCell(int destination){
     }
 }
 
-void TeleportCell::action(Player &player){
-    player.setPosition(this->destination);
+void TeleportCell::action(std::shared_ptr<Player> player){
+    player->setPosition(this->destination);
 }
 
 TrapCell::TrapCell(int turns)  {
@@ -36,8 +39,8 @@ TrapCell::TrapCell(int turns)  {
     }
 }
 
-void TrapCell::action(Player &player){
-    player.setTimeout(timeout);
+void TrapCell::action(std::shared_ptr<Player> player){
+    player->setTimeout(timeout);
 }
 
 } //namespace

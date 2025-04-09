@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <memory>
 #include <vector>
 #include "../model/Board.h"
 #include "../model/Cell.h"
@@ -9,6 +10,7 @@
 
 TEST(TestCellNormal, Constructor) {
     gooseGameModel::Cell c;
+    c.getType(); //Suppress warning
 }
 
 
@@ -18,20 +20,21 @@ TEST(TestCellNormal, GetType) {
 }
 
 TEST(TestCellNormal, ActionNormalBehavior){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
     gooseGameModel::Cell c;
 
     c.action(p);
     //Ensures it does nothing
-    EXPECT_EQ(p.getPosition(), p2.getPosition());
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), p2.getTimeout());
+    EXPECT_EQ(p->getPosition(), p2->getPosition());
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), p2->getTimeout());
 }
 
 TEST(TestCellGoose, Constructor) {
     gooseGameModel::GooseCell c;
+    c.getType(); //Suppress Warning
 }
 
 TEST(TestCellGoose, GetType) {
@@ -40,16 +43,16 @@ TEST(TestCellGoose, GetType) {
 }
 
 TEST(TestCellGoose, ActionNormalBehavior){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
     gooseGameModel::GooseCell c;
 
     c.action(p);
-    //Ensures it moves the player 9 steps
-    EXPECT_EQ(p.getPosition(), p2.getPosition() + 9);
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), p2.getTimeout());
+    //Ensures it does nothing
+    EXPECT_EQ(p->getPosition(), p2->getPosition() + 9);
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), p2->getTimeout());
 }
 
 TEST(TestCellTeleport, Constructor) {
@@ -62,42 +65,47 @@ TEST(TestCellTeleport, GetType) {
 }
 
 TEST(TestCellTeleport, ActionNormalBehavior){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
+    
     gooseGameModel::TeleportCell c(1);
 
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
+
     c.action(p);
-    //Ensures it moves the player to position 1
-    EXPECT_EQ(p.getPosition(), 1);
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), p2.getTimeout());
+    //Ensures it does nothing else 
+    EXPECT_EQ(p->getPosition(), 1);
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), p2->getTimeout());
 }
 
 TEST(TestCellTeleport, BadArgsConstructorBehavior){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
+    
     gooseGameModel::TeleportCell c(-1);
 
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
+
     c.action(p);
-    //Ensures it moves the player to position 0
-    EXPECT_EQ(p.getPosition(), 0);
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), p2.getTimeout());
+    //Ensures it does nothing
+    EXPECT_EQ(p->getPosition(), 0);
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), p2->getTimeout());
 }
 
 TEST(TestCellTeleport, BadArgsConstructorBehavior2){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
+   
     gooseGameModel::TeleportCell c(DEFAULT_SIZE_BOARD);
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
 
     c.action(p);
-    //Ensures it moves the player to position 39
-    EXPECT_EQ(p.getPosition(), DEFAULT_SIZE_BOARD - 1);
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), p2.getTimeout());
+    //Ensures it does nothing
+    EXPECT_EQ(p->getPosition(), DEFAULT_SIZE_BOARD-1);
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), p2->getTimeout());
 }
 
 TEST(TestCellTrap, Constructor) {
@@ -110,29 +118,30 @@ TEST(TestCellTrap, GetType) {
 }
 
 TEST(TestCellTrap, ActionNormalBehavior){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
     gooseGameModel::TrapCell c(1);
 
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
     c.action(p);
-    //Ensures it sets the player timeout to 1
-    EXPECT_EQ(p.getPosition(), p2.getPosition());
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), 1);
+    //Ensures it does nothing
+    EXPECT_EQ(p->getPosition(), p2->getPosition());
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), 1);
 }
 
 TEST(TestCellTrap, BadArgsConstructorBehavior){
-    gooseGameModel::Player p;
-    gooseGameModel::Player p2 = p;
     gooseGameModel::TrapCell c(-1);
 
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>();
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>();
+
     c.action(p);
-    //Ensures it sets the player timeout to 0
-    EXPECT_EQ(p.getPosition(), p2.getPosition());
-    EXPECT_EQ(p.getChar(), p2.getChar());
-    EXPECT_EQ(p.getName(), p2.getName());
-    EXPECT_EQ(p.getTimeout(), 0);
+    //Ensures it does nothing
+    EXPECT_EQ(p->getPosition(), p2->getPosition());
+    EXPECT_EQ(p->getChar(), p2->getChar());
+    EXPECT_EQ(p->getName(), p2->getName());
+    EXPECT_EQ(p->getTimeout(), 0);
 }
 
 TEST(TestPlayer, Constructor) {
@@ -274,27 +283,46 @@ TEST(TestBoard, ConstructorInit) {
 
 TEST(TestBoard, AddPlayer) {
     gooseGameModel::Board b;
-    gooseGameModel::Player p("AAA",'a');
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>("AAA",'a');
     b.addPlayer(p);
 
-    std::vector<gooseGameModel::Player> players = b.getPlayers();
-    EXPECT_EQ(players[0].getChar(), 'a');
-    EXPECT_EQ(players[0].getName(), "AAA");
+
+    std::vector<std::shared_ptr<gooseGameModel::Player>> players = b.getPlayers();
+    EXPECT_EQ(players[0]->getChar(), 'a');
+    EXPECT_EQ(players[0]->getName(), "AAA");
 }
 
 TEST(TestBoard,getPlayers) {
     gooseGameModel::Board b;
-    gooseGameModel::Player p1("AAA",'a');
-    gooseGameModel::Player p2("BBB",'b');
+    std::shared_ptr<gooseGameModel::Player> p1 = std::make_shared<gooseGameModel::Player>("AAA",'a');
+    std::shared_ptr<gooseGameModel::Player> p2 = std::make_shared<gooseGameModel::Player>("BBB",'b');
     
 
     b.addPlayer(p1);
     b.addPlayer(p2);
 
-    std::vector<gooseGameModel::Player> players = b.getPlayers();
-    EXPECT_EQ(p1.getName(),players[0].getName());
-    EXPECT_EQ(p2.getName(), players[1].getName());
+    std::vector<std::shared_ptr<gooseGameModel::Player>> players = b.getPlayers();
+    EXPECT_EQ(p1->getName(),players[0]->getName());
+    EXPECT_EQ(p2->getName(), players[1]->getName());
 }
+
+TEST(TestBoard, GetCell) {
+    gooseGameModel::Board b;
+    std::shared_ptr<gooseGameModel::Cell> c = b.getCell(0);
+    std::shared_ptr<gooseGameModel::Cell> c2 = b.getCell(0);
+
+    EXPECT_EQ(c->getType(), c2->getType());
+}
+
+TEST(TestBoard, GetCellOutOfBounds) {
+    gooseGameModel::Board b;
+    std::shared_ptr<gooseGameModel::Cell> c = b.getCell(DEFAULT_SIZE_BOARD + 1);
+    std::shared_ptr<gooseGameModel::Cell> c2 = b.getCell(DEFAULT_SIZE_BOARD + 1);
+
+    EXPECT_EQ(c->getType(), c2->getType());
+}
+
+
 
 TEST(TestBoard, GetSize) {
     gooseGameModel::Board b;
@@ -311,6 +339,48 @@ TEST(TestBoard, GetCellsTab) {
         EXPECT_EQ(cells[i]->getType(), cells2[i]->getType());
     }
 }
+
+TEST(TestBoard,MovePlayer){
+    gooseGameModel::Board b;
+    std::shared_ptr<gooseGameModel::Player> p = std::make_shared<gooseGameModel::Player>("AAA",'a');
+    b.addPlayer(p);
+    b.movePlayer(0,1);
+    std::vector<std::shared_ptr<gooseGameModel::Player>> players = b.getPlayers();
+    EXPECT_EQ(players[0]->getPosition(),1);
+}
+
+TEST(TestBoard, ToString) {
+    gooseGameModel::Board b;
+    b.toString();
+}
+
+
+TEST(TestDice, Constructor) {
+    gooseGameModel::Dice d;
+}
+
+TEST(TestDice, ConstructorMaxValue) {
+    gooseGameModel::Dice d(10);
+}
+
+TEST(TestDice, Roll) {
+    gooseGameModel::Dice d;
+    int r = d.roll();
+
+    EXPECT_GE(r, 1);
+    EXPECT_LE(r, 6);
+}
+
+TEST(TestDice, RollMaxValue) {
+    gooseGameModel::Dice d(10);
+    int r = d.roll();
+
+    EXPECT_GE(r, 1);
+    EXPECT_LE(r, 10);
+}
+
+
+
 
 
 
