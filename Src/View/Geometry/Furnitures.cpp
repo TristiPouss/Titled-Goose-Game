@@ -79,3 +79,28 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 
 	glPopMatrix();
 }
+
+void drawLitVoiture(float horizontalEdgeLength, int facetNumber) {
+	glPushMatrix();
+
+	float verticalEdgeLength = horizontalEdgeLength * 0.75;
+
+	float thinEdge = horizontalEdgeLength * 0.01;
+	
+	//glTranslatef(-10.0F, 0.0F, -10.0F);
+
+	// Left Side
+	glPushMatrix();
+	glTranslatef(0.0F, 0.0F, -horizontalEdgeLength / 2);
+	glScalef(1.0F, verticalEdgeLength / horizontalEdgeLength, thinEdge / horizontalEdgeLength);
+	drawCube(horizontalEdgeLength, facetNumber);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.0F, 0.0F, horizontalEdgeLength / 2);
+	glScalef(1.0F, verticalEdgeLength / horizontalEdgeLength, thinEdge / horizontalEdgeLength);
+	drawCube(horizontalEdgeLength, facetNumber);
+	glPopMatrix();
+
+	glPopMatrix();
+}

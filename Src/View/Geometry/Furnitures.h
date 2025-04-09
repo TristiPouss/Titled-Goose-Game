@@ -20,4 +20,6 @@ void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNu
 
 void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0);
 
+void drawLitVoiture(float horizontalEdgeLength, int facetNumber);
+
 #endif // !FURNITURES_H
