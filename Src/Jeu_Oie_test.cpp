@@ -61,8 +61,6 @@ static void scene() {
     // Room
     drawCube(c, n, 0, texturesRoom, 3);
     glPopMatrix();
-
-
     
     drawTable(c*0.1, c*0.12, n/5);
     
@@ -72,7 +70,7 @@ static void scene() {
     // Put pawn on the table
     glTranslatef(-10.0F, 0.0F, -10.0F);
     glTranslatef(0.0F, c * 0.1, 0.0F);
-    drawPawn(2, n);
+    drawPawn(2, n, textureRed);
 
     glPopMatrix();
 }

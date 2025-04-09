@@ -11,6 +11,11 @@ GLuint textureTest;
 GLuint textureWood;
 GLuint textureTable;
 
+GLuint textureRed;
+GLuint textureGreen;
+GLuint textureBlue;
+GLuint textureYellow;
+
 unsigned int chargementTexturePNG(char *filename) {
     unsigned int textureID = 0;
     glGenTextures(1,&textureID);
@@ -41,6 +46,11 @@ void initTexture() {
     textureTest = chargementTexturePNG("../Assets/Test.png");
     textureWood = chargementTexturePNG("../Assets/Bois.png");
     textureTable = chargementTexturePNG("../Assets/table.png24");
+
+    textureRed = chargementTexturePNG("../Assets/red.png24");
+    textureGreen = chargementTexturePNG("../Assets/green.png24");
+    textureBlue = chargementTexturePNG("../Assets/blue.png24");
+    textureYellow = chargementTexturePNG("../Assets/yellow.png24");
 
     texturesRoom[0] = textureWall;
     texturesRoom[1] = textureFloor;

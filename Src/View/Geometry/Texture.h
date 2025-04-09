@@ -20,6 +20,11 @@ extern GLuint textureTest;
 extern GLuint textureWood;
 extern GLuint textureTable;
 
+extern GLuint textureRed;
+extern GLuint textureGreen;
+extern GLuint textureBlue;
+extern GLuint textureYellow;
+
 unsigned int chargementTexturePNG(char *filename);
 void initTexture();
 
