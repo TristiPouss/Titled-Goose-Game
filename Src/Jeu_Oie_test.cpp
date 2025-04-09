@@ -79,6 +79,13 @@ static void scene() {
     glPopMatrix();
 
 
+    // Draw the cylinder
+    glPushMatrix();
+    glTranslatef(0.0F, tableHeight, 0.0F);
+    drawCylinder(cylSize, cylSize, cylSize, facetNumber, facetNumber,textureTest, textureTest, textureTest);
+    glPopMatrix();
+
+
     // Put pawn on the table
     glPushMatrix();
     glTranslatef(0.0F, tableHeight, 0.0F);

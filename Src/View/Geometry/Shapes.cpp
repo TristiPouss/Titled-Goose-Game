@@ -173,7 +173,7 @@ void drawCircle(float originX, float originY, float radius, int facetNumber, GLu
         float x = originX + (radius * cos(i * twicePi / facetNumber));
         float y = originY + (radius * sin(i * twicePi / facetNumber));
         glTexCoord2f((x + radius) / (2 * radius), (y + radius) / (2 * radius));
-        glVertex2f(x, y);
+        glVertex2f(y, x);
     }
     glEnd(); // END
 
