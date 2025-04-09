@@ -11,7 +11,10 @@
 #include "View/Geometry/Shapes.h"
 #include "View/Geometry/Furnitures.h"
 
+#include "View/Geometry/Texture.h"
+
 static void init(void) {
+    initTexture();
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
 }
@@ -56,19 +59,18 @@ static void scene() {
     glRotatef(45, 0.0, 1.0, 0.0);
 
     // Room
-    drawCube(c, n, 0);
+    drawCube(c, n, 0, texturesRoom, 3);
     glPopMatrix();
-
+    
     drawTable(c*0.1, c*0.12, n/5);
-
-    // Cube for scale
+    
     glTranslatef(10.0F, 0.0F, 10.0F);
-    drawCube(c * 0.1, n);
-   
+    drawCylinder(c*0.1, c*0.1, c*0.1, n, n, textureTest, textureTest, textureTest);
+    
     // Put pawn on the table
     glTranslatef(-10.0F, 0.0F, -10.0F);
     glTranslatef(0.0F, c * 0.1, 0.0F);
-    drawPawn(2, n);
+    drawPawn(2, n, textureRed);
 
     glPopMatrix();
 }

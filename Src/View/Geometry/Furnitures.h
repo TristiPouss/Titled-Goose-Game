@@ -10,12 +10,14 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "Texture.h"
+
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber);
 
 void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);
 
 void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNumber);
 
-void drawPawn(float horizontalEdgeLength, int facetNumber);
+void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0);
 
 #endif // !FURNITURES_H
