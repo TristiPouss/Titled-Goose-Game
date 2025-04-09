@@ -10,6 +10,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include "Texture.h"
+
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber);
 
 void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);

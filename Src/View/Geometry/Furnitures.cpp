@@ -3,33 +3,15 @@
 
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
 	glPushMatrix();
-
-	GLuint temp[6];
-    temp[0] = chargementTexturePNG("../Assets/Bois.png");
-    temp[1] = chargementTexturePNG("../Assets/Bois.png");
-    temp[2] = chargementTexturePNG("../Assets/Bois.png");
-    temp[3] = chargementTexturePNG("../Assets/Bois.png");
-    temp[4] = chargementTexturePNG("../Assets/Bois.png");
-    temp[5] = chargementTexturePNG("../Assets/Bois.png");
 	glScalef(tableLegWidth, 1.0F, tableLegWidth);
-	drawCube(tableLegHeight - 1.0F, facetNumber, 1, temp);
-
+	drawCube(tableLegHeight - 1.0F, facetNumber, 1, texturesTableLeg);
 	glPopMatrix();
 }
 
 void tableTop(float tableTopLength, float tableTopWidth, int facetNumber) {
 	glPushMatrix();
-
-	GLuint temp[6];
-    temp[0] = chargementTexturePNG("../Assets/table.png24");
-    temp[1] = chargementTexturePNG("../Assets/table.png24");
-    temp[2] = chargementTexturePNG("../Assets/table.png24");
-    temp[3] = chargementTexturePNG("../Assets/table.png24");
-    temp[4] = chargementTexturePNG("../Assets/table.png24");
-    temp[5] = chargementTexturePNG("../Assets/table.png24");
 	glScalef(1.0F, tableTopWidth / tableTopLength, 1.0F);
-	drawCube(tableTopLength, facetNumber, 1, temp);
-
+	drawCube(tableTopLength, facetNumber, 1, texturesTableTop);
 	glPopMatrix();
 }
 

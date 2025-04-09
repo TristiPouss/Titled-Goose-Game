@@ -12,11 +12,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include "PNG/ChargePngFile.h"
-
-unsigned int chargementTexturePNG(char *filename);
-
-
 /*
     Function to draw a edge_length*edge_length cube with a facetisation level of facet_number
 */
