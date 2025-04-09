@@ -14,7 +14,7 @@ namespace gooseGameModel {
 
 
 #define DEFAULT_SIZE_BOARD 40
-#define DEV 1 
+#define DEV 0
 
 
 /**

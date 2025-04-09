@@ -272,7 +272,7 @@ TEST(TestBoard, ConstructorInit) {
     for (unsigned long i = 0; i < cells.size(); i++) {
         if (i == 5 || i == 9 || i == 14 || i == 18 || i == 23 || i == 27 || i == 32 || i == 36) {
             EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::GOOSE);
-        } else if (i == 6 || i == 31 || i == 39) {
+        } else if (i == 6 || i == 31 || i == 38) {
             EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::TELEPORT);
         } else if (i == 19) {
             EXPECT_EQ(cells[i]->getType(), gooseGameModel::CellType::TRAP);
