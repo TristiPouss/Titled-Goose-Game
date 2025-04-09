@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "Board.h"
 
-#define DEV 1
 
 #include <iostream>
 
