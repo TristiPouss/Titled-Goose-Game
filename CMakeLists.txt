@@ -13,6 +13,8 @@ set(CMAKE_C_COMPILER clang)
 # Set the project name
 project(TitledGooseGame)
 
+add_subdirectory(Src/tests)
+
 # Add the executable
 
 file(GLOB_RECURSE GAME_SOURCES Src/*.cpp)
