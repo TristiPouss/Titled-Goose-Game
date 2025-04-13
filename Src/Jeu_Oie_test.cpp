@@ -78,18 +78,28 @@ static void scene() {
     drawTable(tableHeight, tableWidth, facetNumber);
     glPopMatrix();
 
-
-    // Draw the cylinder
-    glPushMatrix();
-    glTranslatef(0.0F, tableHeight, 0.0F);
-    drawCylinder(cylSize, cylSize, cylSize, facetNumber, facetNumber,textureTest, textureTest, textureTest);
-    glPopMatrix();
-
-
     // Put pawn on the table
     glPushMatrix();
-    glTranslatef(0.0F, tableHeight, 0.0F);
-    drawPawn(pawnWidth, facetNumber);
+    glTranslatef(0.0F, tableHeight, -pawnWidth*2);
+    drawPawn(pawnWidth, facetNumber, textureBlue);
+    glPopMatrix();
+
+    // Put a second pawn on the table
+    glPushMatrix();
+    glTranslatef(pawnWidth*2, tableHeight, 0.0F);
+    drawPawn(pawnWidth, facetNumber, textureRed);
+    glPopMatrix();
+    
+    // Put a third pawn on the table
+    glPushMatrix();
+    glTranslatef(-pawnWidth*2, tableHeight, 0.0F);
+    drawPawn(pawnWidth, facetNumber, textureGreen);
+    glPopMatrix();
+    
+    // Put a fourth pawn on the table
+    glPushMatrix();
+    glTranslatef(0.0F, tableHeight, pawnWidth*2);
+    drawPawn(pawnWidth, facetNumber, textureYellow);
     glPopMatrix();
 
     // LitVoiture on the side of the room

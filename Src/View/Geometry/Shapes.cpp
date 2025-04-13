@@ -219,3 +219,43 @@ void drawCylinder(float topRadius, float botRadius, float height, int facetNumbe
 
     glPopMatrix();
 }
+
+void drawSphere(float radius, int facetNumber, GLuint texture) {
+    glPushMatrix();
+
+    GLUquadricObj* qobj = gluNewQuadric();
+    gluQuadricTexture(qobj, GL_TRUE);
+    gluQuadricDrawStyle(qobj, GLU_FILL);
+
+    if (texture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture);
+    }
+
+    gluSphere(qobj, radius, facetNumber, facetNumber);
+
+    if (texture != 0) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
+    gluDeleteQuadric(qobj);
+    glPopMatrix();
+}
+
+void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint texture) {
+    glPushMatrix();
+
+    if (texture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture);
+    }
+
+    glutSolidTorus(innerRadius, outerRadius, facetNumber, facetNumber);
+
+    if (texture != 0) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
+    glPopMatrix();
+}
+

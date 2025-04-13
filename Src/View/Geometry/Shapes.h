@@ -24,4 +24,8 @@ void drawCircle(float originX, float originY, float radius, int facetNumber);
 */
 void drawCylinder(float topRadius, float botRadius, float height, int facetNumberX, int facetNumberY, GLuint sideTexture = 0, GLuint topTexture = 0, GLuint botTexture = 0);
 
+void drawSphere(float radius, int facetNumber, GLuint texture = 0);
+
+void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint texture = 0);
+
 #endif // !SHAPES_H

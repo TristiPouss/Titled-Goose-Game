@@ -49,12 +49,9 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 	// Head Sphere
 	float headRadius = horizontalEdgeLength / 2;
 	float headHeight = verticalEdgeLength - headRadius;
-	glPushMatrix();
 	glTranslatef(0.0F, headHeight, 0.0F);
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glutSolidSphere(headRadius, facetNumber, facetNumber);
-	glPopMatrix();
+	drawSphere(headRadius, facetNumber, textureID);
+	glTranslatef(0.0F, -headHeight, 0.0F);
 
 	// Base Cylinder
 	float baseHeight = headHeight - headRadius;
@@ -64,18 +61,14 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 	// Head Torus
 	float headTorusInnerRadius = headRadius / 5;
 	float headTorusOuterRadius = headRadius / 2;
-	glPushMatrix();
 	glTranslatef(0.0F, baseHeight, 0.0F);
 	glRotatef(90.0, 1.0F, 0.0F, 0.0F);
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glutSolidTorus(headTorusInnerRadius, headTorusOuterRadius, facetNumber, facetNumber);
-	glPopMatrix();
+	drawTorus(headTorusInnerRadius, headTorusOuterRadius, facetNumber, textureID);
+	glRotatef(-90.0, 1.0F, 0.0F, 0.0F);
+	glTranslatef(0.0F, -baseHeight, 0.0F);
 
 	// Base Cylinder
-	glPushMatrix();
 	drawCylinder(baseRadius, baseRadius, baseHeight / 7, facetNumber, facetNumber, textureID, textureID, textureID);
-	glPopMatrix();
 
 	glPopMatrix();
 }
