@@ -28,4 +28,6 @@ void drawSphere(float radius, int facetNumber, GLuint texture = 0);
 
 void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint texture = 0);
 
+void drawCuboid(float width, float height, float depth, GLuint texture=0) ;
+
 #endif // !SHAPES_H

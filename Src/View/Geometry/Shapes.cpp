@@ -259,3 +259,87 @@ void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint tex
     glPopMatrix();
 }
 
+void drawCuboid(float width, float height, float depth, GLuint texture) {
+    glPushMatrix();
+
+    if (texture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture);
+    }
+
+    glBegin(GL_QUADS);
+
+    // Front
+    glNormal3f(0.0F, 0.0F, 1.0F);
+    glTexCoord2f(0.0F, 0.0F);
+    glVertex3f(-width / 2, -height / 2, depth / 2);
+    glTexCoord2f(1.0F, 0.0F);
+    glVertex3f(width / 2, -height / 2, depth / 2);
+    glTexCoord2f(1.0F, 1.0F);
+    glVertex3f(width / 2, height / 2, depth / 2);
+    glTexCoord2f(0.0F, 1.0F);
+    glVertex3f(-width / 2, height / 2, depth / 2);
+
+    // Back
+    glNormal3f(0.0F, 0.0F, -1.0F);
+    glTexCoord2f(0.0F, 0.0F);
+    glVertex3f(-width / 2, -height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 0.0F);
+    glVertex3f(width / 2, -height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 1.0F);
+    glVertex3f(width / 2, height / 2, -depth / 2);
+    glTexCoord2f(0.0F, 1.0F);
+    glVertex3f(-width / 2, height / 2, -depth / 2);
+
+    // Left
+    glNormal3f(-1.0F, 0.0F, 0.0F);
+    glTexCoord2f(0.0F, 0.0F);
+    glVertex3f(-width / 2, -height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 0.0F);
+    glVertex3f(-width / 2, -height / 2, depth / 2);
+    glTexCoord2f(1.0F, 1.0F);
+    glVertex3f(-width / 2, height / 2, depth / 2);
+    glTexCoord2f(0.0F, 1.0F);
+    glVertex3f(-width / 2, height / 2, -depth / 2);
+
+    // Right
+    glNormal3f(1.0F, 0.0F, 0.0F);
+    glTexCoord2f(0.0F, 0.0F);
+    glVertex3f(width / 2, -height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 0.0F);
+    glVertex3f(width / 2, -height / 2, depth / 2);
+    glTexCoord2f(1.0F, 1.0F);
+    glVertex3f(width / 2, height / 2, depth / 2);
+    glTexCoord2f(0.0F, 1.0F);
+    glVertex3f(width / 2, height / 2, -depth / 2);
+
+    // Top
+    glNormal3f(0.0F, 1.0F, 0.0F);
+    glTexCoord2f(0.0F, 0.0F);
+    glVertex3f(-width / 2, height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 0.0F);
+    glVertex3f(width / 2, height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 1.0F);
+    glVertex3f(width / 2, height / 2, depth / 2);
+    glTexCoord2f(0.0F, 1.0F);
+    glVertex3f(-width / 2, height / 2, depth / 2);
+
+    // Bottom
+    glNormal3f(0.0F, -1.0F, 0.0F);
+    glTexCoord2f(0.0F, 0.0F);
+    glVertex3f(-width / 2, -height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 0.0F);
+    glVertex3f(width / 2, -height / 2, -depth / 2);
+    glTexCoord2f(1.0F, 1.0F);
+    glVertex3f(width / 2, -height / 2, depth / 2);
+    glTexCoord2f(0.0F, 1.0F);
+    glVertex3f(-width / 2, -height / 2, depth / 2);
+
+    glEnd();
+
+    if (texture != 0) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
+    glPopMatrix();
+}
