@@ -259,87 +259,147 @@ void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint tex
     glPopMatrix();
 }
 
-void drawCuboid(float width, float height, float depth, GLuint texture) {
+void drawCuboid(float width, float height, float depth, int facetNumber, int normalDirection, GLuint textures[6], float ratioTexture) {
+    float normal = (normalDirection) ? -1.0F : 1.0F;
+
     glPushMatrix();
 
-    if (texture != 0) {
+    // Top Face
+    glPushMatrix();
+    glTranslatef(-width/2, height, -depth/2);
+    glRotatef(90, 1.0F, 0.0F, 0.0F);
+    if (textures && textures[0] != 0) {
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glBindTexture(GL_TEXTURE_2D, textures[0]);
     }
-
-    glBegin(GL_QUADS);
-
-    // Front
-    glNormal3f(0.0F, 0.0F, 1.0F);
-    glTexCoord2f(0.0F, 0.0F);
-    glVertex3f(-width / 2, -height / 2, depth / 2);
-    glTexCoord2f(1.0F, 0.0F);
-    glVertex3f(width / 2, -height / 2, depth / 2);
-    glTexCoord2f(1.0F, 1.0F);
-    glVertex3f(width / 2, height / 2, depth / 2);
-    glTexCoord2f(0.0F, 1.0F);
-    glVertex3f(-width / 2, height / 2, depth / 2);
-
-    // Back
-    glNormal3f(0.0F, 0.0F, -1.0F);
-    glTexCoord2f(0.0F, 0.0F);
-    glVertex3f(-width / 2, -height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 0.0F);
-    glVertex3f(width / 2, -height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 1.0F);
-    glVertex3f(width / 2, height / 2, -depth / 2);
-    glTexCoord2f(0.0F, 1.0F);
-    glVertex3f(-width / 2, height / 2, -depth / 2);
-
-    // Left
-    glNormal3f(-1.0F, 0.0F, 0.0F);
-    glTexCoord2f(0.0F, 0.0F);
-    glVertex3f(-width / 2, -height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 0.0F);
-    glVertex3f(-width / 2, -height / 2, depth / 2);
-    glTexCoord2f(1.0F, 1.0F);
-    glVertex3f(-width / 2, height / 2, depth / 2);
-    glTexCoord2f(0.0F, 1.0F);
-    glVertex3f(-width / 2, height / 2, -depth / 2);
-
-    // Right
-    glNormal3f(1.0F, 0.0F, 0.0F);
-    glTexCoord2f(0.0F, 0.0F);
-    glVertex3f(width / 2, -height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 0.0F);
-    glVertex3f(width / 2, -height / 2, depth / 2);
-    glTexCoord2f(1.0F, 1.0F);
-    glVertex3f(width / 2, height / 2, depth / 2);
-    glTexCoord2f(0.0F, 1.0F);
-    glVertex3f(width / 2, height / 2, -depth / 2);
-
-    // Top
-    glNormal3f(0.0F, 1.0F, 0.0F);
-    glTexCoord2f(0.0F, 0.0F);
-    glVertex3f(-width / 2, height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 0.0F);
-    glVertex3f(width / 2, height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 1.0F);
-    glVertex3f(width / 2, height / 2, depth / 2);
-    glTexCoord2f(0.0F, 1.0F);
-    glVertex3f(-width / 2, height / 2, depth / 2);
-
-    // Bottom
-    glNormal3f(0.0F, -1.0F, 0.0F);
-    glTexCoord2f(0.0F, 0.0F);
-    glVertex3f(-width / 2, -height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 0.0F);
-    glVertex3f(width / 2, -height / 2, -depth / 2);
-    glTexCoord2f(1.0F, 1.0F);
-    glVertex3f(width / 2, -height / 2, depth / 2);
-    glTexCoord2f(0.0F, 1.0F);
-    glVertex3f(-width / 2, -height / 2, depth / 2);
-
-    glEnd();
-
-    if (texture != 0) {
-        glDisable(GL_TEXTURE_2D);
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(0, i*(depth/facetNumber), 0);
+            glTexCoord2f((j+1)/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(width/facetNumber, i*(depth/facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(width/facetNumber, 0.0F, 0.0F);
     }
+    if (textures && textures[0] != 0) glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    // Bottom Face
+    glPushMatrix();
+    glTranslatef(-width/2, 0, depth/2);
+    glRotatef(-90, 1.0F, 0.0F, 0.0F);
+    if (textures && textures[1] != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textures[1]);
+    }
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(0, i*(depth/facetNumber), 0);
+            glTexCoord2f((j+1)/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(width/facetNumber, i*(depth/facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(width/facetNumber, 0.0F, 0.0F);
+    }
+    if (textures && textures[1] != 0) glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    // Left Face
+    glPushMatrix();
+    glTranslatef(-width/2, 0, depth/2);
+    glRotatef(90, 0.0F, 1.0F, 0.0F);
+    if (textures && textures[2] != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textures[2]);
+    }
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(0, i*(height/facetNumber), 0);
+            glTexCoord2f((j+1)/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(depth/facetNumber, i*(height/facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(depth/facetNumber, 0.0F, 0.0F);
+    }
+    if (textures && textures[2] != 0) glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    // Right Face
+    glPushMatrix();
+    glTranslatef(width/2, 0, -depth/2);
+    glRotatef(-90, 0.0F, 1.0F, 0.0F);
+    if (textures && textures[3] != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textures[3]);
+    }
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(0, i*(height/facetNumber), 0);
+            glTexCoord2f((j+1)/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(depth/facetNumber, i*(height/facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(depth/facetNumber, 0.0F, 0.0F);
+    }
+    if (textures && textures[3] != 0) glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    // Back Face
+    glPushMatrix();
+    glTranslatef(width/2, 0, depth/2);
+    glRotatef(180, 0.0F, 1.0F, 0.0F);
+    if (textures && textures[4] != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textures[4]);
+    }
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(0, i*(height/facetNumber), 0);
+            glTexCoord2f((j+1)/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(width/facetNumber, i*(height/facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(width/facetNumber, 0.0F, 0.0F);
+    }
+    if (textures && textures[4] != 0) glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+
+    // Front Face
+    glPushMatrix();
+    glTranslatef(-width/2, 0, -depth/2);
+    if (textures && textures[5] != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textures[5]);
+    }
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(0, i*(height/facetNumber), 0);
+            glTexCoord2f((j+1)/(float)facetNumber * ratioTexture, i/(float)facetNumber * ratioTexture);
+            glVertex3f(width/facetNumber, i*(height/facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(width/facetNumber, 0.0F, 0.0F);
+    }
+    if (textures && textures[5] != 0) glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
 
     glPopMatrix();
 }
