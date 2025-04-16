@@ -114,3 +114,18 @@ void drawCubeStack(float l, int facetNumber) {
 
 	glPopMatrix();
 }
+
+void drawKaplaTower(float l, int nbKapla, int facetNumber) {
+	float L = l/4;
+	float h = l/10;
+
+	glPushMatrix();
+
+	for (int i = 0; i < nbKapla; i++) {
+		drawCuboid(l,h,L,facetNumber, 1, texturesTest);
+		glTranslatef(0.0F, h, 0.0F);
+		glRotatef(25.0F, 0.0F, 1.0F, 0.0F);
+	}
+
+	glPopMatrix();
+}

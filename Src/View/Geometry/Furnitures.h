@@ -24,4 +24,6 @@ void drawLitVoiture(float horizontalEdgeLength, int facetNumber);
 
 void drawCubeStack(float l, int facetNumber);
 
+void drawKaplaTower(float l, int nbKapla, int facetNumber);
+
 #endif // !FURNITURES_H
