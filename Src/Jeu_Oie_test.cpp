@@ -102,6 +102,13 @@ static void scene() {
     drawPawn(pawnWidth, facetNumber, textureYellow);
     glPopMatrix();
 
+
+    glPushMatrix();
+    glTranslatef(0.0F, tableHeight, pawnWidth*2);
+    drawCubeStack(2.0F, facetNumber);
+    glPopMatrix();
+
+
     // LitVoiture on the side of the room
     //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
     //glRotatef(45, 0.0, 1.0, 0.0);

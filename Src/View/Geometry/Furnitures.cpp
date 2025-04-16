@@ -97,3 +97,20 @@ void drawLitVoiture(float horizontalEdgeLength, int facetNumber) {
 
 	glPopMatrix();
 }
+
+void drawCubeStack(float l, int facetNumber) {
+	glPushMatrix();
+
+	glRotatef(20, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texturesTest);
+	
+	glTranslatef(l * 1.5, 0.0F, 0.0F);
+	glRotatef(-10, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texturesTest);
+	
+	glTranslatef(-l * 0.75, l, 0.0F);
+	glRotatef(20, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texturesTest);
+
+	glPopMatrix();
+}

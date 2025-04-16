@@ -22,4 +22,6 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0)
 
 void drawLitVoiture(float horizontalEdgeLength, int facetNumber);
 
+void drawCubeStack(float l, int facetNumber);
+
 #endif // !FURNITURES_H
