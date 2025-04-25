@@ -28,4 +28,6 @@ void drawKaplaTowerSpiral(float l, int nbKapla, int facetNumber);
 
 void drawKaplaTower(float l, int height, int facetNumber);
 
+void drawCastle(float l, int facetNumber);
+
 #endif // !FURNITURES_H

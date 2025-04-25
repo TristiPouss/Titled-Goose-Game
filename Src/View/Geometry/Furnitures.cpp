@@ -148,3 +148,27 @@ void drawKaplaTower(float l, int height, int facetNumber) {
 
 	glPopMatrix();
 }
+
+void drawCastle(float l, int facetNumber) {
+	float L = l/3;
+	float h = L/2;
+	float r = L/3;
+
+	glPushMatrix();
+
+	glTranslatef(-L, 0.0F, 0.0F);
+	drawCube(L,facetNumber, 1, texturesTest);
+	glTranslatef(L*2, 0.0F, 0.0F);
+	drawCube(L,facetNumber, 1, texturesTest);
+	glTranslatef(-L, L, 0.0F);
+	drawCuboid(l,h,L,facetNumber, 1, texturesTest);
+	
+	glTranslatef(-L, h, 0.0F);
+	drawCylinder(r, r, L*2, facetNumber, facetNumber, textureTest, textureTest, textureTest);
+	glTranslatef(L*2, 0.0F, 0.0F);
+	drawCylinder(0, h, L, facetNumber, facetNumber, textureTest, textureTest, textureTest);
+	glTranslatef(-L*2, L*2, 0.0F);
+	drawCylinder(0, h, L, facetNumber, facetNumber, textureTest, textureTest, textureTest);
+
+	glPopMatrix();
+}
