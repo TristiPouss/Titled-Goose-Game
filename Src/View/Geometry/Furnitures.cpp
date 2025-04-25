@@ -115,7 +115,7 @@ void drawCubeStack(float l, int facetNumber) {
 	glPopMatrix();
 }
 
-void drawKaplaTower(float l, int nbKapla, int facetNumber) {
+void drawKaplaTowerSpiral(float l, int nbKapla, int facetNumber) {
 	float L = l/4;
 	float h = l/10;
 
@@ -125,6 +125,25 @@ void drawKaplaTower(float l, int nbKapla, int facetNumber) {
 		drawCuboid(l,h,L,facetNumber, 1, texturesTest);
 		glTranslatef(0.0F, h, 0.0F);
 		glRotatef(25.0F, 0.0F, 1.0F, 0.0F);
+	}
+
+	glPopMatrix();
+}
+
+void drawKaplaTower(float l, int height, int facetNumber) {
+	float h = l/4;
+	float L = l/10;
+	float offset = L;
+
+	glPushMatrix();
+
+	for (int i = 0; i < height; i++) {
+		glTranslatef(0.0F, 0.0F, l/2 - offset);
+		drawCuboid(l,h,L,facetNumber, 1, texturesTest);
+		glTranslatef(0.0F, 0.0F, -l + offset*2);
+		drawCuboid(l,h,L,facetNumber, 1, texturesTest);
+		glTranslatef(0.0F, h, l/2 - offset);
+		glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
 	}
 
 	glPopMatrix();
