@@ -98,19 +98,21 @@ void drawLitVoiture(float horizontalEdgeLength, int facetNumber) {
 	glPopMatrix();
 }
 
-void drawCubeStack(float l, int facetNumber) {
+void drawCubeStack(float l, int facetNumber, GLuint *texture1, GLuint *texture2, GLuint *texture3) {
 	glPushMatrix();
 
-	glRotatef(20, 0.0F, 1.0F, 0.0F);
-	drawCube(l, facetNumber, 1, texturesRed);
-	
-	glTranslatef(l * 1.5, 0.0F, 0.0F);
+	glTranslatef(-l * 0.75, 0.0F, 0.0F); 
+	glRotatef(10, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texture1);
 	glRotatef(-10, 0.0F, 1.0F, 0.0F);
-	drawCube(l, facetNumber, 1, texturesGreen);
+
+	glTranslatef(l * 1.5, 0.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texture2);
 	
 	glTranslatef(-l * 0.75, l, 0.0F);
 	glRotatef(20, 0.0F, 1.0F, 0.0F);
-	drawCube(l, facetNumber, 1, texturesYellow);
+	drawCube(l, facetNumber, 1, texture3);
+	glRotatef(20, 0.0F, 1.0F, 0.0F);
 
 	glPopMatrix();
 }
@@ -197,4 +199,22 @@ void drawTeleportCell(float l, int facetNumber) {
 	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, texturePurple, texturePurple, texturePurple);
 }
 
+void drawShelf(float l, int facetNumber) {
+	float L = l/4;
+	float x = L/4;
 
+	glPushMatrix();
+
+	for (int i = 0; i < 3; i++) {
+		drawCuboid(l, x, L, facetNumber, 1, texturesTableLeg, 1.0F);
+		glTranslatef(-l/2 + x/2, x, 0.0F); 
+		for (int i = 0; i < 4; i++) {
+			drawCuboid(x, L, L, facetNumber, 1, texturesTableLeg, 1.0F);
+			glTranslatef(L + x, 0.0F, 0.0F); 
+		}
+		glTranslatef(-l/2 - L - x/2, L, 0.0F); 
+	}
+	drawCuboid(l, x, L, facetNumber, 1, texturesTableLeg, 1.0F);
+
+	glPopMatrix();
+}

@@ -22,7 +22,7 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0)
 
 void drawLitVoiture(float horizontalEdgeLength, int facetNumber);
 
-void drawCubeStack(float l, int facetNumber);
+void drawCubeStack(float l, int facetNumber, GLuint *texture1, GLuint *texture2, GLuint *texture3);
 
 void drawKaplaTowerSpiral(float l, int nbKapla, int facetNumber);
 
@@ -35,5 +35,6 @@ void drawGooseCell(float l, int facetNumber);
 void drawTrapCell(float l, int facetNumber);
 void drawTeleportCell(float l, int facetNumber);
 
+void drawShelf(float l, int facetNumber);
 
 #endif // !FURNITURES_H
