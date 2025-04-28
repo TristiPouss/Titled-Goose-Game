@@ -5,6 +5,11 @@ GLuint texturesRoom[6];
 GLuint texturesTableTop[6];
 GLuint texturesTableLeg[6];
 
+GLuint texturesYellow[6];
+GLuint texturesRed[6];
+GLuint texturesGreen[6];
+GLuint texturesBlue[6];
+
 GLuint textureWall;
 GLuint textureFloor;
 GLuint textureTest;
@@ -79,4 +84,32 @@ void initTexture() {
     texturesTableLeg[3] = textureWood;
     texturesTableLeg[4] = textureWood;
     texturesTableLeg[5] = textureWood;
+
+    texturesRed[0] = textureRed;
+    texturesRed[1] = textureRed;
+    texturesRed[2] = textureRed;
+    texturesRed[3] = textureRed;
+    texturesRed[4] = textureRed;
+    texturesRed[5] = textureRed;
+
+    texturesGreen[0] = textureGreen;
+    texturesGreen[1] = textureGreen;
+    texturesGreen[2] = textureGreen;
+    texturesGreen[3] = textureGreen;
+    texturesGreen[4] = textureGreen;
+    texturesGreen[5] = textureGreen;
+
+    texturesBlue[0] = textureBlue;
+    texturesBlue[1] = textureBlue;
+    texturesBlue[2] = textureBlue;
+    texturesBlue[3] = textureBlue;
+    texturesBlue[4] = textureBlue;
+    texturesBlue[5] = textureBlue;
+
+    texturesYellow[0] = textureYellow;
+    texturesYellow[1] = textureYellow;
+    texturesYellow[2] = textureYellow;
+    texturesYellow[3] = textureYellow;
+    texturesYellow[4] = textureYellow;
+    texturesYellow[5] = textureYellow;
 }

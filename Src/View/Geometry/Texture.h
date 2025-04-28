@@ -14,6 +14,11 @@ extern GLuint texturesRoom[6];
 extern GLuint texturesTableTop[6];
 extern GLuint texturesTableLeg[6];
 
+extern GLuint texturesYellow[6];
+extern GLuint texturesRed[6];
+extern GLuint texturesGreen[6];
+extern GLuint texturesBlue[6];
+
 extern GLuint textureWall;
 extern GLuint textureFloor;
 extern GLuint textureTest;

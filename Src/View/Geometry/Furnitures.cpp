@@ -97,3 +97,78 @@ void drawLitVoiture(float horizontalEdgeLength, int facetNumber) {
 
 	glPopMatrix();
 }
+
+void drawCubeStack(float l, int facetNumber) {
+	glPushMatrix();
+
+	glRotatef(20, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texturesRed);
+	
+	glTranslatef(l * 1.5, 0.0F, 0.0F);
+	glRotatef(-10, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texturesGreen);
+	
+	glTranslatef(-l * 0.75, l, 0.0F);
+	glRotatef(20, 0.0F, 1.0F, 0.0F);
+	drawCube(l, facetNumber, 1, texturesYellow);
+
+	glPopMatrix();
+}
+
+void drawKaplaTowerSpiral(float l, int nbKapla, int facetNumber) {
+	float L = l/4;
+	float h = l/10;
+
+	glPushMatrix();
+
+	for (int i = 0; i < nbKapla; i++) {
+		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop, 1.0F);
+		glTranslatef(0.0F, h, 0.0F);
+		glRotatef(25.0F, 0.0F, 1.0F, 0.0F);
+	}
+
+	glPopMatrix();
+}
+
+void drawKaplaTower(float l, int height, int facetNumber) {
+	float h = l/4;
+	float L = l/10;
+	float offset = L;
+
+	glPushMatrix();
+
+	for (int i = 0; i < height; i++) {
+		glTranslatef(0.0F, 0.0F, l/2 - offset);
+		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop);
+		glTranslatef(0.0F, 0.0F, -l + offset*2);
+		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop);
+		glTranslatef(0.0F, h, l/2 - offset);
+		glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+	}
+
+	glPopMatrix();
+}
+
+void drawCastle(float l, int facetNumber) {
+	float L = l/3;
+	float h = L/2;
+	float r = L/3;
+
+	glPushMatrix();
+
+	glTranslatef(-L, 0.0F, 0.0F);
+	drawCube(L,facetNumber, 1, texturesBlue);
+	glTranslatef(L*2, 0.0F, 0.0F);
+	drawCube(L,facetNumber, 1, texturesGreen);
+	glTranslatef(-L, L, 0.0F);
+	drawCuboid(l,h,L,facetNumber, 1, texturesYellow, 1.0F);
+	
+	glTranslatef(-L, h, 0.0F);
+	drawCylinder(r, r, L*2, facetNumber, facetNumber, textureRed, textureRed, textureRed);
+	glTranslatef(L*2, 0.0F, 0.0F);
+	drawCylinder(0, h, L, facetNumber, facetNumber, textureBlue, textureBlue, textureBlue);
+	glTranslatef(-L*2, L*2, 0.0F);
+	drawCylinder(0, h, L, facetNumber, facetNumber, textureYellow, textureYellow, textureYellow);
+
+	glPopMatrix();
+}

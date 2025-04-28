@@ -15,7 +15,7 @@
 /*
     Function to draw a edge_length*edge_length cube with a facetisation level of facet_number
 */
-void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1);
+void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1.0F);
 
 void drawCircle(float originX, float originY, float radius, int facetNumber);
 
@@ -28,6 +28,6 @@ void drawSphere(float radius, int facetNumber, GLuint texture = 0);
 
 void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint texture = 0);
 
-void drawCuboid(float width, float height, float depth, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1);
+void drawCuboid(float width, float height, float depth, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1.0F);
 
 #endif // !SHAPES_H
