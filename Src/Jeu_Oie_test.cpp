@@ -78,37 +78,34 @@ static void scene() {
     drawTable(tableHeight, tableWidth, facetNumber);
     glPopMatrix();
 
-    // Put pawn on the table
-    glPushMatrix();
-    glTranslatef(0.0F, tableHeight, -pawnWidth*2);
-    drawPawn(pawnWidth, facetNumber, textureBlue);
-    glPopMatrix();
+    // // Put pawn on the table
+    // glPushMatrix();
+    // glTranslatef(0.0F, tableHeight, -pawnWidth*2);
+    // drawPawn(pawnWidth, facetNumber, textureBlue);
+    // glPopMatrix();
 
-    // Put a second pawn on the table
-    glPushMatrix();
-    glTranslatef(pawnWidth*2, tableHeight, 0.0F);
-    drawPawn(pawnWidth, facetNumber, textureRed);
-    glPopMatrix();
+    // // Put a second pawn on the table
+    // glPushMatrix();
+    // glTranslatef(pawnWidth*2, tableHeight, 0.0F);
+    // drawPawn(pawnWidth, facetNumber, textureRed);
+    // glPopMatrix();
     
-    // Put a third pawn on the table
-    glPushMatrix();
-    glTranslatef(-pawnWidth*2, tableHeight, 0.0F);
-    drawPawn(pawnWidth, facetNumber, textureGreen);
-    glPopMatrix();
+    // // Put a third pawn on the table
+    // glPushMatrix();
+    // glTranslatef(-pawnWidth*2, tableHeight, 0.0F);
+    // drawPawn(pawnWidth, facetNumber, textureGreen);
+    // glPopMatrix();
     
-    // Put a fourth pawn on the table
-    glPushMatrix();
-    glTranslatef(0.0F, tableHeight, pawnWidth*2);
-    drawPawn(pawnWidth, facetNumber, textureYellow);
-    glPopMatrix();
+    // // Put a fourth pawn on the table
+    // glPushMatrix();
+    // glTranslatef(0.0F, tableHeight, pawnWidth*2);
+    // drawPawn(pawnWidth, facetNumber, textureYellow);
+    // glPopMatrix();
 
 
     glPushMatrix();
-    glTranslatef(0.0F, tableHeight, pawnWidth*2);
-    // drawKaplaTower(5, 10, facetNumber);
-    // drawKaplaTowerSpiral(5, 10, facetNumber);
-    // drawCubeStack(3, facetNumber);
-    drawCastle(5, facetNumber);
+    glTranslatef(0.0F, tableHeight, 0.0F);
+    drawTeleportCell(5, facetNumber);
     glPopMatrix();
 
 

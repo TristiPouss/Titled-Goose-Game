@@ -30,4 +30,10 @@ void drawKaplaTower(float l, int height, int facetNumber);
 
 void drawCastle(float l, int facetNumber);
 
+void drawCell(float l, int facetNumber);
+void drawGooseCell(float l, int facetNumber);
+void drawTrapCell(float l, int facetNumber);
+void drawTeleportCell(float l, int facetNumber);
+
+
 #endif // !FURNITURES_H
