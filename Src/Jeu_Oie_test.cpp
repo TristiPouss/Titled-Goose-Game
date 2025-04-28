@@ -105,6 +105,9 @@ static void scene() {
 
     glPushMatrix();
     glTranslatef(0.0F, tableHeight, pawnWidth*2);
+    // drawKaplaTower(5, 10, facetNumber);
+    // drawKaplaTowerSpiral(5, 10, facetNumber);
+    // drawCubeStack(3, facetNumber);
     drawCastle(5, facetNumber);
     glPopMatrix();
 
