@@ -123,6 +123,19 @@ static void scene() {
     drawCastle(castleLength, facetNumber);
     glPopMatrix();
 
+    //door
+    glPushMatrix();
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(roomLength/4 , 0.0F, roomLength/2);
+    drawDoor(50, facetNumber);
+    glPopMatrix();
+
+    //poster
+    glPushMatrix();    
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(-roomLength/4, roomLength/4, roomLength/2 - 0.1);
+    drawPoster(20, 20, facetNumber, textureKaaris);
+    glPopMatrix();
 
     //bed
     //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);

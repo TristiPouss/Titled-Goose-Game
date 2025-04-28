@@ -218,3 +218,22 @@ void drawShelf(float l, int facetNumber) {
 
 	glPopMatrix();
 }
+
+void drawDoor(float h, int facetNumber) {
+	float l = h/2;
+	float L = l/10;
+
+	glPushMatrix();
+	drawCuboid(l, h, L, facetNumber, 1, texturesTableLeg, 1.0F);
+	glTranslatef(-l/3, h/2, 0.0F);
+	drawSphere(L, facetNumber);
+	glPopMatrix();
+}
+
+void drawPoster(float width, float height, int facetNumber, GLuint texture) {
+	GLuint textures[6] = {0,0,0,0,0,texture};
+    float L = width/10;
+	glPushMatrix();
+	drawCuboid(width, height, L, facetNumber, 1, textures, 1.0F);
+    glPopMatrix();
+}

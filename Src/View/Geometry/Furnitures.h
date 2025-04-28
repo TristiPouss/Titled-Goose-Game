@@ -37,4 +37,8 @@ void drawTeleportCell(float l, int facetNumber);
 
 void drawShelf(float l, int facetNumber);
 
+void drawDoor(float h, int facetNumber);
+
+void drawPoster(float width, float height, int facetNumber, GLuint texture);
+
 #endif // !FURNITURES_H

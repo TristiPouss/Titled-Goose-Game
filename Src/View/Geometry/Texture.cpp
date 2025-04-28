@@ -16,6 +16,7 @@ GLuint textureFloor;
 GLuint textureTest;
 GLuint textureWood;
 GLuint textureTable;
+GLuint textureKaaris;
 
 GLuint textureRed;
 GLuint textureGreen;
@@ -53,6 +54,7 @@ void initTexture() {
     textureTest = chargementTexturePNG("../Assets/Test.png");
     textureWood = chargementTexturePNG("../Assets/Bois.png");
     textureTable = chargementTexturePNG("../Assets/table.png24");
+    textureKaaris = chargementTexturePNG("../Assets/kaaris.png24");
 
     textureRed = chargementTexturePNG("../Assets/red.png24");
     textureGreen = chargementTexturePNG("../Assets/green.png24");
