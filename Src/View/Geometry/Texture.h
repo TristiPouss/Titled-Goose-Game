@@ -18,6 +18,7 @@ extern GLuint texturesYellow[6];
 extern GLuint texturesRed[6];
 extern GLuint texturesGreen[6];
 extern GLuint texturesBlue[6];
+extern GLuint texturesPurple[6];
 
 extern GLuint textureWall;
 extern GLuint textureFloor;
@@ -29,6 +30,7 @@ extern GLuint textureRed;
 extern GLuint textureGreen;
 extern GLuint textureBlue;
 extern GLuint textureYellow;
+extern GLuint texturePurple;
 
 unsigned int chargementTexturePNG(char *filename);
 void initTexture();

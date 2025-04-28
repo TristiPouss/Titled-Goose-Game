@@ -9,6 +9,7 @@ GLuint texturesYellow[6];
 GLuint texturesRed[6];
 GLuint texturesGreen[6];
 GLuint texturesBlue[6];
+GLuint texturesPurple[6];
 
 GLuint textureWall;
 GLuint textureFloor;
@@ -20,6 +21,7 @@ GLuint textureRed;
 GLuint textureGreen;
 GLuint textureBlue;
 GLuint textureYellow;
+GLuint texturePurple;
 
 unsigned int chargementTexturePNG(char *filename) {
     unsigned int textureID = 0;
@@ -56,6 +58,7 @@ void initTexture() {
     textureGreen = chargementTexturePNG("../Assets/green.png24");
     textureBlue = chargementTexturePNG("../Assets/blue.png24");
     textureYellow = chargementTexturePNG("../Assets/yellow.png24");
+    texturePurple = chargementTexturePNG("../Assets/purple.png24");
 
     texturesRoom[0] = textureWall;
     texturesRoom[1] = textureFloor;
@@ -112,4 +115,11 @@ void initTexture() {
     texturesYellow[3] = textureYellow;
     texturesYellow[4] = textureYellow;
     texturesYellow[5] = textureYellow;
+
+    texturesPurple[0] = texturePurple;
+    texturesPurple[1] = texturePurple;
+    texturesPurple[2] = texturePurple;
+    texturesPurple[3] = texturePurple;
+    texturesPurple[4] = texturePurple;
+    texturesPurple[5] = texturePurple;
 }

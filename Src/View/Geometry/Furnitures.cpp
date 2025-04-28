@@ -139,9 +139,9 @@ void drawKaplaTower(float l, int height, int facetNumber) {
 
 	for (int i = 0; i < height; i++) {
 		glTranslatef(0.0F, 0.0F, l/2 - offset);
-		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop);
+		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop, 1.0F);
 		glTranslatef(0.0F, 0.0F, -l + offset*2);
-		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop);
+		drawCuboid(l,h,L,facetNumber, 1, texturesTableTop, 1.0F);
 		glTranslatef(0.0F, h, l/2 - offset);
 		glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
 	}
@@ -172,3 +172,29 @@ void drawCastle(float l, int facetNumber) {
 
 	glPopMatrix();
 }
+
+void drawCell(float l, int facetNumber) {
+	float x = l/10;
+	drawCylinder(l, l, x, facetNumber, facetNumber);
+	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, textureBlue, textureBlue, textureBlue);
+}
+
+void drawGooseCell(float l, int facetNumber) {
+	float x = l/10;
+	drawCylinder(l, l, x, facetNumber, facetNumber);
+	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, textureGreen, textureGreen, textureGreen);
+}
+
+void drawTrapCell(float l, int facetNumber) {
+	float x = l/10;
+	drawCylinder(l, l, x, facetNumber, facetNumber);
+	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, textureRed, textureRed, textureRed);
+}
+
+void drawTeleportCell(float l, int facetNumber) {
+	float x = l/10;
+	drawCylinder(l, l, x, facetNumber, facetNumber);
+	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, texturePurple, texturePurple, texturePurple);
+}
+
+
