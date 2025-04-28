@@ -133,10 +133,31 @@ static void scene() {
     //poster
     glPushMatrix();    
     glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(-roomLength/4, roomLength/4, roomLength/2 - 0.1);
-    drawPoster(20, 20, facetNumber, textureKaaris);
+    glTranslatef(-roomLength/5, roomLength/4, roomLength/2);
+    drawPoster(30, 30, facetNumber, textureKaaris);
+    glPopMatrix();
+    glPushMatrix();
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(-roomLength/3.5, roomLength/4, -roomLength/2);
+    glRotatef(180, 0.0, 1.0, 0.0);
+    drawPoster(20, 40, facetNumber, texturePulp);
+    glPopMatrix();
+    glPushMatrix();
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(roomLength/2, roomLength/4, -roomLength/5);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    drawPoster(20, 20, facetNumber, textureEvanescence);
     glPopMatrix();
 
+    //fenetre
+    glPushMatrix();    
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(-roomLength/2, roomLength/4, 0.0F);
+    glRotatef(-90, 0.0, 1.0, 0.0);
+    drawPoster(40, 40, facetNumber, textureFenetre);
+    glPopMatrix();
+
+    
     //bed
     //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
     //glRotatef(45, 0.0, 1.0, 0.0);

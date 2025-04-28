@@ -26,6 +26,9 @@ extern GLuint textureTest;
 extern GLuint textureWood;
 extern GLuint textureTable;
 extern GLuint textureKaaris;
+extern GLuint textureEvanescence;
+extern GLuint texturePulp;
+extern GLuint textureFenetre;
 
 extern GLuint textureRed;
 extern GLuint textureGreen;

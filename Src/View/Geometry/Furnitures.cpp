@@ -232,7 +232,7 @@ void drawDoor(float h, int facetNumber) {
 
 void drawPoster(float width, float height, int facetNumber, GLuint texture) {
 	GLuint textures[6] = {0,0,0,0,0,texture};
-    float L = width/10;
+    float L = width/50;
 	glPushMatrix();
 	drawCuboid(width, height, L, facetNumber, 1, textures, 1.0F);
     glPopMatrix();
