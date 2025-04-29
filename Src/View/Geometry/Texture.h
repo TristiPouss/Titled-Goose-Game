@@ -37,6 +37,13 @@ extern GLuint textureGreen;
 extern GLuint textureBlue;
 extern GLuint textureYellow;
 extern GLuint texturePurple;
+
+extern GLuint textureCubeRed;
+extern GLuint textureCubeGreen;
+extern GLuint textureCubeBlue;
+extern GLuint textureCubeYellow;
+extern GLuint textureCubePurple;
+
 extern GLuint textureEdgeDice;
 extern GLuint textureCornerDice;
 
