@@ -80,4 +80,8 @@ namespace gooseGameModel {
         std::shared_ptr<Player> p = std::make_shared<Player>(name,representation);
         board->addPlayer(p);
     }
+
+    float *Game::getCurrentPlayerPosition() const {
+        return board->getPlayers()[curr_player]->get3Dposition();
+    }
 };

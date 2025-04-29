@@ -59,5 +59,9 @@ namespace gooseGameModel {
 
     void Player::setChar(char new_c){
         this->c = new_c;
-}
+    }
+
+    float *Player::get3Dposition() const {
+        return this->position3D;
+    }
 }
