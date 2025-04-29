@@ -41,6 +41,12 @@ void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNu
 	glPopMatrix();
 }
 
+void drawDice(float diceEdgeLength, float diceRadius, int facetNumber) {
+	glPushMatrix();
+	drawRoundedCube(diceEdgeLength, diceRadius, facetNumber, 1, texturesDiceFaces, textureEdgeDice, textureCornerDice, 1);
+	glPopMatrix();
+}
+
 void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 	glPushMatrix();
 
