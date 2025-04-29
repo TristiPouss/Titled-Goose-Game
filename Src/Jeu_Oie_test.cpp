@@ -1,3 +1,4 @@
+#include <GL/freeglut_std.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -12,6 +13,8 @@
 #include "View/Geometry/Furnitures.h"
 
 #include "View/Geometry/Texture.h"
+
+static float angle = 0.0;
 
 static void init(void) {
     initTexture();
@@ -263,7 +266,8 @@ static void reshape(int wx, int wy) {
 /* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
-    //glutPostRedisplay();
+    angle = (float)(((int)(angle)+1)%360);
+    glutPostRedisplay();
 }
 
 
@@ -446,6 +450,8 @@ static void clean(void) {
     printf("Bye\n");
 }
 
+
+
 /* Fonction principale                          */
 
 int main(int argc, char** argv) {
@@ -458,6 +464,7 @@ int main(int argc, char** argv) {
     glutInitWindowPosition(wPx, wPy);
     glutCreateWindow("Jeu de l'Oie");
     init();
+    glutIdleFunc(idle);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(special);
     glutMouseFunc(mouse);
