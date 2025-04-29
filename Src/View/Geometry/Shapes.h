@@ -33,6 +33,6 @@ void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint tex
 
 void drawCuboid(float width, float height, float depth, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1.0F);
 
-void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection,float radius, GLuint textures[6], float ratioTexture);
+void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalDirection = 1,GLuint facesTextures[6] = nullptr, GLuint edgesTexture = 0, GLuint cornersTexture = 0 , float ratioTexture = 1.0F);
 
 #endif // !SHAPES_H
