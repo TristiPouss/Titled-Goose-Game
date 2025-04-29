@@ -16,6 +16,8 @@ GLuint textureWall;
 GLuint textureFloor;
 GLuint textureTest;
 GLuint textureWood;
+GLuint textureTableFeet;
+GLuint textureTablePlate;
 GLuint textureTable;
 GLuint textureKaaris;
 GLuint textureEvanescence;
@@ -56,18 +58,19 @@ unsigned int chargementTexturePNG(char *filename) {
 }
 
 void initTexture() {
-    textureWall = chargementTexturePNG("../Assets/wall.png24");
-    textureFloor = chargementTexturePNG("../Assets/floor.png24");
+    textureWall = chargementTexturePNG("../Assets/greysand.png24");
+    textureFloor = chargementTexturePNG("../Assets/wood.png24");
     textureTest = chargementTexturePNG("../Assets/Test.png");
-    textureWood = chargementTexturePNG("../Assets/Bois.png");
-    textureTable = chargementTexturePNG("../Assets/table.png24");
+    textureWood = chargementTexturePNG("../Assets/bg_wood.png24");
+    textureTableFeet = chargementTexturePNG("../Assets/trunk_side.png24");
+    textureTablePlate = chargementTexturePNG("../Assets/bg_wood.png24");
     textureKaaris = chargementTexturePNG("../Assets/kaaris.png24");
     textureEvanescence = chargementTexturePNG("../Assets/evanescence.png24");
     texturePulp = chargementTexturePNG("../Assets/pulp.png24");
     textureFenetre = chargementTexturePNG("../Assets/fenetre.png24");
 
 
-    textureRed = chargementTexturePNG("../Assets/red.png24");
+    textureRed = chargementTexturePNG("../Assets/wood_red.png24");
     textureGreen = chargementTexturePNG("../Assets/green.png24");
     textureBlue = chargementTexturePNG("../Assets/blue.png24");
     textureYellow = chargementTexturePNG("../Assets/yellow.png24");
@@ -107,19 +110,19 @@ void initTexture() {
     texturesTest[4] = textureTest;
     texturesTest[5] = textureTest;
 
-    texturesTableTop[0] = textureTable;
-    texturesTableTop[1] = textureTable;
-    texturesTableTop[2] = textureTable;
-    texturesTableTop[3] = textureTable;
-    texturesTableTop[4] = textureTable;
-    texturesTableTop[5] = textureTable;
+    texturesTableTop[0] = textureTableFeet;
+    texturesTableTop[1] = textureTableFeet;
+    texturesTableTop[2] = textureTablePlate;
+    texturesTableTop[3] = textureTablePlate;
+    texturesTableTop[4] = textureTableFeet;
+    texturesTableTop[5] = textureTableFeet;
 
-    texturesTableLeg[0] = textureWood;
-    texturesTableLeg[1] = textureWood;
-    texturesTableLeg[2] = textureWood;
-    texturesTableLeg[3] = textureWood;
-    texturesTableLeg[4] = textureWood;
-    texturesTableLeg[5] = textureWood;
+    texturesTableLeg[0] = textureTableFeet;
+    texturesTableLeg[1] = textureTableFeet;
+    texturesTableLeg[2] = textureTableFeet;
+    texturesTableLeg[3] = textureTableFeet;
+    texturesTableLeg[4] = textureTableFeet;
+    texturesTableLeg[5] = textureTableFeet;
 
     texturesRed[0] = textureRed;
     texturesRed[1] = textureRed;

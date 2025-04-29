@@ -74,7 +74,7 @@ static void scene() {
     //room
     glPushMatrix();
     glRotatef(45, 0.0, 1.0, 0.0);
-    drawCube(roomLength, facetNumber, 0, texturesRoom, 3);
+    drawCube(roomLength, facetNumber, 0, texturesRoom, 5.0F);
     glPopMatrix();    
 
     //table
