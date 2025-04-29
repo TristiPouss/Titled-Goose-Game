@@ -16,6 +16,8 @@ GLuint textureWall;
 GLuint textureFloor;
 GLuint textureTest;
 GLuint textureWood;
+GLuint textureTableFeet;
+GLuint textureTablePlate;
 GLuint textureTable;
 GLuint textureKaaris;
 GLuint textureEvanescence;
@@ -27,6 +29,12 @@ GLuint textureGreen;
 GLuint textureBlue;
 GLuint textureYellow;
 GLuint texturePurple;
+
+GLuint textureCubeRed;
+GLuint textureCubeGreen;
+GLuint textureCubeBlue;
+GLuint textureCubeYellow;
+GLuint textureCubePurple;
 
 GLuint textureEdgeDice;
 GLuint textureCornerDice;
@@ -55,12 +63,19 @@ unsigned int chargementTexturePNG(char *filename) {
     return textureID;
 }
 
+void initCubeTextureSingle(GLuint textureID, GLuint textures[6]) {
+    for (int i = 0; i < 6; i++) {
+        textures[i] = textureID;
+    }
+}
+
 void initTexture() {
-    textureWall = chargementTexturePNG("../Assets/wall.png24");
-    textureFloor = chargementTexturePNG("../Assets/floor.png24");
+    textureWall = chargementTexturePNG("../Assets/greysand.png24");
+    textureFloor = chargementTexturePNG("../Assets/wood.png24");
     textureTest = chargementTexturePNG("../Assets/Test.png");
-    textureWood = chargementTexturePNG("../Assets/Bois.png");
-    textureTable = chargementTexturePNG("../Assets/table.png24");
+    textureWood = chargementTexturePNG("../Assets/bg_wood.png24");
+    textureTableFeet = chargementTexturePNG("../Assets/trunk_side.png24");
+    textureTablePlate = chargementTexturePNG("../Assets/bg_wood.png24");
     textureKaaris = chargementTexturePNG("../Assets/kaaris.png24");
     textureEvanescence = chargementTexturePNG("../Assets/evanescence.png24");
     texturePulp = chargementTexturePNG("../Assets/pulp.png24");
@@ -72,6 +87,12 @@ void initTexture() {
     textureBlue = chargementTexturePNG("../Assets/blue.png24");
     textureYellow = chargementTexturePNG("../Assets/yellow.png24");
     texturePurple = chargementTexturePNG("../Assets/purple.png24");
+
+    textureCubePurple = chargementTexturePNG("../Assets/cube_purple.png24");
+    textureCubeRed = chargementTexturePNG("../Assets/cube_red.png24");
+    textureCubeGreen = chargementTexturePNG("../Assets/cube_green.png24");
+    textureCubeBlue = chargementTexturePNG("../Assets/cube_blue.png24");
+    textureCubeYellow = chargementTexturePNG("../Assets/cube_yellow.png24");
 
     //Init dice 
     textureEdgeDice = chargementTexturePNG("../Assets/edgeDice.png24");
@@ -100,59 +121,21 @@ void initTexture() {
     texturesRoom[4] = textureWall;
     texturesRoom[5] = textureWall;
 
-    texturesTest[0] = textureTest;
-    texturesTest[1] = textureTest;
-    texturesTest[2] = textureTest;
-    texturesTest[3] = textureTest;
-    texturesTest[4] = textureTest;
-    texturesTest[5] = textureTest;
+    initCubeTextureSingle(textureTest,texturesTest);
 
-    texturesTableTop[0] = textureTable;
-    texturesTableTop[1] = textureTable;
-    texturesTableTop[2] = textureTable;
-    texturesTableTop[3] = textureTable;
-    texturesTableTop[4] = textureTable;
-    texturesTableTop[5] = textureTable;
+    texturesTableTop[0] = textureTableFeet;
+    texturesTableTop[1] = textureTableFeet;
+    texturesTableTop[2] = textureTablePlate;
+    texturesTableTop[3] = textureTablePlate;
+    texturesTableTop[4] = textureTableFeet;
+    texturesTableTop[5] = textureTableFeet;
 
-    texturesTableLeg[0] = textureWood;
-    texturesTableLeg[1] = textureWood;
-    texturesTableLeg[2] = textureWood;
-    texturesTableLeg[3] = textureWood;
-    texturesTableLeg[4] = textureWood;
-    texturesTableLeg[5] = textureWood;
+    initCubeTextureSingle(textureTableFeet,texturesTableLeg);
 
-    texturesRed[0] = textureRed;
-    texturesRed[1] = textureRed;
-    texturesRed[2] = textureRed;
-    texturesRed[3] = textureRed;
-    texturesRed[4] = textureRed;
-    texturesRed[5] = textureRed;
 
-    texturesGreen[0] = textureGreen;
-    texturesGreen[1] = textureGreen;
-    texturesGreen[2] = textureGreen;
-    texturesGreen[3] = textureGreen;
-    texturesGreen[4] = textureGreen;
-    texturesGreen[5] = textureGreen;
-
-    texturesBlue[0] = textureBlue;
-    texturesBlue[1] = textureBlue;
-    texturesBlue[2] = textureBlue;
-    texturesBlue[3] = textureBlue;
-    texturesBlue[4] = textureBlue;
-    texturesBlue[5] = textureBlue;
-
-    texturesYellow[0] = textureYellow;
-    texturesYellow[1] = textureYellow;
-    texturesYellow[2] = textureYellow;
-    texturesYellow[3] = textureYellow;
-    texturesYellow[4] = textureYellow;
-    texturesYellow[5] = textureYellow;
-
-    texturesPurple[0] = texturePurple;
-    texturesPurple[1] = texturePurple;
-    texturesPurple[2] = texturePurple;
-    texturesPurple[3] = texturePurple;
-    texturesPurple[4] = texturePurple;
-    texturesPurple[5] = texturePurple;
+    initCubeTextureSingle(textureCubeRed, texturesRed);
+    initCubeTextureSingle(textureCubeGreen, texturesGreen);
+    initCubeTextureSingle(textureCubeBlue, texturesBlue);
+    initCubeTextureSingle(textureCubeYellow, texturesYellow);
+    initCubeTextureSingle(textureCubePurple, texturesPurple);
 }
