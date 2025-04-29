@@ -10,12 +10,19 @@
 #include "View/Settings.h"
 #include "View/Geometry/Shapes.h"
 #include "View/Geometry/Furnitures.h"
-
 #include "View/Geometry/Texture.h"
 
+#include "model/Board.h"
+#include "model/Cell.h"
+#include "model/Dice.h"
+#include "model/Game.h"
+#include "model/Player.h"
+
 static float angle = 0.0;
+gooseGameModel::Game* game;
 
 static void init(void) {
+    game = new gooseGameModel::Game();
     initTexture();
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
@@ -222,7 +229,9 @@ static void display(void) {
 
     glPushMatrix();
 
-    initCamera(cameraPerspect, wTx, wTy);
+    setCurrentPlayerPosition(100, 100, 100);
+    // setCurrentPlayerPosition(game->getCurrentPlayerPosition()[0], game->getCurrentPlayerPosition()[1], game->getCurrentPlayerPosition()[2]);
+    initCamera(cameraPerspect, cameraOnCurrentPlayer, wTx, wTy);
 
     glTranslatef(0.0F, 0.0F, -100.0F);
 
@@ -346,6 +355,11 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'm':
         polygonMode = !polygonMode;
+        glutPostRedisplay();
+        break;
+    case 'P':
+    case 'p':
+        cameraOnCurrentPlayer = !cameraOnCurrentPlayer;
         glutPostRedisplay();
         break;
     case 0x20:

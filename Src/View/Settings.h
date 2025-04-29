@@ -32,6 +32,7 @@ static int fond = 1;               // Flag de switch entre couleurs de fond noir
 static int culling = 0;            // Flag de switch entre affichages avec et sans culling
 static int fullscreen = 0;
 static int cameraPerspect = 1;
+static int cameraOnCurrentPlayer = 0;
 
 static float scenerySize = 100.0F;            // Taille de la face d'un cube
 static int facetNumber = 20;                 // Niveau de facettisation
