@@ -69,10 +69,19 @@ void initTexture() {
     textureYellow = chargementTexturePNG("../Assets/yellow.png24");
     texturePurple = chargementTexturePNG("../Assets/purple.png24");
 
+    /* For a cube, we have the following corresponding table: 
+    0 - Front
+    1 - Back
+    2 - Top
+    3 - Bottom
+    4 - Right
+    5 - Left
+    */
+
     texturesRoom[0] = textureWall;
-    texturesRoom[1] = textureFloor;
+    texturesRoom[1] = textureWall;
     texturesRoom[2] = textureWall;
-    texturesRoom[3] = textureWall;
+    texturesRoom[3] = textureFloor;
     texturesRoom[4] = textureWall;
     texturesRoom[5] = textureWall;
 

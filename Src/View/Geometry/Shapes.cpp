@@ -2,7 +2,7 @@
 #include "../Colors.h"
 
 
-void drawPlane(float edgeLength,float facetNumber,float normal,float ratioTexture){
+void drawPlane(float edgeLength,int facetNumber,float normal,float ratioTexture){
     for (int j = 0; j < facetNumber; j++) {
         glBegin(GL_QUAD_STRIP);
         for (int i = 0; i <= facetNumber; i++) {
@@ -19,98 +19,62 @@ void drawPlane(float edgeLength,float facetNumber,float normal,float ratioTextur
 
 void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint textures[6], float ratioTexture) {
     float normal = (normalDirection) ? -0.1F : 0.1F;
-
+    GLUquadric* quadric = gluNewQuadric();
+    gluQuadricNormals(quadric, GLU_SMOOTH);
     glPushMatrix();
+    for (int i = 0; i < 6; i++) {
+        glPushMatrix();
 
-    // Up
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, edgeLength, -edgeLength / 2);
-    glRotatef(90, 1.0F, 0.0F, 0.0F);
-    if (textures && textures[0] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[0]);
-    }
-   drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-    if (textures && textures[0] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
+        // Position and orient the face
+        switch (i) {
+            case 0: // Front face
+                glTranslatef(-edgeLength / 2, 0, -edgeLength / 2);
+                break; 
+            case 1: // Back face
+                glTranslatef(edgeLength / 2, 0, edgeLength / 2);
+                glRotatef(180, 0.0F, 1.0F, 0.0F);
+                break; 
+            case 2:  // Top face
+                glTranslatef(-edgeLength / 2, edgeLength, -edgeLength / 2);
+                glRotatef(90, 1.0F, 0.0F, 0.0F); 
+                break; 
 
-    // Down
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
-    glRotatef(-90, 1.0F, 0.0F, 0.0F);
-    if (textures && textures[1] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[1]);
-    }
-    drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-    if (textures && textures[1] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
+            case 3: // Bottom face
+                glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
+                glRotatef(-90, 1.0F, 0.0F, 0.0F);
+                break;
+            
+            case 4: //Right face
+                glTranslatef(edgeLength / 2, 0, -edgeLength / 2);
+                glRotatef(-90, 0.0F, 1.0F, 0.0F);
+                break; 
 
-    // Left
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
-    glRotatef(90, 0.0F, 1.0F, 0.0F);
-    if (textures && textures[2] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[2]);
-    }
-    drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-    if (textures && textures[2] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
+            case 5: //Left face
+                glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
+                glRotatef(90, 0.0F, 1.0F, 0.0F);
+                break; 
+        }
+        if (textures && textures[i] != 0) {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, textures[i]);
+        }
+       drawPlane(edgeLength, facetNumber, normal, ratioTexture);
+        if (textures && textures[i] != 0) {
+            glDisable(GL_TEXTURE_2D);
+        }
 
-    // Right
-    glPushMatrix();
-    glTranslatef(edgeLength / 2, 0, -edgeLength / 2);
-    glRotatef(-90, 0.0F, 1.0F, 0.0F);
-    if (textures && textures[3] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[3]);
+        glPopMatrix();
+        
     }
-    drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-    if (textures && textures[3] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
+  
     glPopMatrix();
-
-    // Back
-    glPushMatrix();
-    glTranslatef(edgeLength / 2, 0, edgeLength / 2);
-    glRotatef(180, 0.0F, 1.0F, 0.0F);
-    if (textures && textures[4] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[4]);
-    }
-    drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-    if (textures && textures[4] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
-
-    // Front
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, 0, -edgeLength / 2);
-    if (textures && textures[5] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[5]);
-    }
-    drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-    if (textures && textures[5] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
-
-    glPopMatrix();
+    gluDeleteQuadric(quadric);
 }
 //A cube with (rounded) edges - modelized from the true center
-void drawDice(float originX,float originY,float radius){
-    
+void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection,float radius, GLuint textures[6], float ratioTexture){
+   
 }
+
 
 void drawCircle(float originX, float originY, float radius, int facetNumber, GLuint textureID = 0) {
     glPushMatrix();

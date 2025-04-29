@@ -57,6 +57,9 @@ static void scene() {
 
     float pawnWidth = 0.4;
 
+    float dice_edge = 0.9;
+    float dice_radius = 0.1;
+
     float litVoitureWidth = roomLength * 0.1;
     float shelfLength = 40;
     float kaplaLength = 5;
@@ -157,6 +160,14 @@ static void scene() {
     drawPoster(40, 40, facetNumber, textureFenetre);
     glPopMatrix();
 
+    //Dice
+    glPushMatrix();
+    glTranslatef(0.0F, tableHeight + pawnWidth*2, -pawnWidth*2);
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(0.0F, 0.0F, -dice_radius);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    drawDice(dice_edge, dice_radius, facetNumber);
+    glPopMatrix();
     
     //bed
     //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
