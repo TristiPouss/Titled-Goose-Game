@@ -1,5 +1,6 @@
 #include "Shapes.h"
 #include "../Colors.h"
+#include <GL/gl.h>
 
 
 void drawPlane(float edgeLength,int facetNumber,float normal,float ratioTexture){
@@ -17,11 +18,22 @@ void drawPlane(float edgeLength,int facetNumber,float normal,float ratioTexture)
     }
 }
 
+void drawCenteredPlane(float edgeLength,int facetNumber,float normal,float ratioTexture){
+    glPushMatrix();
+    glTranslatef(-edgeLength/2, -edgeLength/2, 0);
+    glPushMatrix();
+    drawPlane(edgeLength,facetNumber, normal, ratioTexture);
+    glPopMatrix();
+
+    glPopMatrix();
+}
+
 void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint textures[6], float ratioTexture) {
     float normal = (normalDirection) ? -0.1F : 0.1F;
     GLUquadric* quadric = gluNewQuadric();
     gluQuadricNormals(quadric, GLU_SMOOTH);
     glPushMatrix();
+
     for (int i = 0; i < 6; i++) {
         glPushMatrix();
 
@@ -72,7 +84,62 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
 }
 //A cube with (rounded) edges - modelized from the true center
 void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection,float radius, GLuint textures[6], float ratioTexture){
-   
+        float normal = (normalDirection) ? -0.1F : 0.1F;
+        GLUquadric* quadric = gluNewQuadric();
+        gluQuadricNormals(quadric, GLU_SMOOTH);
+        glPushMatrix();
+        float fullEdge = edgeLength + radius*2;
+        float HalfEdge = edgeLength/2 + radius;
+        // Draw the six faces of the cube with rounded edges
+        for (int i = 0; i < 6; i++) {
+            glPushMatrix();
+    
+           // Position and orient the face
+            switch (i) {
+                case 0: // Front face
+                    glTranslatef(0, 0, -fullEdge / 2);
+                    break; 
+                case 1: // Back face
+                    glTranslatef(0, 0, fullEdge / 2);
+                    glRotatef(180, 0.0F, 1.0F, 0.0F);
+                    break; 
+                case 2:  // Top face
+                    glTranslatef(0, fullEdge/2, 0);
+                    glRotatef(90, 1.0F, 0.0F, 0.0F); 
+                    break; 
+
+                case 3: // Bottom face
+                    glTranslatef(0, -fullEdge/2, 0);
+                    glRotatef(-90, 1.0F, 0.0F, 0.0F);
+                    break;
+                
+                case 4: //Right face
+                    glTranslatef(fullEdge / 2, 0, 0);
+                    glRotatef(-90, 0.0F, 1.0F, 0.0F);
+                    break; 
+
+                case 5: //Left face
+                    glTranslatef(-fullEdge / 2, 0, 0);
+                    glRotatef(90, 0.0F, 1.0F, 0.0F);
+                    break; 
+            }
+    
+            // Draw the face
+            if (textures && textures[i] != 0) {
+                glEnable(GL_TEXTURE_2D);
+                glBindTexture(GL_TEXTURE_2D, textures[i]);
+            }
+            drawCenteredPlane(edgeLength, facetNumber, normal, ratioTexture);
+            if (textures && textures[i] != 0) {
+                glDisable(GL_TEXTURE_2D);
+            }
+            glPopMatrix();
+            // Draw the rounded edges
+            
+        }
+    
+        gluDeleteQuadric(quadric);
+        glPopMatrix();
 }
 
 

@@ -17,6 +17,9 @@
 */
 void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1.0F);
 
+void drawPlane(float edgeLength,int facetNumber,float normal,float ratioTexture);
+void drawCenteredPlane(float edgeLength,int facetNumber,float normal,float ratioTexture);
+
 void drawCircle(float originX, float originY, float radius, int facetNumber);
 
 /*
