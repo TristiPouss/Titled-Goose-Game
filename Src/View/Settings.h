@@ -1,43 +1,41 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-/* TODO Changer la langue des commentaires de con */
-
-static float rx = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe x
-static float ry = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe y
-static float rz = 0.0F;            // Angle de rotation de la scene sur elle-meme autour de l'axe z
-static float sens = 1.0F;          // Sens de rotation de la scene sur elle-meme autour de l'axe x
-static float mx = 0.0F;            // Longueur de mouvement de la scene sur elle-meme autour de l'axe x
-static float my = 0.0F;            // Longueur de mouvement de la scene sur elle-meme autour de l'axe y
-static float mz = 0.0F;            // Longueur de mouvement de la scene sur elle-meme autour de l'axe z
+static float rx = 0.0F;            // Rotation angle of the scene around the x-axis
+static float ry = 0.0F;            // Rotation angle of the scene around the y-axis
+static float rz = 0.0F;            // Rotation angle of the scene around the z-axis
+static float sens = 1.0F;          // Rotation direction of the scene around the x-axis
+static float mx = 0.0F;            // Movement length of the scene around the x-axis
+static float my = 0.0F;            // Movement length of the scene around the y-axis
+static float mz = 0.0F;            // Movement length of the scene around the z-axis
 static float zoom = 2.86F;
 
-static int mouseActive = 0;        // Flag de d'indication que la souris est active (bouton presse) ou non 
-static int mouseX = 0;             // Derniere position en x relevee pour la souris
+static int mouseActive = 0;        // Flag indicating whether the mouse is active (button pressed) or not
+static int mouseX = 0;             // Last recorded x position of the mouse
 
-static int wTx = 480;              // Resolution horizontale de la fenetre
-static int wTy = 480;              // Resolution verticale de la fenetre
-static int wPx = 50;               // Position horizontale de la fenetre
-static int wPy = 50;               // Position verticale de la fenetre
+static int wTx = 480;              // Horizontal resolution of the window
+static int wTy = 480;              // Vertical resolution of the window
+static int wPx = 50;               // Horizontal position of the window
+static int wPy = 50;               // Vertical position of the window
 
-static int anim = 0;               // Flag d'activation/desactivation de l'animation
-static int polygonMode = 1;        // Flag de switch entre modes d'affichage wireframe et fill 
+static int anim = 0;               // Flag for enabling/disabling animation
+static int polygonMode = 1;        // Flag for switching between wireframe and fill display modes
 static int materialLightMode = 1;
 static int light1 = 0;
 static int light2 = 1;
 static int light3 = 1;
 static int light4 = 0;
-static int normalize = 1;          // Flag de switch avec et sans normalisation
-static int fond = 1;               // Flag de switch entre couleurs de fond noir et gris clair
-static int culling = 0;            // Flag de switch entre affichages avec et sans culling
+static int normalize = 1;          // Flag for switching with and without normalization
+static int fond = 1;               // Flag for switching between black and light gray background colors
+static int culling = 0;            // Flag for switching between display with and without culling
 static int fullscreen = 0;
 static int cameraPerspect = 1;
 static int cameraOnCurrentPlayer = 0;
 
-static float scenerySize = 100.0F;            // Taille de la face d'un cube
-static int facetNumber = 20;                 // Niveau de facettisation
+static float scenerySize = 100.0F; // Size of one face of a cube
+static int facetNumber = 20;       // Level of faceting
 
-#ifndef M_PI
+#ifndef M_PI 
 #define M_PI 3.14159
 #endif
 

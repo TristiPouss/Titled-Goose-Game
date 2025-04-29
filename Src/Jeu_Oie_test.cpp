@@ -69,7 +69,8 @@ static void scene() {
     float dice_edge = 0.9;
     float dice_radius = 0.1;
 
-    float litVoitureWidth = roomLength * 0.1;
+    float litVoitureWidth = roomLength * 0.55;
+    float litVoitureDepth = litVoitureWidth * 0.5;
     float shelfLength = 40;
     float kaplaLength = 5;
     float castleLength = 10;
@@ -177,11 +178,11 @@ static void scene() {
     glRotatef(90, 0.0, 1.0, 0.0);
     drawDice(dice_edge, dice_radius, facetNumber);
     glPopMatrix();
-    
-    //bed
-    //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
-    //glRotatef(45, 0.0, 1.0, 0.0);
-    //drawLitVoiture(litVoitureWidth, facetNumber);
+
+    // LitVoiture on the side of the room
+    glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureDepth*2);
+    glRotatef(45, 0.0, 1.0, 0.0);
+    drawLitVoiture(litVoitureWidth, litVoitureDepth, facetNumber);
 
     glPopMatrix();
 }

@@ -79,26 +79,38 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 	glPopMatrix();
 }
 
-void drawLitVoiture(float horizontalEdgeLength, int facetNumber) {
+void drawLitVoiture(float horizontalEdgeLength, float depthEdgeLength, int facetNumber) {
 	glPushMatrix();
 
-	float verticalEdgeLength = horizontalEdgeLength * 0.75;
-
+	float verticalEdgeLength = horizontalEdgeLength * 0.3;
 	float thinEdge = horizontalEdgeLength * 0.01;
-	
-	//glTranslatef(-10.0F, 0.0F, -10.0F);
 
 	// Left Side
 	glPushMatrix();
-	glTranslatef(0.0F, 0.0F, -horizontalEdgeLength / 2);
+	glTranslatef(0.0F, 0.0F, -depthEdgeLength / 2 + thinEdge / 2);
 	glScalef(1.0F, verticalEdgeLength / horizontalEdgeLength, thinEdge / horizontalEdgeLength);
 	drawCube(horizontalEdgeLength, facetNumber);
 	glPopMatrix();
 
+	// Right Side
 	glPushMatrix();
-	glTranslatef(0.0F, 0.0F, horizontalEdgeLength / 2);
+	glTranslatef(0.0F, 0.0F, depthEdgeLength / 2 - thinEdge / 2);
 	glScalef(1.0F, verticalEdgeLength / horizontalEdgeLength, thinEdge / horizontalEdgeLength);
 	drawCube(horizontalEdgeLength, facetNumber);
+	glPopMatrix();
+
+	// Front Side
+	glPushMatrix();
+	glTranslatef(-horizontalEdgeLength / 2 + thinEdge / 2, 0.0F, 0.0F);
+	glScalef(thinEdge / depthEdgeLength, verticalEdgeLength / depthEdgeLength, 1.0F);
+	drawCube(depthEdgeLength, facetNumber);
+	glPopMatrix();
+
+	// Back Side
+	glPushMatrix();
+	glTranslatef(horizontalEdgeLength / 2 - thinEdge / 2, 0.0F, 0.0F);
+	glScalef(thinEdge / depthEdgeLength, verticalEdgeLength / depthEdgeLength, 1.0F);
+	drawCube(depthEdgeLength, facetNumber);
 	glPopMatrix();
 
 	glPopMatrix();
