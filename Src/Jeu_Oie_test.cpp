@@ -1,3 +1,4 @@
+#include <GL/freeglut_std.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -12,6 +13,8 @@
 #include "View/Geometry/Furnitures.h"
 
 #include "View/Geometry/Texture.h"
+
+static float angle = 0.0;
 
 static void init(void) {
     initTexture();
@@ -56,6 +59,9 @@ static void scene() {
     float tableWidth = roomLength * 0.18;
 
     float pawnWidth = 0.4;
+
+    float dice_edge = 0.9;
+    float dice_radius = 0.1;
 
     float litVoitureWidth = roomLength * 0.1;
     float shelfLength = 40;
@@ -157,6 +163,14 @@ static void scene() {
     drawPoster(40, 40, facetNumber, textureFenetre);
     glPopMatrix();
 
+    //Dice
+    glPushMatrix();
+    glTranslatef(0.0F, tableHeight + pawnWidth*2, -pawnWidth*2);
+    glRotatef(45, 0.0, 1.0, 0.0);
+    glTranslatef(0.0F, 0.0F, -dice_radius);
+    glRotatef(90, 0.0, 1.0, 0.0);
+    drawDice(dice_edge, dice_radius, facetNumber);
+    glPopMatrix();
     
     //bed
     //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
@@ -252,7 +266,8 @@ static void reshape(int wx, int wy) {
 /* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
-    //glutPostRedisplay();
+    angle = (float)(((int)(angle)+1)%360);
+    glutPostRedisplay();
 }
 
 
@@ -435,6 +450,8 @@ static void clean(void) {
     printf("Bye\n");
 }
 
+
+
 /* Fonction principale                          */
 
 int main(int argc, char** argv) {
@@ -447,6 +464,7 @@ int main(int argc, char** argv) {
     glutInitWindowPosition(wPx, wPy);
     glutCreateWindow("Jeu de l'Oie");
     init();
+    glutIdleFunc(idle);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(special);
     glutMouseFunc(mouse);

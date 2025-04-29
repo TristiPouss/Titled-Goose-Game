@@ -4,6 +4,7 @@ GLuint texturesTest[6];
 GLuint texturesRoom[6];
 GLuint texturesTableTop[6];
 GLuint texturesTableLeg[6];
+GLuint texturesDiceFaces[6];
 
 GLuint texturesYellow[6];
 GLuint texturesRed[6];
@@ -26,6 +27,9 @@ GLuint textureGreen;
 GLuint textureBlue;
 GLuint textureYellow;
 GLuint texturePurple;
+
+GLuint textureEdgeDice;
+GLuint textureCornerDice;
 
 unsigned int chargementTexturePNG(char *filename) {
     unsigned int textureID = 0;
@@ -69,10 +73,30 @@ void initTexture() {
     textureYellow = chargementTexturePNG("../Assets/yellow.png24");
     texturePurple = chargementTexturePNG("../Assets/purple.png24");
 
+    //Init dice 
+    textureEdgeDice = chargementTexturePNG("../Assets/edgeDice.png24");
+    textureCornerDice = chargementTexturePNG("../Assets/edgeDice.png24");
+
+    texturesDiceFaces[0] = chargementTexturePNG("../Assets/diceRed2.png24");
+    texturesDiceFaces[1] = chargementTexturePNG("../Assets/diceRed5.png24");
+    texturesDiceFaces[2] = chargementTexturePNG("../Assets/diceRed1.png24");
+    texturesDiceFaces[3] = chargementTexturePNG("../Assets/diceRed6.png24");
+    texturesDiceFaces[4] = chargementTexturePNG("../Assets/diceRed4.png24");
+    texturesDiceFaces[5] = chargementTexturePNG("../Assets/diceRed3.png24");
+
+    /* For a cube, we have the following corresponding table: 
+    0 - Front
+    1 - Back
+    2 - Top
+    3 - Bottom
+    4 - Right
+    5 - Left
+    */
+
     texturesRoom[0] = textureWall;
-    texturesRoom[1] = textureFloor;
+    texturesRoom[1] = textureWall;
     texturesRoom[2] = textureWall;
-    texturesRoom[3] = textureWall;
+    texturesRoom[3] = textureFloor;
     texturesRoom[4] = textureWall;
     texturesRoom[5] = textureWall;
 

@@ -17,6 +17,9 @@
 */
 void drawCube(float edgeLength, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1.0F);
 
+void drawPlane(float edgeLength,int facetNumber,float normal,float ratioTexture);
+void drawCenteredPlane(float edgeLength,int facetNumber,float normal,float ratioTexture);
+
 void drawCircle(float originX, float originY, float radius, int facetNumber);
 
 /*
@@ -29,5 +32,7 @@ void drawSphere(float radius, int facetNumber, GLuint texture = 0);
 void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint texture = 0);
 
 void drawCuboid(float width, float height, float depth, int facetNumber, int normalDirection = 1, GLuint textures[6] = nullptr, float ratioTexture=1.0F);
+
+void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalDirection = 1,GLuint facesTextures[6] = nullptr, GLuint edgesTexture = 0, GLuint cornersTexture = 0 , float ratioTexture = 1.0F);
 
 #endif // !SHAPES_H

@@ -1,160 +1,206 @@
 #include "Shapes.h"
 #include "../Colors.h"
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+/* PLANES */
+
+void drawPlane(float edgeLength,int facetNumber,float normal,float ratioTexture){
+    for (int j = 0; j < facetNumber; j++) {
+        glBegin(GL_QUAD_STRIP);
+        for (int i = 0; i <= facetNumber; i++) {
+            glNormal3f(0.0F, 0.0F, normal);
+            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
+            glVertex3f(0, i * (edgeLength / facetNumber), 0);
+            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
+            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
+        }
+        glEnd();
+        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
+    }
+}
+
+void drawCenteredPlane(float edgeLength,int facetNumber,float normal,float ratioTexture){
+    glPushMatrix();
+    glTranslatef(-edgeLength/2, -edgeLength/2, 0);
+    glPushMatrix();
+    drawPlane(edgeLength,facetNumber, normal, ratioTexture);
+    glPopMatrix();
+    glPopMatrix();
+}
+
+/*BASICS FORMS*/
 
 void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint textures[6], float ratioTexture) {
     float normal = (normalDirection) ? -0.1F : 0.1F;
-
+    GLUquadric* quadric = gluNewQuadric();
+    gluQuadricNormals(quadric, GLU_SMOOTH);
     glPushMatrix();
 
-    // Up
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, edgeLength, -edgeLength / 2);
-    glRotatef(90, 1.0F, 0.0F, 0.0F);
-    if (textures && textures[0] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[0]);
-    }
-    for (int j = 0; j < facetNumber; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
+    for (int i = 0; i < 6; i++) {
+        glPushMatrix();
+
+        // Position and orient the face
+        switch (i) {
+            case 0: // Front face
+                glTranslatef(-edgeLength / 2, 0, -edgeLength / 2);
+                break; 
+            case 1: // Back face
+                glTranslatef(edgeLength / 2, 0, edgeLength / 2);
+                glRotatef(180, 0.0F, 1.0F, 0.0F);
+                break; 
+            case 2:  // Top face
+                glTranslatef(-edgeLength / 2, edgeLength, -edgeLength / 2);
+                glRotatef(90, 1.0F, 0.0F, 0.0F); 
+                break; 
+
+            case 3: // Bottom face
+                glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
+                glRotatef(-90, 1.0F, 0.0F, 0.0F);
+                break;
+            
+            case 4: //Right face
+                glTranslatef(edgeLength / 2, 0, -edgeLength / 2);
+                glRotatef(-90, 0.0F, 1.0F, 0.0F);
+                break; 
+
+            case 5: //Left face
+                glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
+                glRotatef(90, 0.0F, 1.0F, 0.0F);
+                break; 
         }
-        glEnd();
-        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
+        if (textures && textures[i] != 0) {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, textures[i]);
+        }
+       drawPlane(edgeLength, facetNumber, normal, ratioTexture);
+        if (textures && textures[i] != 0) {
+            glDisable(GL_TEXTURE_2D);
+        }
+
+        glPopMatrix();
+        
     }
-    if (textures && textures[0] != 0) {
+  
+    glPopMatrix();
+    gluDeleteQuadric(quadric);
+}
+
+// Function to draw a rounded cube
+void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalDirection,GLuint facesTextures[6], GLuint edgesTexture , GLuint cornersTexture , float ratioTexture){
+    float normal = (normalDirection) ? -0.1F : 0.1F;
+    GLUquadric* quadric = gluNewQuadric();
+    gluQuadricNormals(quadric, GLU_SMOOTH);
+    gluQuadricTexture(quadric, GL_TRUE);
+    glPushMatrix();
+
+    float fullEdge = edgeLength;
+    
+    edgeLength = edgeLength - radius*2;
+    float halfEdge = edgeLength / 2;
+    // Draw the six faces of the cube with rounded edges
+    for (int i = 0; i < 6; i++) {
+        glPushMatrix();
+
+        // Position and orient the face
+        switch (i) {
+            case 0: // Front face
+                glTranslatef(0, 0, -fullEdge / 2);
+                break;
+            case 1: // Back face
+                glTranslatef(0, 0, fullEdge / 2);
+                glRotatef(180, 0.0F, 1.0F, 0.0F);
+                break;
+            case 2:  // Top face
+                glTranslatef(0, fullEdge / 2, 0);
+                glRotatef(90, 1.0F, 0.0F, 0.0F);
+                break;
+            case 3: // Bottom face
+                glTranslatef(0, -fullEdge / 2, 0);
+                glRotatef(-90, 1.0F, 0.0F, 0.0F);
+                break;
+            case 4: // Right face
+                glTranslatef(fullEdge / 2, 0, 0);
+                glRotatef(-90, 0.0F, 1.0F, 0.0F);
+                break;
+            case 5: // Left face
+                glTranslatef(-fullEdge / 2, 0, 0);
+                glRotatef(90, 0.0F, 1.0F, 0.0F);
+                break;
+        }
+
+        // Draw the face
+        if (facesTextures && facesTextures[i] != 0) {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, facesTextures[i]);
+        }
+        drawCenteredPlane(edgeLength, facetNumber, normal, ratioTexture);
+        if (facesTextures && facesTextures[i] != 0) {
+            glDisable(GL_TEXTURE_2D);
+        }
+        glPopMatrix();
+    }
+    if (cornersTexture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, cornersTexture);
+    }
+    // Draw the rounded edges
+    for (int i = 0; i < 8; i++) {
+        glPushMatrix();
+        switch (i) {
+            case 0: glTranslatef(-halfEdge, -halfEdge, -halfEdge); break;
+            case 1: glTranslatef(halfEdge, -halfEdge, -halfEdge); break;
+            case 2: glTranslatef(halfEdge, halfEdge, -halfEdge); break;
+            case 3: glTranslatef(-halfEdge, halfEdge, -halfEdge); break;
+            case 4: glTranslatef(-halfEdge, -halfEdge, halfEdge); break;
+            case 5: glTranslatef(halfEdge, -halfEdge, halfEdge); break;
+            case 6: glTranslatef(halfEdge, halfEdge, halfEdge); break;
+            case 7: glTranslatef(-halfEdge, halfEdge, halfEdge); break;
+        }
+        gluSphere(quadric, radius, facetNumber, facetNumber);
+        glPopMatrix();
+    }
+    if (cornersTexture  != 0) {
         glDisable(GL_TEXTURE_2D);
     }
-    glPopMatrix();
 
-    // Down
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
-    glRotatef(-90, 1.0F, 0.0F, 0.0F);
-    if (textures && textures[1] != 0) {
+    // Draw the rounded edges (cylinders)
+    if (edgesTexture != 0) {
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[1]);
+        glBindTexture(GL_TEXTURE_2D, edgesTexture);
     }
-    for (int j = 0; j < facetNumber; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber * 2 * ratioTexture, i / (float)facetNumber * 2 * ratioTexture);
-            glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber * 2 * ratioTexture, i / (float)facetNumber * 2 * ratioTexture);
-            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
+    for (int i = 0; i < 12; i++) {
+        glPushMatrix();
+        switch (i) {
+            //Making edges from top to bottom clockwise
+            //Top 
+            case 0: glTranslatef(-halfEdge, halfEdge, -halfEdge); glRotatef(90, 1.0F, 0.0F, 0.0F); break;
+            case 1: glTranslatef(halfEdge, halfEdge, halfEdge); glRotatef(90, 0.0F, 0.0F, 1.0F); break;
+            case 2: glTranslatef(halfEdge, halfEdge, -halfEdge); glRotatef(90, 1.0F, 0.0F, 0.0F); break;
+            case 3: glTranslatef(halfEdge, halfEdge, -halfEdge); glRotatef(90, 0.0F, 0.0F, 1.0F); break;
+            //Side - MARCHE PAS PQ 
+            case 4: glTranslatef(halfEdge, -halfEdge, halfEdge);  break;
+            case 5: glTranslatef(halfEdge, -halfEdge, -halfEdge);  break;
+            case 6: glTranslatef(-halfEdge, -halfEdge, -halfEdge); break;
+            case 7: glTranslatef(-halfEdge, -halfEdge, halfEdge); break;
+            //Bottom
+            case 8: glTranslatef(-halfEdge, -halfEdge, -halfEdge); glRotatef(90, 1.0F, 0.0F, 0.0F); break;
+            case 9: glTranslatef(halfEdge, -halfEdge, halfEdge); glRotatef(90, 0.0F, 0.0F, 1.0F); break;
+            case 10: glTranslatef(halfEdge, -halfEdge, -halfEdge); glRotatef(90, 1.0F, 0.0F, 0.0F); break;
+            case 11: glTranslatef(halfEdge, -halfEdge, -halfEdge); glRotatef(90, 0.0F, 0.0F, 1.0F); break;
         }
-        glEnd();
-        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
+        if (edgesTexture != 0) {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, edgesTexture);
+        }
+        drawCylinder(radius, radius, edgeLength, facetNumber, facetNumber);
+        glPopMatrix();
     }
-    if (textures && textures[1] != 0) {
+    if (edgesTexture != 0) {
         glDisable(GL_TEXTURE_2D);
     }
-    glPopMatrix();
 
-    // Left
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, 0, edgeLength / 2);
-    glRotatef(90, 0.0F, 1.0F, 0.0F);
-    if (textures && textures[2] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[2]);
-    }
-    for (int j = 0; j < facetNumber; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
-        }
-        glEnd();
-        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
-    }
-    if (textures && textures[2] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
-
-    // Right
-    glPushMatrix();
-    glTranslatef(edgeLength / 2, 0, -edgeLength / 2);
-    glRotatef(-90, 0.0F, 1.0F, 0.0F);
-    if (textures && textures[3] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[3]);
-    }
-    for (int j = 0; j < facetNumber; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
-        }
-        glEnd();
-        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
-    }
-    if (textures && textures[3] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
-
-    // Back
-    glPushMatrix();
-    glTranslatef(edgeLength / 2, 0, edgeLength / 2);
-    glRotatef(180, 0.0F, 1.0F, 0.0F);
-    if (textures && textures[4] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[4]);
-    }
-    for (int j = 0; j < facetNumber; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
-        }
-        glEnd();
-        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
-    }
-    if (textures && textures[4] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
-
-    // Front
-    glPushMatrix();
-    glTranslatef(-edgeLength / 2, 0, -edgeLength / 2);
-    if (textures && textures[5] != 0) {
-        glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, textures[5]);
-    }
-    for (int j = 0; j < facetNumber; j++) {
-        glBegin(GL_QUAD_STRIP);
-        for (int i = 0; i <= facetNumber; i++) {
-            glNormal3f(0.0F, 0.0F, normal);
-            glTexCoord2f(j / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(0, i * (edgeLength / facetNumber), 0);
-            glTexCoord2f((j + 1) / (float)facetNumber * ratioTexture, i / (float)facetNumber * ratioTexture);
-            glVertex3f(edgeLength / facetNumber, i * (edgeLength / facetNumber), 0);
-        }
-        glEnd();
-        glTranslatef(edgeLength / facetNumber, 0.0, 0.0);
-    }
-    if (textures && textures[5] != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
-
+    gluDeleteQuadric(quadric);
     glPopMatrix();
 }
 
