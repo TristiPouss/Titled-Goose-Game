@@ -26,7 +26,6 @@ void drawCenteredPlane(float edgeLength,int facetNumber,float normal,float ratio
     glPushMatrix();
     drawPlane(edgeLength,facetNumber, normal, ratioTexture);
     glPopMatrix();
-
     glPopMatrix();
 }
 
@@ -88,7 +87,7 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
 }
 
 // Function to draw a rounded cube
-void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection, float radius, GLuint textures[6], float ratioTexture) {
+void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection,float radius, GLuint facesTextures[6], GLuint edgesTexture , GLuint cornersTexture , float ratioTexture){
     float normal = (normalDirection) ? -0.1F : 0.1F;
     GLUquadric* quadric = gluNewQuadric();
     gluQuadricNormals(quadric, GLU_SMOOTH);
@@ -130,17 +129,20 @@ void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection, flo
         }
 
         // Draw the face
-        if (textures && textures[i] != 0) {
+        if (facesTextures && facesTextures[i] != 0) {
             glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, textures[i]);
+            glBindTexture(GL_TEXTURE_2D, facesTextures[i]);
         }
         drawCenteredPlane(edgeLength, facetNumber, normal, ratioTexture);
-        if (textures && textures[i] != 0) {
+        if (facesTextures && facesTextures[i] != 0) {
             glDisable(GL_TEXTURE_2D);
         }
         glPopMatrix();
     }
-
+    if (cornersTexture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, cornersTexture);
+    }
     // Draw the rounded edges
     for (int i = 0; i < 8; i++) {
         glPushMatrix();
@@ -157,8 +159,15 @@ void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection, flo
         gluSphere(quadric, radius, facetNumber, facetNumber);
         glPopMatrix();
     }
-    gluSphere(quadric,0.1, facetNumber, facetNumber);
+    if (cornersTexture  != 0) {
+        glDisable(GL_TEXTURE_2D);
+    }
+
     // Draw the rounded edges (cylinders)
+    if (edgesTexture != 0) {
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, edgesTexture);
+    }
     for (int i = 0; i < 12; i++) {
         glPushMatrix();
         switch (i) {
@@ -179,9 +188,15 @@ void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection, flo
             case 10: glTranslatef(halfEdge, -halfEdge, -halfEdge); glRotatef(90, 1.0F, 0.0F, 0.0F); break;
             case 11: glTranslatef(halfEdge, -halfEdge, -halfEdge); glRotatef(90, 0.0F, 0.0F, 1.0F); break;
         }
-        //gluCylinder(quadric, radius, radius, edgeLength, facetNumber, 1);
+        if (edgesTexture != 0) {
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, edgesTexture);
+        }
         drawCylinder(radius, radius, edgeLength, facetNumber, facetNumber);
         glPopMatrix();
+    }
+    if (edgesTexture != 0) {
+        glDisable(GL_TEXTURE_2D);
     }
 
     gluDeleteQuadric(quadric);
