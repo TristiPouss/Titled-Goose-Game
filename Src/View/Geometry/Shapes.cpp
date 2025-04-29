@@ -87,16 +87,17 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
 }
 
 // Function to draw a rounded cube
-void drawRoundedCube(float edgeLength, int facetNumber, int normalDirection,float radius, GLuint facesTextures[6], GLuint edgesTexture , GLuint cornersTexture , float ratioTexture){
+void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalDirection,GLuint facesTextures[6], GLuint edgesTexture , GLuint cornersTexture , float ratioTexture){
     float normal = (normalDirection) ? -0.1F : 0.1F;
     GLUquadric* quadric = gluNewQuadric();
     gluQuadricNormals(quadric, GLU_SMOOTH);
     gluQuadricTexture(quadric, GL_TRUE);
     glPushMatrix();
 
-    float fullEdge = edgeLength + radius * 2;
+    float fullEdge = edgeLength;
+    
+    edgeLength = edgeLength - radius*2;
     float halfEdge = edgeLength / 2;
-
     // Draw the six faces of the cube with rounded edges
     for (int i = 0; i < 6; i++) {
         glPushMatrix();
