@@ -209,28 +209,34 @@ void drawCastle(float l, int facetNumber) {
 	glPopMatrix();
 }
 
-void drawCell(float l, int facetNumber) {
-	float x = l/10;
-	drawCylinder(l, l, x, facetNumber, facetNumber);
-	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, textureBlue, textureBlue, textureBlue);
-}
+enum CellType {
+	DEFAULT,
+	GOOSE,
+	TRAP,
+	TELEPORT
+};
 
-void drawGooseCell(float l, int facetNumber) {
-	float x = l/10;
-	drawCylinder(l, l, x, facetNumber, facetNumber);
-	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, textureGreen, textureGreen, textureGreen);
-}
+void drawCell(float l, int facetNumber, CellType type = DEFAULT) {
+	float x = l / 10;
+	GLuint texture = 0;
 
-void drawTrapCell(float l, int facetNumber) {
-	float x = l/10;
-	drawCylinder(l, l, x, facetNumber, facetNumber);
-	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, textureRed, textureRed, textureRed);
-}
+	switch (type) {
+		case GOOSE:
+			texture = textureGreen;
+			break;
+		case TRAP:
+			texture = textureRed;
+			break;
+		case TELEPORT:
+			texture = texturePurple;
+			break;
+		default:
+			texture = textureBlue;
+			break;
+	}
 
-void drawTeleportCell(float l, int facetNumber) {
-	float x = l/10;
 	drawCylinder(l, l, x, facetNumber, facetNumber);
-	drawCylinder(l-x, l-x, x+x, facetNumber, facetNumber, texturePurple, texturePurple, texturePurple);
+	drawCylinder(l - x, l - x, x + x, facetNumber, facetNumber, texture, texture, texture);
 }
 
 void drawShelf(float l, int facetNumber) {
