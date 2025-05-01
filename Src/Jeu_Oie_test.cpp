@@ -11,6 +11,7 @@
 #include "View/Geometry/Texture.h"
 #include "View/View.h"
 
+#include "controller/Controller.h"
 #include "model/Board.h"
 #include "model/Cell.h"
 #include "model/Dice.h"
@@ -18,12 +19,10 @@
 #include "model/Player.h"
 
 static float angle = 0.0;
-gooseGameModel::Game game;
-View view;
+Controller main_game;
 
 static void init(void) {
-    game = gooseGameModel::Game();
-    view = View();
+    main_game = Controller();
     initTexture();
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
@@ -121,7 +120,7 @@ static void display(void) {
     // Light init
     initLight();
     // Scene
-    view.draw(facetNumber);
+    main_game.display(facetNumber);
 
     glPopMatrix();
 
@@ -146,7 +145,7 @@ static void reshape(int wx, int wy) {
 /* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
-    view.update();
+    main_game.update();
     angle = (float)(((int)(angle)+1)%360);
     glutPostRedisplay();
 }
