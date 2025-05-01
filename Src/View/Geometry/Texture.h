@@ -14,12 +14,14 @@ extern GLuint texturesRoom[6];
 extern GLuint texturesTableTop[6];
 extern GLuint texturesTableLeg[6];
 extern GLuint texturesDiceFaces[6];
+extern GLuint texturesLitVoiture[6];
 
 extern GLuint texturesYellow[6];
 extern GLuint texturesRed[6];
 extern GLuint texturesGreen[6];
 extern GLuint texturesBlue[6];
 extern GLuint texturesPurple[6];
+extern GLuint texturesWhite[6];
 
 extern GLuint textureWall;
 extern GLuint textureFloor;
@@ -31,6 +33,8 @@ extern GLuint textureKaaris;
 extern GLuint textureEvanescence;
 extern GLuint texturePulp;
 extern GLuint textureFenetre;
+extern GLuint textureRedStripes;
+extern GLuint textureMcqueenFace;
 
 extern GLuint textureRed;
 extern GLuint textureGreen;
@@ -43,6 +47,7 @@ extern GLuint textureCubeGreen;
 extern GLuint textureCubeBlue;
 extern GLuint textureCubeYellow;
 extern GLuint textureCubePurple;
+extern GLuint textureCubeWhite;
 
 extern GLuint textureEdgeDice;
 extern GLuint textureCornerDice;

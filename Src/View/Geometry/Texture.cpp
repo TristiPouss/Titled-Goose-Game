@@ -5,12 +5,14 @@ GLuint texturesRoom[6];
 GLuint texturesTableTop[6];
 GLuint texturesTableLeg[6];
 GLuint texturesDiceFaces[6];
+GLuint texturesLitVoiture[6];
 
 GLuint texturesYellow[6];
 GLuint texturesRed[6];
 GLuint texturesGreen[6];
 GLuint texturesBlue[6];
 GLuint texturesPurple[6];
+GLuint texturesWhite[6];
 
 GLuint textureWall;
 GLuint textureFloor;
@@ -23,6 +25,8 @@ GLuint textureKaaris;
 GLuint textureEvanescence;
 GLuint texturePulp;
 GLuint textureFenetre;
+GLuint textureRedStripes;
+GLuint textureMcqueenFace;
 
 GLuint textureRed;
 GLuint textureGreen;
@@ -35,6 +39,7 @@ GLuint textureCubeGreen;
 GLuint textureCubeBlue;
 GLuint textureCubeYellow;
 GLuint textureCubePurple;
+GLuint textureCubeWhite;
 
 GLuint textureEdgeDice;
 GLuint textureCornerDice;
@@ -80,6 +85,14 @@ void initTexture() {
     textureEvanescence = chargementTexturePNG("../Assets/evanescence.png24");
     texturePulp = chargementTexturePNG("../Assets/pulp.png24");
     textureFenetre = chargementTexturePNG("../Assets/fenetre.png24");
+	textureRedStripes = chargementTexturePNG("../Assets/red_stripes.png24");
+	textureMcqueenFace = chargementTexturePNG("../Assets/mcqueen_face.png24");
+    /*
+	textureLitVoitureBack = chargementTexturePNG("../Assets/lit_voiture_back.png24");
+	textureLitVoitureLeft = chargementTexturePNG("../Assets/lit_voiture_left.png24");
+	textureLitVoitureRight = chargementTexturePNG("../Assets/lit_voiture_right.png24");
+	textureLitVoitureTop = chargementTexturePNG("../Assets/lit_voiture_top.png24");
+    */
 
 
     textureRed = chargementTexturePNG("../Assets/red.png24");
@@ -93,6 +106,7 @@ void initTexture() {
     textureCubeGreen = chargementTexturePNG("../Assets/cube_green.png24");
     textureCubeBlue = chargementTexturePNG("../Assets/cube_blue.png24");
     textureCubeYellow = chargementTexturePNG("../Assets/cube_yellow.png24");
+	textureCubeWhite = chargementTexturePNG("../Assets/cube_white.png24");
 
     //Init dice 
     textureEdgeDice = chargementTexturePNG("../Assets/edgeDice.png24");
@@ -138,4 +152,7 @@ void initTexture() {
     initCubeTextureSingle(textureCubeBlue, texturesBlue);
     initCubeTextureSingle(textureCubeYellow, texturesYellow);
     initCubeTextureSingle(textureCubePurple, texturesPurple);
+	initCubeTextureSingle(textureCubeWhite, texturesWhite);
+
+	initCubeTextureSingle(textureRedStripes, texturesLitVoiture);
 }
