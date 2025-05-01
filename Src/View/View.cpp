@@ -14,16 +14,52 @@ View::View() {
 }
 
 void View::init() {
-    //Initialize posCells and posPlayers
+    std::vector<pos3D> positions = {
+        {tableWidth/3,           tableHeight, tableWidth/3,          0},
+        {0.0F,                   tableHeight, tableWidth/3,          1},
+        {-tableWidth/3,          tableHeight, tableWidth/3,          2},
+        {-tableWidth/3,          tableHeight, 0.0F,                  3},
+        {-tableWidth/3,          tableHeight, -tableWidth/3,         4},
+        {0.0F,                   tableHeight, -tableWidth/3,         5},
+        {0.0F,                   0.0F,        -tableWidth,           6},
+        {0.0F,                   0.0F,        -tableWidth*1.5F,      7},
+        {tableWidth/2.0F,        0.0F,        -tableWidth*1.5F,      8},
+        {tableWidth,             0.0F,        -tableWidth*1.5F,      9},
+        {tableWidth*1.5F,        0.0F,        -tableWidth*1.5F,      10},
+        {tableWidth*1.75F,       0.0F,        -tableWidth*1.25F,     11},
+        {tableWidth*2.0F,        0.0F,        -tableWidth,           12},
+        {tableWidth*2.0F,        0.0F,        -tableWidth/2.0F,      13},
+        {tableWidth*2.0F,        0.0F,        0.0F,                  14},
+        {tableWidth*2.0F,        0.0F,        tableWidth/2.0F,       15},
+        {tableWidth*1.5F,        0.0F,        tableWidth/2.0F,       16},
+        {tableWidth*1.25F,       0.0F,        tableWidth/1.25F,      17},
+        {tableWidth,             0.0F,        tableWidth,            18},
+        {tableWidth,             0.0F,        tableWidth*1.5F,       19},
+        {tableWidth/1.25F,       0.0F,        tableWidth*1.75F,      20},
+        {tableWidth/2.0F,        0.0F,        tableWidth*2.0F,       21},
+        {tableWidth/4.0F,        0.0F,        tableWidth*2.25F,      22},
+        {0.0F,                   0.0F,        tableWidth*2.5F,       23},
+        {-tableWidth/2.0F,       0.0F,        tableWidth*2.5F,       24},
+        {-tableWidth+5.0F,       0.0F,        tableWidth*2.0F+5.0F,  25},
+        {-tableWidth*1.5F-2.0F,  9.8F,        tableWidth*1.5F-2.0F,  26},
+        {-tableWidth*2.0F,       9.8F,        tableWidth,            27},
+        {-tableWidth*2.25F,      9.8F,        tableWidth/1.25F,      28},
+        {-tableWidth*2.5F,       9.8F,        tableWidth/2.0F,       29},
+        {-tableWidth*2.75F,      9.8F,        tableWidth/4.0F,       30},
+        {-tableWidth*3.0F,       9.8F,        0.0F,                  31},
+        {-tableWidth*2.75F,      9.8F,        -tableWidth/4.0F,      32},
+        {-tableWidth*2.5F,       9.8F,        -tableWidth/2.0F,      33},
+        {-tableWidth*2.0F,       shelfLength, -tableWidth*1.5F,      34},
+        {-tableWidth*1.75F,      shelfLength, -tableWidth*1.75F,     35},
+        {-tableWidth*1.5F,       shelfLength, -tableWidth*2.0F,      36},
+        {-tableWidth*1.25F,      shelfLength, -tableWidth*2.25F,     37},
+        {-tableWidth,            shelfLength, -tableWidth*2.5F,      38},
+        {0.0F,                castleLength/2, -tableWidth*2.75F,     39}
+    };
 
-    //Place it randomly in the room 
+    //Place cells
     for (int i = 0; i < DEFAULT_SIZE_BOARD; i++) {
-        int sign = (rand() % 2) == 0 ? -1 : 1;
-        posCells[i].x = (rand() % 100) / 100.0f * scenerySize/2 * sign;
-        posCells[i].y = (rand() % 100) / 100.0f * scenerySize/2;
-        sign = (rand() % 2) == 0 ? -1 : 1;
-        posCells[i].z = (rand() % 100) / 100.0f * scenerySize/2 * sign;
-        posCells[i].caseNumber = i;
+        posCells[i] = positions[i];
     }
 
     // Place players in the room on the table
@@ -92,7 +128,7 @@ void View::drawMainScene(int facetNumber) {
    glPushMatrix();
    glTranslatef(roomLength/4, 0.0F, 0.0F);
    drawKaplaTower(kaplaLength, 10, facetNumber);
-   glTranslatef(0.0F, 0.0F, roomLength/8);
+   glTranslatef(0.0F, 0.0F, roomLength/5);
    drawKaplaTowerSpiral(kaplaLength, 15, facetNumber);
    glPopMatrix();
 
@@ -138,7 +174,7 @@ void View::drawMainScene(int facetNumber) {
 
    //Dice for decoration
    glPushMatrix();
-   glTranslatef(tableWidth/3, tableHeight + dice_edge/2, tableWidth/3);
+   glTranslatef(tableWidth/3, tableHeight + dice_edge/2, -tableWidth/3);
    glRotatef(45, 0.0, 1.0, 0.0);
    drawDice(dice_edge, dice_radius, facetNumber);
    glTranslatef(0.0, dice_edge, 0.0);
