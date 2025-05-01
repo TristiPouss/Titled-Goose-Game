@@ -113,7 +113,6 @@ static void display(void) {
         glRotatef(rz, 0.0F, 0.0F, 1.0F);
         
         glScalef(zoom, zoom, zoom);
-        printf("%f\n", zoom);
     }
     
     
@@ -263,6 +262,12 @@ static void keyboard(unsigned char key, int x, int y) {
         printf("  - 'P' : camera on current player toggle\n");
         printf("  - 'O' : camera on dice toggle\n");
         printf("  - 'H' : help toggle\n");
+        printf("  - 'V' : play turn\n");
+        glutPostRedisplay();
+        break;
+    case 'v':
+    case 'V':
+        main_game.playTurn();
         glutPostRedisplay();
         break;
     
