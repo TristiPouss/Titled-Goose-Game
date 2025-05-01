@@ -39,6 +39,8 @@ static int facetNumber = 20;       // Level of tessellation
 
 static float FOV = 90.0F;          // Field of view for the perspective camera
 
+static float speedPawn = 1.0F;        // Speed of the pawn movement
+
 #ifndef M_PI 
 #define M_PI 3.14159
 #endif

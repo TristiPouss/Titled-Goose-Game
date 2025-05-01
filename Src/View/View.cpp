@@ -222,20 +222,40 @@ void View::drawDiceScene(int facetNumber) {
 void View::updateMainScene() {
     // Update the main scene
     // For example, update player positions or other dynamic elements
-    for (unsigned i = 0; i < board_cpy.getNbPlayer(); i++) {
-        
 
-        posPlayers[i].caseNumber = board_cpy.getPlayerPosition(i);
-        // = player->getPosition();
-        // Move the player towards the target cell position
-        if (posPlayers[i].x != posCells[posPlayers[i].caseNumber].x) {
-            posPlayers[i].x += (posCells[posPlayers[i].caseNumber].x - posPlayers[i].x) / 10;
+    for (unsigned i = 0; i < board_cpy.getNbPlayer(); i++) {
+        // Target the next cell position
+        unsigned targetPos = board_cpy.getPlayerPosition(i);
+        
+        // Check if the player is already at the target cell position
+        if (posPlayers[i].caseNumber == targetPos) {
+            continue; // Player is already at the target position
         }
-        if (posPlayers[i].y != posCells[posPlayers[i].caseNumber].y) {
-            posPlayers[i].y += (posCells[posPlayers[i].caseNumber].y - posPlayers[i].y) / 10;
+        //Handle the case of resetting
+        unsigned nextCell = 0;
+        if (targetPos != 0) {
+            nextCell = posPlayers[i].caseNumber + 1;
         }
-        if (posPlayers[i].z != posCells[posPlayers[i].caseNumber].z) {
-            posPlayers[i].z += (posCells[posPlayers[i].caseNumber].z - posPlayers[i].z) / 10;
+
+        // Move the player towards the next cell position
+        if (posPlayers[i].x != posCells[nextCell].x) {
+            posPlayers[i].x += ((posCells[nextCell].x - posPlayers[i].x) / 10)*speedPawn;
+        }
+        if (posPlayers[i].y != posCells[nextCell].y) {
+            posPlayers[i].y += ((posCells[nextCell].y - posPlayers[i].y) / 10)*speedPawn;
+        }
+        if (posPlayers[i].z != posCells[nextCell].z) {
+            posPlayers[i].z += ((posCells[nextCell].z - posPlayers[i].z) / 10)*speedPawn;
+        }
+
+        // Detect if the player has reached a new cell
+        if (abs(posPlayers[i].x - posCells[nextCell].x) < 0.1 &&
+            abs(posPlayers[i].y - posCells[nextCell].y) < 0.1 &&
+            abs(posPlayers[i].z - posCells[nextCell].z) < 0.1) {
+            posPlayers[i].caseNumber = nextCell;
+            posPlayers[i].x = posCells[nextCell].x;
+            posPlayers[i].y = posCells[nextCell].y;
+            posPlayers[i].z = posCells[nextCell].z;
         }
     }
 
