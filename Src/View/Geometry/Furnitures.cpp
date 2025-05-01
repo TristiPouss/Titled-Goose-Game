@@ -112,7 +112,7 @@ void drawLitVoiture(float horizontalEdgeLength, float depthEdgeLength, int facet
 	glTranslatef(horizontalEdgeLength / 2 - thinEdge / 2, 0.0F, 0.0F);
 	glRotatef(45, 0.0F, 0.0F, 1.0F);
 	glScalef(thinEdge / depthEdgeLength, verticalEdgeLength / depthEdgeLength, 1.0F);
-	drawCube(depthEdgeLength, facetNumber, 1, texturesFront, 0.1);
+	drawCube(depthEdgeLength, facetNumber, 1, texturesFront, 1);
 	glPopMatrix();
 
 	// Top Side
