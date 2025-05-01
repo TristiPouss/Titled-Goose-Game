@@ -19,6 +19,8 @@ static float shelfLength = 40;
 static float kaplaLength = 5;
 static float castleLength = 10;
 
+static float cellWidth = roomLength / 100.0f;
+
 typedef struct {
     float x;
     float y;

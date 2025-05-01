@@ -58,11 +58,6 @@ static void initLight() {
     diffuse();
     spot_top();
 }
-
-static void scene() {
-    view.draw();
-}
-
 /* Fonction executee lors d'un rafraichissement */
 /* de la fenetre de dessin                      */
 
@@ -124,9 +119,8 @@ static void display(void) {
 
     // Light init
     initLight();
-
     // Scene
-    scene();
+    view.draw();
 
     glPopMatrix();
 

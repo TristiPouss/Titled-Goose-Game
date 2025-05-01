@@ -18,9 +18,11 @@ void View::init() {
 
     //Place it randomly in the room 
     for (int i = 0; i < DEFAULT_SIZE_BOARD; i++) {
-        posCells[i].x = (rand() % 100) / 100.0f * scenerySize;
-        posCells[i].y = (rand() % 100) / 100.0f * scenerySize;
-        posCells[i].z = (rand() % 100) / 100.0f * scenerySize;
+        int sign = (rand() % 2) == 0 ? -1 : 1;
+        posCells[i].x = (rand() % 100) / 100.0f * scenerySize/2 * sign;
+        posCells[i].y = (rand() % 100) / 100.0f * scenerySize/2;
+        sign = (rand() % 2) == 0 ? -1 : 1;
+        posCells[i].z = (rand() % 100) / 100.0f * scenerySize/2 * sign;
     }
 
     // Place players in the room on the table
@@ -60,7 +62,7 @@ void View::drawMainScene() {
     for (int i = 0; i < DEFAULT_SIZE_BOARD; i++) {
         glPushMatrix();
         glTranslatef(posCells[i].x, posCells[i].y, posCells[i].z);
-        drawCell(1.0F, facetNumber);
+        drawCell(cellWidth, facetNumber);
         glPopMatrix();
     }
 
