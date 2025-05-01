@@ -22,7 +22,7 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0)
 
 void drawDice(float diceEdgeLength, float diceRadius, int facetNumber);
 
-void drawLitVoiture(float horizontalEdgeLength, int facetNumber);
+void drawLitVoiture(float horizontalEdgeLength, float depthEdgeLength, int facetNumber);
 
 void drawCubeStack(float l, int facetNumber, GLuint *texture1, GLuint *texture2, GLuint *texture3);
 
