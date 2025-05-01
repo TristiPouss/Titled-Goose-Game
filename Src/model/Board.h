@@ -89,6 +89,8 @@ public:
      */
     void movePlayer(unsigned playerIndex, int diceValue);
 
+    unsigned int getPlayerPosition(unsigned playerIndex);
+
 private:
     unsigned size; /**< The size of the board. */
     unsigned long nb_players;
