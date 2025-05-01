@@ -111,7 +111,7 @@ void View::drawMainScene() {
    drawPoster(20, 20, facetNumber, textureEvanescence);
    glPopMatrix();
 
-   //fenetre
+   //Window
    glPushMatrix();    
    glRotatef(45, 0.0, 1.0, 0.0);
    glTranslatef(-roomLength/2, roomLength/4, 0.0F);
@@ -119,13 +119,14 @@ void View::drawMainScene() {
    drawPoster(40, 40, facetNumber, textureFenetre);
    glPopMatrix();
 
-   //Dice
+   //Dice for decoration
    glPushMatrix();
-   glTranslatef(0.0F, tableHeight + pawnWidth*2, -pawnWidth*2);
+   glTranslatef(tableWidth/3, tableHeight + dice_edge/2, tableWidth/3);
    glRotatef(45, 0.0, 1.0, 0.0);
-   glTranslatef(0.0F, 0.0F, -dice_radius);
-   glRotatef(90, 0.0, 1.0, 0.0);
    drawDice(dice_edge, dice_radius, facetNumber);
+   glTranslatef(0.0, dice_edge, 0.0);
+   glRotatef(45, 0.0, 1.0, 0.0);
+   drawDice(dice_edge, dice_radius, facetNumber);   
    glPopMatrix();
    
    //bed
