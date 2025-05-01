@@ -164,14 +164,14 @@ void View::drawDiceScene() {
 void View::updateMainScene() {
     // Update the main scene
     // For example, update player positions or other dynamic elements
-   /*  posPlayers[0].x += 0.1f; // Example of moving the first player
+    posPlayers[0].x += 0.1f; // Example of moving the first player
     posPlayers[0].z += 0.1f; // Example of moving the first player
     if (posPlayers[0].x > tableWidth / 2) {
         posPlayers[0].x = -tableWidth / 2; // Reset position if out of bounds
     }
     if (posPlayers[0].z > tableWidth / 2) {
         posPlayers[0].z = -tableWidth / 2; // Reset position if out of bounds
-    } */
+    }
 
     setCameraPlayerPosition(posPlayers[0].x, posPlayers[0].y, posPlayers[0].z);
 }

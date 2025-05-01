@@ -112,10 +112,12 @@ static void display(void) {
         glRotatef(rx, 1.0F, 0.0F, 0.0F);
         glRotatef(ry, 0.0F, 1.0F, 0.0F);
         glRotatef(rz, 0.0F, 0.0F, 1.0F);
+        
+        glScalef(zoom, zoom, zoom);
+        printf("%f\n", zoom);
     }
     
-    glScalef(zoom, zoom, zoom);
-    printf("%f\n", zoom);
+    
     // Light init
     initLight();
     // Scene
