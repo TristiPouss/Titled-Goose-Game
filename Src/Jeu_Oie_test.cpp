@@ -157,6 +157,7 @@ static void idle(void) {
 static void keyboard(unsigned char key, int x, int y) {
     printf("K  %4c %4d %4d\n", key, x, y);
     switch (key) {
+    
     case 'n':
         facetNumber--;
         if (facetNumber < 1)
@@ -243,6 +244,28 @@ static void keyboard(unsigned char key, int x, int y) {
         normalize = !normalize;
         glutPostRedisplay();
         break;
+    case 'H':
+    case 'h':
+        printf("Help\n");
+        printf("  - 'n' : previous facetNumber\n");
+        printf("  - 'N' : next facetNumber\n");
+        printf("  - 'k' : zoom in\n");
+        printf("  - 'K' : zoom out\n");
+        printf("  - 'Z' : move camera up\n");
+        printf("  - 'S' : move camera down\n");
+        printf("  - 'Q' : move camera left\n");
+        printf("  - 'D' : move camera right\n");
+        printf("  - 'f' : fullscreen mode\n");
+        printf("  - 'b' : background color toggle\n");
+        printf("  - 'c' : culling toggle\n");
+        printf("  - 'C' : perspective camera toggle\n");
+        printf("  - 'm' : polygon mode toggle\n");
+        printf("  - 'P' : camera on current player toggle\n");
+        printf("  - 'O' : camera on dice toggle\n");
+        printf("  - 'H' : help toggle\n");
+        glutPostRedisplay();
+        break;
+    
     case 0x1B:
         exit(0);
         break;
