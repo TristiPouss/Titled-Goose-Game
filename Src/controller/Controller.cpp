@@ -6,12 +6,24 @@ Controller::Controller() {
     game = gooseGameModel::Game();
     view = View();
     
+    game.addPlayer("Player 1", 'A');
+    game.addPlayer("Player 2", 'B');
+    game.addPlayer("Player 3", 'C');
+    game.addPlayer("Player 4", 'D');
+
+    // Set the initial player
+    game.launchGame();
+
+    game.playTurn();
 };
 
 void Controller::update() {
-    // Update the game state
+    // Retrieve the game board
+    auto board = game.getBoard();
+    view.setCurrentPlayer(game.getCurrentPlayer());
+    view.setBoard(board);
     
-    game.nextTurn();
+    // Update the view with the current game state
     view.update();
 }
 
