@@ -20,7 +20,9 @@ static float tableWidth = roomLength * 0.18f;
 static float pawnWidth = 0.4f;
 static float dice_edge = 0.9f;
 static float dice_radius = 0.1f;
-static float litVoitureWidth = roomLength * 0.1f;
+
+static float litVoitureWidth = roomLength * 0.65f;
+static float litVoitureDepth = litVoitureWidth * 0.5f;
 static float shelfLength = 40;
 static float kaplaLength = 5;
 static float castleLength = 10;

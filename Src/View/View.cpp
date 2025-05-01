@@ -147,9 +147,11 @@ void View::drawMainScene() {
    glPopMatrix();
    
    //bed
-   //glTranslatef(roomLength/2 - litVoitureWidth*2, 0.0F, roomLength/2 - litVoitureWidth*2);
-   //glRotatef(45, 0.0, 1.0, 0.0);
-   //drawLitVoiture(litVoitureWidth, facetNumber);
+   glPushMatrix();
+   glRotatef(45, 0.0, -1.0, 0.0);
+   glTranslatef(-roomLength / 2 + litVoitureWidth / 2, 0.0F, roomLength / 2 - litVoitureDepth / 2);
+   drawLitVoiture(litVoitureWidth, litVoitureDepth, facetNumber);
+   glPopMatrix();
 
    glPopMatrix();
 }
