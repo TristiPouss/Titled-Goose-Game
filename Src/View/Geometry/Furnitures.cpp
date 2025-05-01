@@ -209,25 +209,18 @@ void drawCastle(float l, int facetNumber) {
 	glPopMatrix();
 }
 
-enum CellType {
-	DEFAULT,
-	GOOSE,
-	TRAP,
-	TELEPORT
-};
-
-void drawCell(float l, int facetNumber, CellType type = DEFAULT) {
+void drawCell(float l, int facetNumber, gooseGameModel::CellType type) {
 	float x = l / 10;
 	GLuint texture = 0;
 
 	switch (type) {
-		case GOOSE:
+		case gooseGameModel::CellType::GOOSE:
 			texture = textureGreen;
 			break;
-		case TRAP:
+		case gooseGameModel::CellType::TRAP:
 			texture = textureRed;
 			break;
-		case TELEPORT:
+		case gooseGameModel::CellType::TELEPORT:
 			texture = texturePurple;
 			break;
 		default:

@@ -12,6 +12,9 @@
 
 #include "Texture.h"
 
+#include "../../model/Cell.h"
+
+
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber);
 
 void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);
@@ -32,7 +35,7 @@ void drawKaplaTower(float l, int height, int facetNumber);
 
 void drawCastle(float l, int facetNumber);
 
-void drawCell(float l, int facetNumber);
+void drawCell(float l, int facetNumber , gooseGameModel::CellType type = gooseGameModel::CellType::NORMAL);
 void drawGooseCell(float l, int facetNumber);
 void drawTrapCell(float l, int facetNumber);
 void drawTeleportCell(float l, int facetNumber);
