@@ -146,7 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Src\model\Board.cc" />
+    <ClCompile Include="..\Src\model\Cell.cc" />
+    <ClCompile Include="..\Src\model\Dice.cc" />
+    <ClCompile Include="..\Src\model\Game.cc" />
+    <ClCompile Include="..\Src\model\Player.cc" />
     <ClCompile Include="..\Src\View\Geometry\Texture.cpp" />
+    <ClCompile Include="..\Src\View\View.cpp" />
     <ClInclude Include="..\Include\PNG\ChargePngFile.h" />
     <ClInclude Include="..\Include\PNG\Espace3UC.h" />
     <ClInclude Include="..\Include\PNG\ImageUtils.h" />
@@ -165,6 +171,11 @@
     <ClInclude Include="..\Include\PNG\Png\zconf.in.h" />
     <ClInclude Include="..\Include\PNG\Png\zlib.h" />
     <ClInclude Include="..\Include\PNG\Png\zutil.h" />
+    <ClInclude Include="..\Src\model\Board.h" />
+    <ClInclude Include="..\Src\model\Cell.h" />
+    <ClInclude Include="..\Src\model\Dice.h" />
+    <ClInclude Include="..\Src\model\Game.h" />
+    <ClInclude Include="..\Src\model\Player.h" />
     <ClInclude Include="..\Src\View\Camera\Camera.h" />
     <ClInclude Include="..\Src\View\Colors.h" />
     <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
@@ -175,6 +186,7 @@
     <ClCompile Include="..\Src\View\Camera\Camera.cpp" />
     <ClCompile Include="..\Src\View\Geometry\Furnitures.cpp" />
     <ClCompile Include="..\Src\View\Geometry\Shapes.cpp" />
+    <ClInclude Include="..\Src\View\View.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Lib\LibTexture.lib" />
