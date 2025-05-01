@@ -61,7 +61,4 @@ namespace gooseGameModel {
         this->c = new_c;
     }
 
-    float *Player::get3Dposition() const {
-        return this->position3D;
-    }
 }

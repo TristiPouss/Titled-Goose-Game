@@ -67,12 +67,6 @@ class Player {
         std::string getName() const;
 
         /**
-         * @brief Gets the x,y,z position.
-         * @return x,y,z position.
-         */
-        float *get3Dposition() const;
-
-        /**
          * @brief Gets the character representation of the player.
          * @return Character representing the player.
          */
@@ -87,7 +81,6 @@ class Player {
     private:
         int timeout; ///< Timeout for the player's turn in turns.
         int position; ///< Position of the player on the board.
-        float *position3D; ///< x,y,z position
         std::string name; ///< Name of the player.
         char c; ///< Character representation of the player.
 };

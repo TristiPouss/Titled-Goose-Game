@@ -23,6 +23,8 @@ extern GLuint texturesBlue[6];
 extern GLuint texturesPurple[6];
 extern GLuint texturesWhite[6];
 
+extern GLuint texturesPawn[4];
+
 extern GLuint textureWall;
 extern GLuint textureFloor;
 extern GLuint textureTest;

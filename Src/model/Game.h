@@ -92,8 +92,6 @@ class Game{
       */
     void resetGame();
 
-    float *getCurrentPlayerPosition() const;
-
     private:
 
         // Variables

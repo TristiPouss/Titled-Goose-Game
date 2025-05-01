@@ -8,9 +8,8 @@
 
 #include "View/Camera/Camera.h"
 #include "View/Settings.h"
-#include "View/Geometry/Shapes.h"
-#include "View/Geometry/Furnitures.h"
 #include "View/Geometry/Texture.h"
+#include "View/View.h"
 
 #include "model/Board.h"
 #include "model/Cell.h"
@@ -19,10 +18,12 @@
 #include "model/Player.h"
 
 static float angle = 0.0;
-gooseGameModel::Game* game;
+gooseGameModel::Game game;
+View view;
 
 static void init(void) {
-    game = new gooseGameModel::Game();
+    game = gooseGameModel::Game();
+    view = View();
     initTexture();
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
@@ -57,138 +58,6 @@ static void initLight() {
     diffuse();
     spot_top();
 }
-
-static void scene() {
-    float roomLength = scenerySize;
-
-    float tableHeight = roomLength * 0.15;
-    float tableWidth = roomLength * 0.18;
-
-    float pawnWidth = 0.4;
-
-    float dice_edge = 0.9;
-    float dice_radius = 0.1;
-
-    float litVoitureWidth = roomLength * 0.65;
-    float litVoitureDepth = litVoitureWidth * 0.5;
-    float shelfLength = 40;
-    float kaplaLength = 5;
-    float castleLength = 10;
-
-    glPushMatrix();
-    glTranslatef(0.0, -tableHeight, 0.0);
-
-    //room
-    glPushMatrix();
-    glRotatef(45, 0.0, 1.0, 0.0);
-    drawCube(roomLength, facetNumber, 0, texturesRoom, 5.0F);
-    glPopMatrix();    
-
-    //table
-    glPushMatrix();
-    drawTable(tableHeight, tableWidth, facetNumber);
-    glPopMatrix();
-
-    //pawn
-    glPushMatrix();
-    glTranslatef(0.0F, tableHeight, -pawnWidth*2);
-    drawPawn(pawnWidth, facetNumber, textureBlue);
-    glPopMatrix();
-    glPushMatrix();
-    glTranslatef(pawnWidth*2, tableHeight, 0.0F);
-    drawPawn(pawnWidth, facetNumber, textureRed);
-    glPopMatrix();
-    glPushMatrix();
-    glTranslatef(-pawnWidth*2, tableHeight, 0.0F);
-    drawPawn(pawnWidth, facetNumber, textureGreen);
-    glPopMatrix();
-    glPushMatrix();
-    glTranslatef(0.0F, tableHeight, pawnWidth*2);
-    drawPawn(pawnWidth, facetNumber, textureYellow);
-    glPopMatrix();
-
-    //shelf
-    glPushMatrix();
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(shelfLength / 4, 0.0F, -roomLength/2 + shelfLength/8);
-    drawShelf(shelfLength, facetNumber);
-    glTranslatef(0.0F, shelfLength/16, 0.0F);
-    drawCubeStack(3, facetNumber, texturesBlue, texturesGreen, texturesRed);
-    glTranslatef(-shelfLength/4 -shelfLength/16, shelfLength/4 +shelfLength/16, 0.0F);
-    drawCubeStack(3, facetNumber, texturesPurple, texturesBlue, texturesYellow);
-    glTranslatef(shelfLength/4 +shelfLength/16, shelfLength/4 +shelfLength/16, 0.0F);
-    drawCubeStack(3, facetNumber, texturesRed, texturesGreen, texturesYellow);
-    glTranslatef(shelfLength/4 +shelfLength/16, 0.0F, 0.0F);
-    drawCubeStack(3, facetNumber, texturesYellow, texturesBlue, texturesGreen);
-    glPopMatrix();
-
-    //kapla
-    glPushMatrix();
-    glTranslatef(roomLength/4, 0.0F, 0.0F);
-    drawKaplaTower(kaplaLength, 10, facetNumber);
-    glTranslatef(0.0F, 0.0F, roomLength/8);
-    drawKaplaTowerSpiral(kaplaLength, 15, facetNumber);
-    glPopMatrix();
-
-    //castle
-    glPushMatrix();
-    glTranslatef(0.0F, 0.0F, -roomLength/2);
-    drawCastle(castleLength, facetNumber);
-    glPopMatrix();
-
-    //door
-    glPushMatrix();
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(roomLength/4 , 0.0F, roomLength/2);
-    drawDoor(50, facetNumber);
-    glPopMatrix();
-
-    //poster
-    glPushMatrix();    
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(-roomLength/5, roomLength/4, roomLength/2);
-    drawPoster(30, 30, facetNumber, textureKaaris);
-    glPopMatrix();
-    glPushMatrix();
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(-roomLength/3.5, roomLength/4, -roomLength/2);
-    glRotatef(180, 0.0, 1.0, 0.0);
-    drawPoster(20, 40, facetNumber, texturePulp);
-    glPopMatrix();
-    glPushMatrix();
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(roomLength/2, roomLength/4, -roomLength/5);
-    glRotatef(90, 0.0, 1.0, 0.0);
-    drawPoster(20, 20, facetNumber, textureEvanescence);
-    glPopMatrix();
-
-    //fenetre
-    glPushMatrix();    
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(-roomLength/2, roomLength/4, 0.0F);
-    glRotatef(-90, 0.0, 1.0, 0.0);
-    drawPoster(40, 40, facetNumber, textureFenetre);
-    glPopMatrix();
-
-    //Dice
-    glPushMatrix();
-    glTranslatef(0.0F, tableHeight + pawnWidth*2, -pawnWidth*2);
-    glRotatef(45, 0.0, 1.0, 0.0);
-    glTranslatef(0.0F, 0.0F, -dice_radius);
-    glRotatef(90, 0.0, 1.0, 0.0);
-    drawDice(dice_edge, dice_radius, facetNumber);
-    glPopMatrix();
-
-    // LitVoiture on the side of the room
-    glPushMatrix();
-    glRotatef(45, 0.0, -1.0, 0.0);
-    glTranslatef(-roomLength / 2 + litVoitureWidth / 2, 0.0F, roomLength / 2 - litVoitureDepth / 2);
-    drawLitVoiture(litVoitureWidth, litVoitureDepth, facetNumber);
-    glPopMatrix();
-
-    glPopMatrix();
-}
-
 /* Fonction executee lors d'un rafraichissement */
 /* de la fenetre de dessin                      */
 
@@ -232,27 +101,27 @@ static void display(void) {
 
     glPushMatrix();
 
-    setCurrentPlayerPosition(100, 100, 100);
-    // setCurrentPlayerPosition(game->getCurrentPlayerPosition()[0], game->getCurrentPlayerPosition()[1], game->getCurrentPlayerPosition()[2]);
-    initCamera(cameraPerspect, cameraOnCurrentPlayer, wTx, wTy);
+    initCamera(cameraPerspect, cameraOnCurrentPlayer, cameraOnDice, wTx, wTy);
 
-    glTranslatef(0.0F, 0.0F, -100.0F);
+    if (!cameraOnCurrentPlayer && !cameraOnDice) {
+        glTranslatef(0.0F, 0.0F, -100.0F);
 
-    // Camera movements, rotation and zoom
-    glTranslatef(mx, my, mz);
+        // Camera movements, rotation and zoom
+        glTranslatef(mx, my, mz);
 
-    glRotatef(rx, 1.0F, 0.0F, 0.0F);
-    glRotatef(ry, 0.0F, 1.0F, 0.0F);
-    glRotatef(rz, 0.0F, 0.0F, 1.0F);
-
-    glScalef(zoom, zoom, zoom);
-    printf("%f\n", zoom);
-
+        glRotatef(rx, 1.0F, 0.0F, 0.0F);
+        glRotatef(ry, 0.0F, 1.0F, 0.0F);
+        glRotatef(rz, 0.0F, 0.0F, 1.0F);
+        
+        glScalef(zoom, zoom, zoom);
+        printf("%f\n", zoom);
+    }
+    
+    
     // Light init
     initLight();
-
     // Scene
-    scene();
+    view.draw();
 
     glPopMatrix();
 
@@ -277,6 +146,7 @@ static void reshape(int wx, int wy) {
 /* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
+    view.update();
     angle = (float)(((int)(angle)+1)%360);
     glutPostRedisplay();
 }
@@ -363,6 +233,11 @@ static void keyboard(unsigned char key, int x, int y) {
     case 'P':
     case 'p':
         cameraOnCurrentPlayer = !cameraOnCurrentPlayer;
+        glutPostRedisplay();
+        break;
+    case 'O':
+    case 'o':
+        cameraOnDice = !cameraOnDice;
         glutPostRedisplay();
         break;
     case 0x20:

@@ -14,6 +14,8 @@ GLuint texturesBlue[6];
 GLuint texturesPurple[6];
 GLuint texturesWhite[6];
 
+GLuint texturesPawn[4];
+
 GLuint textureWall;
 GLuint textureFloor;
 GLuint textureTest;
@@ -134,6 +136,11 @@ void initTexture() {
     texturesRoom[3] = textureFloor;
     texturesRoom[4] = textureWall;
     texturesRoom[5] = textureWall;
+
+    texturesPawn[0] = textureRed;
+    texturesPawn[1] = textureGreen;
+    texturesPawn[2] = textureBlue;
+    texturesPawn[3] = textureYellow;
 
     initCubeTextureSingle(textureTest,texturesTest);
 
