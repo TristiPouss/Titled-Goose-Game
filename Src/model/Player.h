@@ -81,7 +81,6 @@ class Player {
     private:
         int timeout; ///< Timeout for the player's turn in turns.
         int position; ///< Position of the player on the board.
-        float *position3D; ///< x,y,z position
         std::string name; ///< Name of the player.
         char c; ///< Character representation of the player.
 };
