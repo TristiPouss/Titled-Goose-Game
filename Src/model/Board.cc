@@ -48,8 +48,11 @@ void Board::init() {
             default:
                 cells.push_back(std::make_shared<Cell>());
             }
-        
-
+    }
+    // Initialize players
+    for (unsigned i = 0; i < players.size(); i++) {
+        players[i]->setPosition(0);
+        players[i]->setTimeout(0);
     }
 }
 

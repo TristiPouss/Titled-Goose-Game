@@ -271,6 +271,8 @@ static void keyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
     case 'r':
+        main_game.resetGame();
+        break;
     case 'R':
         rx = 0.0F;
         ry = 0.0F;
@@ -279,7 +281,7 @@ static void keyboard(unsigned char key, int x, int y) {
         my = 0.0F;
         mz = -100.0F;
         zoom = zoomDefault;
-        main_game.resetGame();
+       
         glutPostRedisplay();
         break;
 
