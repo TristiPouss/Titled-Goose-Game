@@ -9,7 +9,7 @@
 namespace gooseGameModel {
 
     Game::Game() : g_state(stateGame::WAITING) ,curr_player(0), turn(0){
-        board = std::make_unique<Board>();
+        board = std::make_shared<Board>();
         Dice d1, d2;
         dices = std::make_tuple(d1,d2);
     }
