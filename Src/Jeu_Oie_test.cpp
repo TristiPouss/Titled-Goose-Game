@@ -121,7 +121,7 @@ static void display(void) {
     // Light init
     initLight();
     // Scene
-    view.draw();
+    view.draw(facetNumber);
 
     glPopMatrix();
 

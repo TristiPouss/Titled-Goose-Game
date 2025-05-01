@@ -47,10 +47,10 @@ class View
         View();
         void init();
 
-        void draw();
+        void draw(int facetNumber);
 
-        void drawMainScene();
-        void drawDiceScene();
+        void drawMainScene(int facetNumber);
+        void drawDiceScene(int facetNumber);
 
         void update();
 

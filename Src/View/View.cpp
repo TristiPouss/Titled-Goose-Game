@@ -39,7 +39,7 @@ void View::init() {
     }
 }
 
-void View::drawMainScene() {
+void View::drawMainScene(int facetNumber) {
    
     // Draw the main scene
    glPushMatrix();
@@ -157,7 +157,7 @@ void View::drawMainScene() {
 }
 
 
-void View::drawDiceScene() {
+void View::drawDiceScene(int facetNumber) {
     float roomLength = scenerySize;
 
     float dice_edge = 9.0;
@@ -216,14 +216,14 @@ void View::update() {
     }
 }
 
-void View::draw() {
+void View::draw(int facetNumber) {
     // Draw the current scene
     switch (scene) {
         case MAIN_SCENE:
-            drawMainScene();
+            drawMainScene(facetNumber);
             break;
         case DICE_SCENE:
-            drawDiceScene();
+            drawDiceScene(facetNumber);
             break;
     }
 }
