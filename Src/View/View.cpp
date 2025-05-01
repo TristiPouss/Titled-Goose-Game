@@ -10,25 +10,30 @@ View::View() {
     scene = MAIN_SCENE;
     posCells.resize(DEFAULT_SIZE_BOARD); // Assuming 40 cells on the board
     posPlayers.resize(4); // Assuming 4 players
+    init();
+}
+
+void View::init() {
+    //Initialize posCells and posPlayers
+
+    //Place it randomly in the room 
+    for (int i = 0; i < DEFAULT_SIZE_BOARD; i++) {
+        posCells[i].x = (rand() % 100) / 100.0f * scenerySize;
+        posCells[i].y = (rand() % 100) / 100.0f * scenerySize;
+        posCells[i].z = (rand() % 100) / 100.0f * scenerySize;
+    }
+
+    // Place players in the room on the table
+    for (int i = 0; i < 4; i++) {
+        posPlayers[i].x = 0.0F;
+        posPlayers[i].y = tableHeight;
+        posPlayers[i].z = -pawnWidth*2;
+    }
 }
 
 void View::drawMainScene() {
-   // Draw the main scene
-   float roomLength = scenerySize;
-
-   float tableHeight = roomLength * 0.15;
-   float tableWidth = roomLength * 0.18;
-
-   float pawnWidth = 0.4;
-
-   float dice_edge = 0.9;
-   float dice_radius = 0.1;
-
-   float litVoitureWidth = roomLength * 0.1;
-   float shelfLength = 40;
-   float kaplaLength = 5;
-   float castleLength = 10;
-
+   
+    // Draw the main scene
    glPushMatrix();
    glTranslatef(0.0, -tableHeight, 0.0);
 
@@ -44,22 +49,12 @@ void View::drawMainScene() {
    glPopMatrix();
 
    //pawn
-   glPushMatrix();
-   glTranslatef(0.0F, tableHeight, -pawnWidth*2);
-   drawPawn(pawnWidth, facetNumber, textureBlue);
-   glPopMatrix();
-   glPushMatrix();
-   glTranslatef(pawnWidth*2, tableHeight, 0.0F);
-   drawPawn(pawnWidth, facetNumber, textureRed);
-   glPopMatrix();
-   glPushMatrix();
-   glTranslatef(-pawnWidth*2, tableHeight, 0.0F);
-   drawPawn(pawnWidth, facetNumber, textureGreen);
-   glPopMatrix();
-   glPushMatrix();
-   glTranslatef(0.0F, tableHeight, pawnWidth*2);
-   drawPawn(pawnWidth, facetNumber, textureYellow);
-   glPopMatrix();
+   for (int i = 0; i < 4; i++) {
+       glPushMatrix();
+       glTranslatef(posPlayers[i].x, posPlayers[i].y, posPlayers[i].z);
+       drawPawn(pawnWidth, facetNumber, texturesPawn[i]);
+       glPopMatrix();
+   }
 
    //shelf
    glPushMatrix();

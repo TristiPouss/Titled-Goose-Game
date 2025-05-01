@@ -7,7 +7,17 @@
 #include "Geometry/Furnitures.h"
 #include "Geometry/Texture.h"
 
-
+// General settings for the view
+static float roomLength = scenerySize;
+static float tableHeight = roomLength * 0.15f;
+static float tableWidth = roomLength * 0.18f;
+static float pawnWidth = 0.4f;
+static float dice_edge = 0.9f;
+static float dice_radius = 0.1f;
+static float litVoitureWidth = roomLength * 0.1f;
+static float shelfLength = 40;
+static float kaplaLength = 5;
+static float castleLength = 10;
 
 typedef struct {
     float x;
@@ -24,6 +34,7 @@ class View
 {
     public:
         View();
+        void init();
 
         void draw();
 
