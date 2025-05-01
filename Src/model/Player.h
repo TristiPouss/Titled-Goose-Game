@@ -67,12 +67,6 @@ class Player {
         std::string getName() const;
 
         /**
-         * @brief Gets the x,y,z position.
-         * @return x,y,z position.
-         */
-        float *get3Dposition() const;
-
-        /**
          * @brief Gets the character representation of the player.
          * @return Character representing the player.
          */
