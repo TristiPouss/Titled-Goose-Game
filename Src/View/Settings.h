@@ -35,6 +35,8 @@ static int cameraOnCurrentPlayer = 0;
 static float scenerySize = 100.0F; // Size of one face of a cube
 static int facetNumber = 20;       // Level of tessellation
 
+static float FOV = 90.0F;          // Field of view for the perspective camera
+
 #ifndef M_PI 
 #define M_PI 3.14159
 #endif

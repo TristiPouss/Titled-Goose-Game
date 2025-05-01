@@ -7,6 +7,12 @@
 #include "Geometry/Furnitures.h"
 #include "Geometry/Texture.h"
 
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#include "Camera/Camera.h"
+
 // General settings for the view
 static float roomLength = scenerySize;
 static float tableHeight = roomLength * 0.15f;
@@ -44,6 +50,9 @@ class View
         void drawDiceScene();
 
         void update();
+
+        void updateMainScene();
+        void updateDiceScene();
         
 
     private:

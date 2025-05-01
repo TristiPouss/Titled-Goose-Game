@@ -1,7 +1,7 @@
 #include "View.h"
-#include <GL/glut.h>
+#include "Geometry/Furnitures.h"
+#include "Settings.h"
 #include <GL/gl.h>
-#include <GL/glu.h>
 
 
 
@@ -29,7 +29,7 @@ void View::init() {
     for (int i = 0; i < 4; i++) {
         posPlayers[i].x = 0.0F;
         posPlayers[i].y = tableHeight;
-        posPlayers[i].z = -pawnWidth*2;
+        posPlayers[i].z = 0.0F;
     }
 }
 
@@ -157,14 +157,36 @@ void View::drawDiceScene() {
     glPopMatrix();
 }
 
+void View::updateMainScene() {
+    // Update the main scene
+    // For example, update player positions or other dynamic elements
+   /*  posPlayers[0].x += 0.1f; // Example of moving the first player
+    posPlayers[0].z += 0.1f; // Example of moving the first player
+    if (posPlayers[0].x > tableWidth / 2) {
+        posPlayers[0].x = -tableWidth / 2; // Reset position if out of bounds
+    }
+    if (posPlayers[0].z > tableWidth / 2) {
+        posPlayers[0].z = -tableWidth / 2; // Reset position if out of bounds
+    } */
+
+    setCameraPlayerPosition(posPlayers[0].x, posPlayers[0].y, posPlayers[0].z);
+}
+
+void View::updateDiceScene() {
+    // Update the dice scene
+    // For example, animate the dice rolling or other effects
+}
+
 void View::update() {
     // Update the view based on the current scene
     switch (scene) {
         case MAIN_SCENE:
             // Update main scene
+            updateMainScene();
             break;
         case DICE_SCENE:
             // Update dice scene
+            updateDiceScene();
             break;
     }
 }

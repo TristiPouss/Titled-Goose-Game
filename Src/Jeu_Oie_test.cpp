@@ -101,22 +101,21 @@ static void display(void) {
 
     glPushMatrix();
 
-    setCurrentPlayerPosition(100, 100, 100);
-    // setCurrentPlayerPosition(game->getCurrentPlayerPosition()[0], game->getCurrentPlayerPosition()[1], game->getCurrentPlayerPosition()[2]);
     initCamera(cameraPerspect, cameraOnCurrentPlayer, wTx, wTy);
 
-    glTranslatef(0.0F, 0.0F, -100.0F);
+    if (!cameraOnCurrentPlayer){
+        glTranslatef(0.0F, 0.0F, -100.0F);
 
-    // Camera movements, rotation and zoom
-    glTranslatef(mx, my, mz);
+        // Camera movements, rotation and zoom
+        glTranslatef(mx, my, mz);
 
-    glRotatef(rx, 1.0F, 0.0F, 0.0F);
-    glRotatef(ry, 0.0F, 1.0F, 0.0F);
-    glRotatef(rz, 0.0F, 0.0F, 1.0F);
-
+        glRotatef(rx, 1.0F, 0.0F, 0.0F);
+        glRotatef(ry, 0.0F, 1.0F, 0.0F);
+        glRotatef(rz, 0.0F, 0.0F, 1.0F);
+    }
+    
     glScalef(zoom, zoom, zoom);
     printf("%f\n", zoom);
-
     // Light init
     initLight();
     // Scene
