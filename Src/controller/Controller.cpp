@@ -36,6 +36,11 @@ void Controller::playTurn() {
     game.playTurn();
 }
 
+void Controller::resetGame() {
+    // Reset the game state
+    game.resetGame();
+}
+
 void Controller::display(int facetNumber) {
     // Draw the current scene
     view.draw(facetNumber);

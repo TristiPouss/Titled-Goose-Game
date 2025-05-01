@@ -20,6 +20,7 @@ public:
     void display(int facetNumber);
 
     void playTurn();
+    void resetGame();
 
 private:
     gooseGameModel::Game game;

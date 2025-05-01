@@ -9,6 +9,7 @@ static float mx = 0.0F;            // Movement length of the scene along the x-a
 static float my = 0.0F;            // Movement length of the scene along the y-axis
 static float mz = 0.0F;            // Movement length of the scene along the z-axis
 static float zoom = 2.86F;
+static float zoomDefault = 2.86F; // Default zoom level of the scene
 
 static int mouseActive = 0;        // Flag indicating whether the mouse is active (button pressed) or not
 static int mouseX = 0;             // Last recorded x position of the mouse

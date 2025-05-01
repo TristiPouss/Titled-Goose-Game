@@ -270,7 +270,19 @@ static void keyboard(unsigned char key, int x, int y) {
         main_game.playTurn();
         glutPostRedisplay();
         break;
-    
+    case 'r':
+    case 'R':
+        rx = 0.0F;
+        ry = 0.0F;
+        rz = 0.0F;
+        mx = 0.0F;
+        my = 0.0F;
+        mz = -100.0F;
+        zoom = zoomDefault;
+        main_game.resetGame();
+        glutPostRedisplay();
+        break;
+
     case 0x1B:
         exit(0);
         break;
