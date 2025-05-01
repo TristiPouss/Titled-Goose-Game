@@ -23,6 +23,7 @@ void View::init() {
         posCells[i].y = (rand() % 100) / 100.0f * scenerySize/2;
         sign = (rand() % 2) == 0 ? -1 : 1;
         posCells[i].z = (rand() % 100) / 100.0f * scenerySize/2 * sign;
+        posCells[i].caseNumber = i;
     }
 
     // Place players in the room on the table
@@ -34,6 +35,7 @@ void View::init() {
         posPlayers[i].x = posCells[0].x + pawnWidth * signX;
         posPlayers[i].y = posCells[0].y;
         posPlayers[i].z = posCells[0].z + pawnWidth * signZ;
+        posPlayers[i].caseNumber = 0;
     }
 }
 

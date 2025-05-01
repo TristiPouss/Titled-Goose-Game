@@ -31,6 +31,7 @@ typedef struct {
     float x;
     float y;
     float z;
+    int caseNumber;
 } pos3D;
 
 typedef enum {
