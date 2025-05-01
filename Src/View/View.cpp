@@ -56,6 +56,15 @@ void View::drawMainScene() {
        glPopMatrix();
    }
 
+    // Cells
+    for (int i = 0; i < DEFAULT_SIZE_BOARD; i++) {
+        glPushMatrix();
+        glTranslatef(posCells[i].x, posCells[i].y, posCells[i].z);
+        drawCell(1.0F, facetNumber);
+        glPopMatrix();
+    }
+
+
    //shelf
    glPushMatrix();
    glRotatef(45, 0.0, 1.0, 0.0);
