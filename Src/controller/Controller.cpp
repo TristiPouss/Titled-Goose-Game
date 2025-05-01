@@ -11,10 +11,6 @@ Controller::Controller() {
     game.addPlayer("Player 3", 'C');
     game.addPlayer("Player 4", 'D');
 
-    // Set the initial player
-    game.launchGame();
-
-    game.playTurn();
 };
 
 void Controller::update() {
@@ -25,6 +21,19 @@ void Controller::update() {
     
     // Update the view with the current game state
     view.update();
+}
+
+
+void Controller::playTurn() {
+    // Play the current turn in the game
+    if (game.getState() == gooseGameModel::stateGame::WAITING) {
+       game.launchGame();
+       return;
+    }
+    if (view.isAnimating()) {
+        return;
+    }
+    game.playTurn();
 }
 
 void Controller::display(int facetNumber) {

@@ -69,6 +69,10 @@ class View
             scene = s;
         }
 
+        bool isAnimating() {
+            return f_anim;
+        }
+
     private:
         std::vector<pos3D> posCells;
         std::vector<pos3D> posPlayers;
@@ -77,6 +81,8 @@ class View
 
         unsigned long delta = 0;
         unsigned long currentPlayer = 0;
+
+        bool f_anim = false;
 
         gooseGameModel::Board board_cpy;
 };

@@ -19,6 +19,8 @@ public:
     void update();
     void display(int facetNumber);
 
+    void Controller::playTurn();
+
 private:
     gooseGameModel::Game game;
     View view;
