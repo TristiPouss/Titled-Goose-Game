@@ -9,7 +9,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-void initCamera(bool isCameraPerspect, bool cameraOnCurrentPlayer, int wx, int wy);
+void initCamera(bool isCameraPerspect, bool cameraOnCurrentPlayer, bool cameraOnDice, int wx, int wy);
 void setCameraPlayerPosition(float x, float y, float z);
 
 #endif // !CAMERA_H

@@ -31,6 +31,7 @@ static int culling = 0;            // Flag to switch between rendering with and 
 static int fullscreen = 0;
 static int cameraPerspect = 1;
 static int cameraOnCurrentPlayer = 0;
+static int cameraOnDice = 0;
 
 static float scenerySize = 100.0F; // Size of one face of a cube
 static int facetNumber = 20;       // Level of tessellation

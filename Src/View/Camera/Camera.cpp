@@ -14,6 +14,12 @@ static float playerTrackingCamera[3][3] = {
     { 0.0,  0.0,    1.0} 
 };
 
+static float diceCamera[3][3] = { 
+    { 0.0,  50.0, 0.0},
+    { 0.0,  0.0,   0.0},
+    { 0.0,  0.0,   1.0} 
+};
+
 static float (*cam)[3][3] = &isometricCamera; // in case we want to make multiple preconfigured cameras
 
 static double dist = sqrt(pow((*cam)[1][0] - (*cam)[0][0], 2) + pow((*cam)[1][1] - (*cam)[0][1], 2) + pow((*cam)[1][2] - (*cam)[0][2], 2));
@@ -31,13 +37,15 @@ void setCameraPlayerPosition(float x, float y, float z) {
     playerTrackingCamera[0][2] = z;
 }
 
-void initCamera(bool isCameraPerspect, bool cameraOnCurrentPlayer, int wx, int wy) {
+void initCamera(bool isCameraPerspect, bool cameraOnCurrentPlayer, bool cameraOnDice, int wx, int wy) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     double ratio = (double)wx / wy;
 
     if (cameraOnCurrentPlayer) {
         cam = &playerTrackingCamera;
+    } else if(cameraOnDice) {
+        cam = &diceCamera;
     } else {
         cam = &isometricCamera;
     }

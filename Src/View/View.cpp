@@ -154,10 +154,27 @@ void View::drawMainScene() {
 
 
 void View::drawDiceScene() {
-    // Draw the dice scene
+    float roomLength = scenerySize;
+
+    float dice_edge = 9.0;
+    float dice_radius = 1;
+
     glPushMatrix();
-    glTranslatef(0.0F, 0.0F, -scenerySize / 2);
-    drawDice(1.0, 0.5, facetNumber);
+    glTranslatef(0.0F, -roomLength/2, 0.0F);
+
+    //room
+    glPushMatrix();
+    drawCuboid(1000, 10, 1000, facetNumber, 1, texturesTableLeg, 3);
+    glPopMatrix();    
+
+    //Dice
+    glPushMatrix();
+    glTranslatef(-dice_edge, roomLength/2, 0.0F);
+    drawDice(dice_edge, dice_radius, facetNumber);
+    glTranslatef(dice_edge*2, 0.0F, 0.0F);
+    drawDice(dice_edge, dice_radius, facetNumber);
+    glPopMatrix();
+    
     glPopMatrix();
 }
 

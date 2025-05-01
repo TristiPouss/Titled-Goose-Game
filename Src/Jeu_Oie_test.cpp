@@ -101,9 +101,9 @@ static void display(void) {
 
     glPushMatrix();
 
-    initCamera(cameraPerspect, cameraOnCurrentPlayer, wTx, wTy);
+    initCamera(cameraPerspect, cameraOnCurrentPlayer, cameraOnDice, wTx, wTy);
 
-    if (!cameraOnCurrentPlayer){
+    if (!cameraOnCurrentPlayer && !cameraOnDice) {
         glTranslatef(0.0F, 0.0F, -100.0F);
 
         // Camera movements, rotation and zoom
@@ -233,6 +233,11 @@ static void keyboard(unsigned char key, int x, int y) {
     case 'P':
     case 'p':
         cameraOnCurrentPlayer = !cameraOnCurrentPlayer;
+        glutPostRedisplay();
+        break;
+    case 'O':
+    case 'o':
+        cameraOnDice = !cameraOnDice;
         glutPostRedisplay();
         break;
     case 0x20:
