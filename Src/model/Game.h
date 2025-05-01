@@ -95,7 +95,7 @@ class Game{
     private:
 
         // Variables
-        std::unique_ptr<Board> board;
+        std::shared_ptr<Board> board;
         std::tuple<Dice , Dice> dices;
         stateGame g_state;
         unsigned curr_player; 

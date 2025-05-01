@@ -100,11 +100,12 @@ void View::drawMainScene(int facetNumber) {
        glPopMatrix();
    }
 
+   auto cells = board_cpy.getCellsTab();
     // Cells
-    for (int i = 0; i < DEFAULT_SIZE_BOARD; i++) {
+    for (unsigned long i = 0; i < DEFAULT_SIZE_BOARD; i++) {
         glPushMatrix();
         glTranslatef(posCells[i].x, posCells[i].y, posCells[i].z);
-        drawCell(cellWidth, facetNumber);
+        drawCell(cellWidth, facetNumber,cells[i]->getType());
         glPopMatrix();
     }
 
@@ -221,16 +222,45 @@ void View::drawDiceScene(int facetNumber) {
 void View::updateMainScene() {
     // Update the main scene
     // For example, update player positions or other dynamic elements
-    posPlayers[0].x += 0.1f; // Example of moving the first player
-    posPlayers[0].z += 0.1f; // Example of moving the first player
-    if (posPlayers[0].x > tableWidth / 2) {
-        posPlayers[0].x = -tableWidth / 2; // Reset position if out of bounds
-    }
-    if (posPlayers[0].z > tableWidth / 2) {
-        posPlayers[0].z = -tableWidth / 2; // Reset position if out of bounds
+
+    for (unsigned i = 0; i < board_cpy.getNbPlayer(); i++) {
+        // Target the next cell position
+        unsigned targetPos = board_cpy.getPlayerPosition(i);
+        
+        // Check if the player is already at the target cell position
+        if (posPlayers[i].caseNumber == targetPos) {
+            continue; // Player is already at the target position
+        }
+        //Handle the case of resetting
+        unsigned nextCell = 0;
+        if (targetPos != 0) {
+            nextCell = posPlayers[i].caseNumber + 1;
+        }
+
+        // Move the player towards the next cell position
+        if (posPlayers[i].x != posCells[nextCell].x) {
+            posPlayers[i].x += ((posCells[nextCell].x - posPlayers[i].x) / 10)*speedPawn;
+        }
+        if (posPlayers[i].y != posCells[nextCell].y) {
+            posPlayers[i].y += ((posCells[nextCell].y - posPlayers[i].y) / 10)*speedPawn;
+        }
+        if (posPlayers[i].z != posCells[nextCell].z) {
+            posPlayers[i].z += ((posCells[nextCell].z - posPlayers[i].z) / 10)*speedPawn;
+        }
+
+        // Detect if the player has reached a new cell
+        if (abs(posPlayers[i].x - posCells[nextCell].x) < 0.1 &&
+            abs(posPlayers[i].y - posCells[nextCell].y) < 0.1 &&
+            abs(posPlayers[i].z - posCells[nextCell].z) < 0.1) {
+            posPlayers[i].caseNumber = nextCell;
+            posPlayers[i].x = posCells[nextCell].x;
+            posPlayers[i].y = posCells[nextCell].y;
+            posPlayers[i].z = posCells[nextCell].z;
+        }
     }
 
-    setCameraPlayerPosition(posPlayers[0].x, posPlayers[0].y, posPlayers[0].z);
+
+    setCameraPlayerPosition(posPlayers[currentPlayer].x, posPlayers[currentPlayer].y, posPlayers[currentPlayer].z);
 }
 
 void View::updateDiceScene() {

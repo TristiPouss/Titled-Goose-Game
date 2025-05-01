@@ -11,6 +11,7 @@
 #include "View/Geometry/Texture.h"
 #include "View/View.h"
 
+#include "controller/Controller.h"
 #include "model/Board.h"
 #include "model/Cell.h"
 #include "model/Dice.h"
@@ -18,12 +19,10 @@
 #include "model/Player.h"
 
 static float angle = 0.0;
-gooseGameModel::Game game;
-View view;
+Controller main_game;
 
 static void init(void) {
-    game = gooseGameModel::Game();
-    view = View();
+    main_game = Controller();
     initTexture();
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
@@ -114,14 +113,13 @@ static void display(void) {
         glRotatef(rz, 0.0F, 0.0F, 1.0F);
         
         glScalef(zoom, zoom, zoom);
-        printf("%f\n", zoom);
     }
     
     
     // Light init
     initLight();
     // Scene
-    view.draw(facetNumber);
+    main_game.display(facetNumber);
 
     glPopMatrix();
 
@@ -146,7 +144,7 @@ static void reshape(int wx, int wy) {
 /* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
-    view.update();
+    main_game.update();
     angle = (float)(((int)(angle)+1)%360);
     glutPostRedisplay();
 }
@@ -158,6 +156,7 @@ static void idle(void) {
 static void keyboard(unsigned char key, int x, int y) {
     printf("K  %4c %4d %4d\n", key, x, y);
     switch (key) {
+    
     case 'n':
         facetNumber--;
         if (facetNumber < 1)
@@ -244,6 +243,48 @@ static void keyboard(unsigned char key, int x, int y) {
         normalize = !normalize;
         glutPostRedisplay();
         break;
+    case 'H':
+    case 'h':
+        printf("Help\n");
+        printf("  - 'n' : previous facetNumber\n");
+        printf("  - 'N' : next facetNumber\n");
+        printf("  - 'k' : zoom in\n");
+        printf("  - 'K' : zoom out\n");
+        printf("  - 'Z' : move camera up\n");
+        printf("  - 'S' : move camera down\n");
+        printf("  - 'Q' : move camera left\n");
+        printf("  - 'D' : move camera right\n");
+        printf("  - 'f' : fullscreen mode\n");
+        printf("  - 'b' : background color toggle\n");
+        printf("  - 'c' : culling toggle\n");
+        printf("  - 'C' : perspective camera toggle\n");
+        printf("  - 'm' : polygon mode toggle\n");
+        printf("  - 'P' : camera on current player toggle\n");
+        printf("  - 'O' : camera on dice toggle\n");
+        printf("  - 'H' : help toggle\n");
+        printf("  - 'V' : play turn\n");
+        glutPostRedisplay();
+        break;
+    case 'v':
+    case 'V':
+        main_game.playTurn();
+        glutPostRedisplay();
+        break;
+    case 'r':
+        main_game.resetGame();
+        break;
+    case 'R':
+        rx = 0.0F;
+        ry = 0.0F;
+        rz = 0.0F;
+        mx = 0.0F;
+        my = 0.0F;
+        mz = -100.0F;
+        zoom = zoomDefault;
+       
+        glutPostRedisplay();
+        break;
+
     case 0x1B:
         exit(0);
         break;

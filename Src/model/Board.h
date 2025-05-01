@@ -14,7 +14,7 @@ namespace gooseGameModel {
 
 
 #define DEFAULT_SIZE_BOARD 40
-#define DEV 0
+#define DEV 1
 
 
 /**
@@ -88,6 +88,8 @@ public:
      * @param diceValue The value of the dice roll.
      */
     void movePlayer(unsigned playerIndex, int diceValue);
+
+    unsigned int getPlayerPosition(unsigned playerIndex);
 
 private:
     unsigned size; /**< The size of the board. */

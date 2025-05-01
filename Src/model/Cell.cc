@@ -15,8 +15,8 @@ void Cell::action(std::shared_ptr<Player> player){
 }
 
 void GooseCell::action(std::shared_ptr<Player> player){
-    if (DEV) std::cout << "Goose Cell: Moving player " << player->getName() << " forward 9 spaces." << std::endl;
-    player->move(9);
+    if (DEV) std::cout << "Goose Cell: Moving player " << player->getName() << " forward 5 spaces." << std::endl;
+    player->move(5);
 
 }
 

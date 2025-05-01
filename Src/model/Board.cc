@@ -48,8 +48,11 @@ void Board::init() {
             default:
                 cells.push_back(std::make_shared<Cell>());
             }
-        
-
+    }
+    // Initialize players
+    for (unsigned i = 0; i < players.size(); i++) {
+        players[i]->setPosition(0);
+        players[i]->setTimeout(0);
     }
 }
 
@@ -114,6 +117,16 @@ void Board::toString() {
 
 std::vector<std::shared_ptr<Player>> Board::getPlayers() {
     return players;
+}
+
+unsigned int Board::getPlayerPosition(unsigned playerIndex) {
+    if (playerIndex >= players.size()) {
+        playerIndex = static_cast<unsigned int>(players.size() - 1);
+    }
+    if (playerIndex < 0) {
+        playerIndex = 0;
+    }
+    return players[playerIndex]->getPosition();
 }
 
 void Board::movePlayer(unsigned playerIndex, int diceValue){

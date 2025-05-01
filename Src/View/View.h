@@ -57,6 +57,21 @@ class View
         void updateMainScene();
         void updateDiceScene();
         
+        void setCurrentPlayer(unsigned long player) {
+            currentPlayer = player;
+        }
+
+        void setBoard(gooseGameModel::Board board) {
+            board_cpy = board;
+        }
+
+        void setScene(currentScene s) {
+            scene = s;
+        }
+
+        bool isAnimating() {
+            return f_anim;
+        }
 
     private:
         std::vector<pos3D> posCells;
@@ -65,6 +80,11 @@ class View
         currentScene scene;
 
         unsigned long delta = 0;
+        unsigned long currentPlayer = 0;
+
+        bool f_anim = false;
+
+        gooseGameModel::Board board_cpy;
 };
 
 #endif // VIEW_H
