@@ -27,9 +27,13 @@ void View::init() {
 
     // Place players in the room on the table
     for (int i = 0; i < 4; i++) {
-        posPlayers[i].x = 0.0F;
-        posPlayers[i].y = tableHeight;
-        posPlayers[i].z = 0.0F;
+        // Put one per quadrant on the cell
+        int signX = (i % 2 == 0) ? -1 : 1;
+        int signZ = (i < 2) ? -1 : 1;
+
+        posPlayers[i].x = posCells[0].x + pawnWidth * signX;
+        posPlayers[i].y = posCells[0].y;
+        posPlayers[i].z = posCells[0].z + pawnWidth * signZ;
     }
 }
 
