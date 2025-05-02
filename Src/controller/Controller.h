@@ -24,9 +24,29 @@ public:
     void playTurn();
     void resetGame();
 
+    //Camera control
+
+    void switchCameraPerspect() {
+        view.switchCameraPerspect();
+    }
+
+    void switchCameraOnDice() {
+        view.switchCameraOnDice();
+    }
+
+    void switchCameraOnPlayer() {
+        view.switchCameraOnCurrentPlayer();
+    }
+
+    void reshape(int w, int h) {
+        view.reshape(w, h);
+    }
+
+    
+    View view;
 private:
     gooseGameModel::Game game;
-    View view;
+    
 
     time_t lastFrameTime;
 };

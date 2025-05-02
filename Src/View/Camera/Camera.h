@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "../Settings.h"
-#include "../View.h"
+
 
 #include <GL/glut.h>
 #include <GL/gl.h>
@@ -23,12 +23,6 @@ static camera_t isometricCamera = {
     { 0.0,  25 + scenerySize, 0.0},
     { 0.0,  0.0,   -100.0},
     { 0.0,  1.0,    0.0} 
-};
-
-static camera_t playerTrackingCamera = { 
-    { 0.0,  0.0, 0.0},
-    { 0.0,  0.0, 0.0},
-    { 0.0,  0.0, 1.0} 
 };
 
 static camera_t diceCamera = { 
@@ -61,8 +55,12 @@ public:
         dist = sqrt(pow(currentViewCamera.center[0] - currentViewCamera.eye[0], 2) + pow(currentViewCamera.center[1] - currentViewCamera.eye[1], 2) + pow(currentViewCamera.center[2] - currentViewCamera.eye[2], 2));
     }
 
-    void switchPerspective() {
-        
+
+    void loadPreconfiguredCamera() {
+        currentViewCamera = isometricCamera;
+        dist = sqrt(pow(currentViewCamera.center[0] - currentViewCamera.eye[0], 2) + pow(currentViewCamera.center[1] - currentViewCamera.eye[1], 2) + pow(currentViewCamera.center[2] - currentViewCamera.eye[2], 2));
+        ray = scenerySize;
+        ang = asin(ray / dist) * 2 * 180 / M_PI; 
     }
 
     void switchCameraPerspect() {
@@ -72,21 +70,28 @@ public:
     void switchCameraOnCurrentPlayer() {
         if (f_cameraOnCurrentPlayer) {
             currentViewCamera = isometricCamera;
-        } else {
-            currentViewCamera = playerTrackingCamera;
+            f_cameraOnIsometric = true;
+            f_cameraOnCurrentPlayer = false;
+            return;
         }
-        f_cameraOnCurrentPlayer = !f_cameraOnCurrentPlayer;
+        f_cameraOnCurrentPlayer = true;
         f_cameraOnDice = false;
     }
 
     void switchCameraOnDice() {
         if (f_cameraOnDice) {
             currentViewCamera = isometricCamera;
+            f_cameraOnIsometric = true;
         } else {
             currentViewCamera = diceCamera;
+            f_cameraOnIsometric = false;
         }
         f_cameraOnDice = !f_cameraOnDice;
         f_cameraOnCurrentPlayer = false;
+    }
+
+    bool isCameraIsometric() {
+        return f_cameraOnIsometric;
     }
 
     private: 
@@ -94,13 +99,13 @@ public:
 
         bool isCameraPerspect;
 
-        static double dist;
-        static double ray;
-        static double ang; 
+        double dist;
+        double ray;
+        double ang; 
 
-        static bool f_cameraOnCurrentPlayer;
-        static bool f_cameraOnDice;
-        static bool f_cameraOnIsometric;
+        bool f_cameraOnCurrentPlayer;
+        bool f_cameraOnDice;
+        bool f_cameraOnIsometric;
     
 };
 

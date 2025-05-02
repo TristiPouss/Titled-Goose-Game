@@ -1,7 +1,9 @@
 #include "View.h"
+#include "Camera/Camera.h"
 #include "Geometry/Furnitures.h"
 #include "Settings.h"
 #include <GL/gl.h>
+#include <cstdlib>
 #include <math.h>
 
 
@@ -9,6 +11,7 @@
 View::View() {
     // Initialize the view
     scene = MAIN_SCENE;
+    cam = Camera();
     posCells.resize(DEFAULT_SIZE_BOARD); // Assuming 40 cells on the board
     posPlayers.resize(4); // Assuming 4 players
     init();
@@ -309,7 +312,7 @@ void View::updateMainScene(float deltaTime) {
         
     }
    
-    setCameraPlayerPosition(posPlayers[currentPlayer].x, posPlayers[currentPlayer].y, posPlayers[currentPlayer].z);
+    cam.setCameraPlayerPosition(posPlayers[currentPlayer].x, posPlayers[currentPlayer].y, posPlayers[currentPlayer].z);
 }
 
 void View::updateDiceScene(float deltaTime) {
@@ -317,8 +320,9 @@ void View::updateDiceScene(float deltaTime) {
     // For example, animate the dice rolling or other effects
     if (f_diceRolling) {
         // Animate the dice rolling
-        angled1 += 5.0F; // Rotate the first dice
-        angled2 += 5.0F; // Rotate the second dice
+        srand(time(NULL)); // Seed the random number generator
+        angled1 += 25.0F + static_cast<float>(rand() % 6); // Rotate the first dice with a random value between 25 and 30
+        angled2 += 25.0F + static_cast<float>(rand() % 6); // Rotate the second dice with a random value between 25 and 30
         if (angled1 >= 360.0F) {
             angled1 = 0.0F; // Reset the angle
         }
@@ -358,6 +362,7 @@ void View::update(float deltaTime) {
         timerDiceShowing -= deltaTime; // Decrease the timerDiceShowing
         if (timerDiceShowing <= 0) {
             setScene(MAIN_SCENE); // Switch back to the main scene
+            switchCameraOnDice();
             timerDiceShowing = 0;
         }
     }
@@ -373,7 +378,9 @@ void View::update(float deltaTime) {
 
 }
 
-void View::draw(int facetNumber) {
+void View::draw(int facetNumber) {    
+    
+    
     // Draw the current scene
     switch (scene) {
         case MAIN_SCENE:

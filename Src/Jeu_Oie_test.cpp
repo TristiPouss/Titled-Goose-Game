@@ -97,9 +97,9 @@ static void display(void) {
 
     glPushMatrix();
 
-    initCamera(cameraPerspect, cameraOnCurrentPlayer, cameraOnDice, wTx, wTy);
+    main_game.view.cam.initCamera(INIT_wTx, INIT_wTy);
 
-    if (!cameraOnCurrentPlayer && !cameraOnDice) {
+    if (main_game.view.cam.isCameraIsometric()) {
         glTranslatef(0.0F, 0.0F, -100.0F);
 
         // Camera movements, rotation and zoom
@@ -111,7 +111,6 @@ static void display(void) {
         
         glScalef(zoom, zoom, zoom);
     }
-    
     
     // Light init
     initLight();
@@ -132,8 +131,7 @@ static void display(void) {
 
 static void reshape(int wx, int wy) {
     printf("R\n");
-    wTx = wx;
-    wTy = wy;
+    main_game.reshape(wx, wy);
     glViewport(0, 0, wx, wy);
 }
 
@@ -221,7 +219,7 @@ static void keyboard(unsigned char key, int x, int y) {
         glutPostRedisplay();
         break;
     case 'C':
-        cameraPerspect = !cameraPerspect;
+        main_game.switchCameraPerspect();
         glutPostRedisplay();
         break;
     case 'm':
@@ -230,12 +228,12 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'P':
     case 'p':
-        cameraOnCurrentPlayer = !cameraOnCurrentPlayer;
+        main_game.switchCameraOnPlayer();
         glutPostRedisplay();
         break;
     case 'O':
     case 'o':
-        cameraOnDice = !cameraOnDice;
+        main_game.switchCameraOnDice();
         glutPostRedisplay();
         break;
     case 0x20:
@@ -391,7 +389,7 @@ int main(int argc, char** argv) {
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
-    glutInitWindowSize(wTx, wTy);
+    glutInitWindowSize(INIT_wTx, INIT_wTy);
     glutInitWindowPosition(wPx, wPy);
     glutCreateWindow("Jeu de l'Oie");
     init();

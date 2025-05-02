@@ -1,8 +1,12 @@
 #include "Camera.h"
 
-
-
 void Camera::setCameraPlayerPosition(float x, float y, float z) {
+    if (!isCameraPerspect) {
+        return;
+    }
+    if (!f_cameraOnCurrentPlayer){
+        return;
+    }
     //Center of the pawn 
     currentViewCamera.center[0] = x;
     currentViewCamera.center[1] = y;
@@ -16,6 +20,13 @@ void Camera::setCameraPlayerPosition(float x, float y, float z) {
 }
 
 void Camera::initCamera(int wx, int wy) {
+    //Print camera position
+    printf("Camera position : %f %f %f\n", currentViewCamera.eye[0], currentViewCamera.eye[1], currentViewCamera.eye[2]);
+    //Print camera center
+    printf("Camera center : %f %f %f\n", currentViewCamera.center[0], currentViewCamera.center[1], currentViewCamera.center[2]);
+    //Print camera up
+    printf("Camera up : %f %f %f\n", currentViewCamera.up[0], currentViewCamera.up[1], currentViewCamera.up[2]);
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     double ratio = (double)wx / wy;
@@ -34,8 +45,8 @@ void Camera::initCamera(int wx, int wy) {
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(
-            currentViewCamera.center[0], currentViewCamera.center[1], currentViewCamera.center[2],
             currentViewCamera.eye[0], currentViewCamera.eye[1], currentViewCamera.eye[2],
+            currentViewCamera.center[0], currentViewCamera.center[1], currentViewCamera.center[2],
             currentViewCamera.up[0], currentViewCamera.up[1], currentViewCamera.up[2]
         );
     }
