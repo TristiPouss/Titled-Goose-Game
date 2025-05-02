@@ -20,12 +20,6 @@ void Camera::setCameraPlayerPosition(float x, float y, float z) {
 }
 
 void Camera::initCamera(int wx, int wy) {
-    //Print camera position
-    printf("Camera position : %f %f %f\n", currentViewCamera.eye[0], currentViewCamera.eye[1], currentViewCamera.eye[2]);
-    //Print camera center
-    printf("Camera center : %f %f %f\n", currentViewCamera.center[0], currentViewCamera.center[1], currentViewCamera.center[2]);
-    //Print camera up
-    printf("Camera up : %f %f %f\n", currentViewCamera.up[0], currentViewCamera.up[1], currentViewCamera.up[2]);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

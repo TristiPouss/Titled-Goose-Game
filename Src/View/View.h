@@ -93,6 +93,10 @@ class View
             
         }
 
+        void initCamera() {
+            cam.initCamera(wTx, wTy);
+        }
+
         Camera cam;
     private:
 

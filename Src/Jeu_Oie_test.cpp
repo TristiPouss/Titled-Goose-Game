@@ -97,7 +97,7 @@ static void display(void) {
 
     glPushMatrix();
 
-    main_game.view.cam.initCamera(INIT_wTx, INIT_wTy);
+    main_game.view.initCamera();
 
     if (main_game.view.cam.isCameraIsometric()) {
         glTranslatef(0.0F, 0.0F, -100.0F);
