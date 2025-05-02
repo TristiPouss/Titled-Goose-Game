@@ -232,6 +232,7 @@ void View::updateMainScene() {
         if (posPlayers[i].caseNumber == targetPos) {
             continue; // Player is already at the target position
         }
+        f_anim = true; // Set animation flag to true
         //Handle the case of resetting
         unsigned nextCell = 0;
         if (targetPos != 0) {
@@ -280,9 +281,13 @@ void View::updateMainScene() {
             posPlayers[i].y = posCells[nextCell].y;
             posPlayers[i].z = posCells[nextCell].z;
         }
+        // Check if the player has reached the target cell
+        if (posPlayers[i].caseNumber == targetPos) {
+            f_anim = false; // Animation is complete
+        }
     }
 
-
+    printf("Player %lu is at cell %d\n", currentPlayer, posPlayers[currentPlayer].caseNumber);
     setCameraPlayerPosition(posPlayers[currentPlayer].x, posPlayers[currentPlayer].y, posPlayers[currentPlayer].z);
 }
 

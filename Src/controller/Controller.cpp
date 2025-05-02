@@ -16,11 +16,15 @@ Controller::Controller() {
 void Controller::update() {
     // Retrieve the game board
     auto board = game.getBoard();
-    view.setCurrentPlayer(game.getCurrentPlayer());
+    
     view.setBoard(board);
     
     // Update the view with the current game state
-    view.update();
+    view.update(deltaTime);
+
+    // Update the current player in the view at the end of the frame in case of animation
+    // This ensure that the camera is set to the right player
+    if (!view.isAnimating()) view.setCurrentPlayer(game.getCurrentPlayer());
 }
 
 
