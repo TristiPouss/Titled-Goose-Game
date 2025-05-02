@@ -262,7 +262,7 @@ void View::updateMainScene() {
         float progress = 1.0F - (distance / totalDistance);
         
         // Vary the Y speed based on the progress to the next target (midpoint or next cell) to create a more natural movement
-        float ySpeed = abs(tanh(progress - 0.5F) * 0.5F); // Adjust the speed based on progress
+        float ySpeed = abs(tanh(progress - 0.5F) * 0.5F) * speedPawn; // Adjust the speed based on progress
         if (ySpeed < 0.1F) ySpeed = 0.1F; // Ensure a minimum speed
 
         if (progress <= 0.5F) // Move on a non-linear movement on the Y axis to mid Y
