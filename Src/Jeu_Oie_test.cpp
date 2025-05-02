@@ -1,6 +1,8 @@
+#include <bits/types/time_t.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 
 #include <GL/glut.h>
 #include <GL/gl.h>
@@ -12,11 +14,6 @@
 #include "View/View.h"
 
 #include "controller/Controller.h"
-#include "model/Board.h"
-#include "model/Cell.h"
-#include "model/Dice.h"
-#include "model/Game.h"
-#include "model/Player.h"
 
 static float angle = 0.0;
 Controller main_game;
@@ -144,7 +141,9 @@ static void reshape(int wx, int wy) {
 /* facetNumber'est en file d'attente                      */
 
 static void idle(void) {
-    main_game.update();
+
+    main_game.update(time(NULL));
+
     angle = (float)(((int)(angle)+1)%360);
     glutPostRedisplay();
 }

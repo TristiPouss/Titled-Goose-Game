@@ -6,6 +6,8 @@
 #include "../model/Game.h"
 #include "../View/View.h"
 #include "../View/Camera/Camera.h"
+#include <bits/types/time_t.h>
+#include <time.h>
 
 #include <GL/glut.h>
 #include <GL/gl.h>
@@ -16,7 +18,7 @@ class Controller
 public:
     Controller();
 
-    void update();
+    void update(time_t frameTime);
     void display(int facetNumber);
 
     void playTurn();
@@ -25,6 +27,8 @@ public:
 private:
     gooseGameModel::Game game;
     View view;
+
+    time_t lastFrameTime;
 };
 
 

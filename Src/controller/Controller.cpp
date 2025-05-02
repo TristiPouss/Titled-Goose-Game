@@ -1,4 +1,5 @@
 #include "Controller.h"
+#include <bits/types/time_t.h>
 
 
 Controller::Controller() {
@@ -13,14 +14,16 @@ Controller::Controller() {
 
 };
 
-void Controller::update() {
+void Controller::update(time_t frameTime) {
+    double delta = difftime(frameTime, lastFrameTime);
+    lastFrameTime = frameTime;
     // Retrieve the game board
     auto board = game.getBoard();
     
     view.setBoard(board);
     
     // Update the view with the current game state
-    view.update(deltaTime);
+    view.update(delta);
 
     // Update the current player in the view at the end of the frame in case of animation
     // This ensure that the camera is set to the right player

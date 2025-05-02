@@ -220,7 +220,7 @@ void View::drawDiceScene(int facetNumber) {
     glPopMatrix();
 }
 
-void View::updateMainScene() {
+void View::updateMainScene(float deltaTime) {
     // Update the main scene
     // For example, update player positions or other dynamic elements
 
@@ -283,29 +283,38 @@ void View::updateMainScene() {
         }
         // Check if the player has reached the target cell
         if (posPlayers[i].caseNumber == targetPos) {
+            timer = 10.0F;
+        }
+        
+    }
+    if (timer > 0) {
+        timer -= deltaTime; // Decrease the timer
+        if (timer <= 0) {
             f_anim = false; // Animation is complete
+            timer = 0;
         }
     }
+   
 
     printf("Player %lu is at cell %d\n", currentPlayer, posPlayers[currentPlayer].caseNumber);
     setCameraPlayerPosition(posPlayers[currentPlayer].x, posPlayers[currentPlayer].y, posPlayers[currentPlayer].z);
 }
 
-void View::updateDiceScene() {
+void View::updateDiceScene(float deltaTime) {
     // Update the dice scene
     // For example, animate the dice rolling or other effects
 }
 
-void View::update() {
+void View::update(float deltaTime) {
     // Update the view based on the current scene
     switch (scene) {
         case MAIN_SCENE:
             // Update main scene
-            updateMainScene();
+            updateMainScene(deltaTime);
             break;
         case DICE_SCENE:
             // Update dice scene
-            updateDiceScene();
+            updateDiceScene(deltaTime);
             break;
     }
 }

@@ -33,7 +33,7 @@ typedef struct {
     float x;
     float y;
     float z;
-    int caseNumber;
+    unsigned int caseNumber;
 } pos3D;
 
 typedef enum {
@@ -52,10 +52,10 @@ class View
         void drawMainScene(int facetNumber);
         void drawDiceScene(int facetNumber);
 
-        void update();
+        void update(float deltaTime);
 
-        void updateMainScene();
-        void updateDiceScene();
+        void updateMainScene(float deltaTime);
+        void updateDiceScene(float deltaTime);
         
         void setCurrentPlayer(unsigned long player) {
             currentPlayer = player;
@@ -79,7 +79,7 @@ class View
 
         currentScene scene;
 
-        unsigned long delta = 0;
+        float timer = 0;
         unsigned long currentPlayer = 0;
 
         bool f_anim = false;
