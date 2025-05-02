@@ -58,6 +58,9 @@ class View
         void updateMainScene(float deltaTime);
         void updateDiceScene(float deltaTime);
         
+        void showDiceFace(int value);
+
+
         void setCurrentPlayer(unsigned long player) {
             currentPlayer = player;
         }
@@ -81,6 +84,11 @@ class View
             timerDiceRolling = TIMER_DICE_ROLLING; // Set the duration for the dice rolling animation
         }
 
+        void setDicesValues(int value1, int value2) {
+            dicesValues[0] = value1;
+            dicesValues[1] = value2;
+        }
+
     private:
         std::vector<pos3D> posCells;
         std::vector<pos3D> posPlayers;
@@ -98,6 +106,7 @@ class View
         bool f_diceShowing = false;
 
         gooseGameModel::Board board_cpy;
+        int dicesValues[2] = { 1, 1 }; // Values of the two dices
 
         // Angle of rotation for the dices animation
         float angled1 = 0.0f;

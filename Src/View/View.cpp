@@ -215,20 +215,26 @@ void View::drawDiceScene(int facetNumber) {
     //Position the dice 1
     glTranslatef(-dice_edge, roomLength/2, 0.0F);
     
-    glPushMatrix();
-    // Animate the dice rolling
-    glRotatef(angled1, 0.0, 1.0, 0.0);
-    drawDice(dice_edge, dice_radius, facetNumber);
-    glPopMatrix();
+    for (int i = 0; i < 2; i++) {
+        float angle = (i == 0) ? angled1 : angled2;
 
-    //Position the dice 2
-    glTranslatef(dice_edge*2, 0.0F, 0.0F);
+        glPushMatrix();
     
-    glPushMatrix();
-    // Animate the dice rolling
-    glRotatef(angled2, 0.0, 1.0, 0.0);
-    drawDice(dice_edge, dice_radius, facetNumber);
-    glPopMatrix();
+        // Animate the dice rolling
+        if (f_diceRolling) {
+            glRotatef(angle, 0.0, 1.0, 1.0);
+        } else {
+            // Reset the angle if not rolling
+            showDiceFace(dicesValues[i]);
+        }
+        
+        drawDice(dice_edge, dice_radius, facetNumber);
+        glPopMatrix();
+    
+        //Position the dice 2
+        glTranslatef(dice_edge*2, 0.0F, 0.0F);
+    }
+    
 
     glPopMatrix();
     
@@ -379,3 +385,28 @@ void View::draw(int facetNumber) {
     }
 }
 
+void View::showDiceFace(int value) {
+    // Rotate the dice to show the specified face value
+    switch (value) {
+        case 1:
+            angled1 = 0.0F;
+            break;
+        case 2:
+            angled1 = 90.0F;
+            break;
+        case 3:
+            angled1 = 180.0F;
+            break;
+        case 4:
+            angled1 = 270.0F;
+            break;
+        case 5:
+            angled1 = 360.0F;
+            break;
+        case 6:
+            angled1 = 450.0F;
+            break;
+        default:
+            break;
+    }
+}

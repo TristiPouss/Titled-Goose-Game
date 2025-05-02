@@ -31,7 +31,9 @@ namespace gooseGameModel {
         }
         int diceValue1 = std::get<0>(dices).roll();
         int diceValue2 = std::get<1>(dices).roll();
-        std::cout << "Roll : " << diceValue1 << " " << diceValue2 << std::endl;
+        dicesValues = std::make_tuple(diceValue1, diceValue2);
+
+        if (DEV) std::cout << "Roll : " << diceValue1 << " " << diceValue2 << std::endl;
         std::shared_ptr<Player> currentPlayer = board->getPlayers()[curr_player];
         std::shared_ptr<Cell> currentCell = board->getCell(currentPlayer->getPosition());
         if (currentPlayer->getTimeout() > 0) {

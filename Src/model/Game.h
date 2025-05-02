@@ -92,11 +92,20 @@ class Game{
       */
     void resetGame();
 
+    /**
+     * @brief Get the dices values
+     */
+    std::tuple<int,int> getDicesValues() const {
+        return dicesValues;
+    }
+
     private:
 
         // Variables
         std::shared_ptr<Board> board;
         std::tuple<Dice , Dice> dices;
+        std::tuple<int,int> dicesValues;
+
         stateGame g_state;
         unsigned curr_player; 
         unsigned turn; // Current turn number

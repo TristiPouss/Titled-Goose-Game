@@ -42,6 +42,11 @@ void Controller::playTurn() {
     }
 
     game.playTurn();
+    auto dices = game.getDicesValues();
+    auto dice1 = std::get<0>(dices);
+    auto dice2 = std::get<1>(dices);
+    view.setDicesValues(dice1, dice2);
+    
     view.switchToDiceScene();
 }
 
