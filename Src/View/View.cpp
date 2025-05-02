@@ -396,22 +396,22 @@ void View::showDiceFace(int value) {
     // Rotate the dice to show the specified face value
     switch (value) {
         case 1:
-            angled1 = 0.0F;
-            break;
+            return; // No rotation needed for face 1
         case 2:
-            angled1 = 90.0F;
+            glRotatef(90, 1.0, 0.0, 0.0);
             break;
         case 3:
-            angled1 = 180.0F;
+            glRotatef(-90, 0.0, 0.0, 1.0);
             break;
         case 4:
-            angled1 = 270.0F;
+            glRotatef(90, 0.0, 0.0, 1.0);
             break;
         case 5:
-            angled1 = 360.0F;
+            glRotatef(-90, 1.0, 0.0, 0.0);
+            
             break;
         case 6:
-            angled1 = 450.0F;
+            glRotatef(180, 0.0, 0.0, 1.0);
             break;
         default:
             break;
