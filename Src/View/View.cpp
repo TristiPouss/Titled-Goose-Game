@@ -155,7 +155,7 @@ void View::drawMainScene(int facetNumber) {
    glPopMatrix();
    glPushMatrix();
    glRotatef(45, 0.0, 1.0, 0.0);
-   glTranslatef(-roomLength/3.5, roomLength/4, -roomLength/2);
+   glTranslatef(-roomLength/3.5f, roomLength/4, -roomLength/2);
    glRotatef(180, 0.0, 1.0, 0.0);
    drawPoster(20, 40, facetNumber, texturePulp);
    glPopMatrix();
@@ -211,10 +211,25 @@ void View::drawDiceScene(int facetNumber) {
 
     //Dice
     glPushMatrix();
+    
+    //Position the dice 1
     glTranslatef(-dice_edge, roomLength/2, 0.0F);
+    
+    glPushMatrix();
+    // Animate the dice rolling
+    glRotatef(angled1, 0.0, 1.0, 0.0);
     drawDice(dice_edge, dice_radius, facetNumber);
+    glPopMatrix();
+
+    //Position the dice 2
     glTranslatef(dice_edge*2, 0.0F, 0.0F);
+    
+    glPushMatrix();
+    // Animate the dice rolling
+    glRotatef(angled2, 0.0, 1.0, 0.0);
     drawDice(dice_edge, dice_radius, facetNumber);
+    glPopMatrix();
+
     glPopMatrix();
     
     glPopMatrix();
@@ -283,26 +298,32 @@ void View::updateMainScene(float deltaTime) {
         }
         // Check if the player has reached the target cell
         if (posPlayers[i].caseNumber == targetPos) {
-            timer = 10.0F;
+            timerChangeTurn = TIMER_TIMEOUT;
         }
         
     }
-    if (timer > 0) {
-        timer -= deltaTime; // Decrease the timer
-        if (timer <= 0) {
-            f_anim = false; // Animation is complete
-            timer = 0;
-        }
-    }
    
-
-    printf("Player %lu is at cell %d\n", currentPlayer, posPlayers[currentPlayer].caseNumber);
     setCameraPlayerPosition(posPlayers[currentPlayer].x, posPlayers[currentPlayer].y, posPlayers[currentPlayer].z);
 }
 
 void View::updateDiceScene(float deltaTime) {
     // Update the dice scene
     // For example, animate the dice rolling or other effects
+    if (f_diceRolling) {
+        // Animate the dice rolling
+        angled1 += 5.0F; // Rotate the first dice
+        angled2 += 5.0F; // Rotate the second dice
+        if (angled1 >= 360.0F) {
+            angled1 = 0.0F; // Reset the angle
+        }
+        if (angled2 >= 360.0F) {
+            angled2 = 0.0F; // Reset the angle
+        }
+    } else {
+        // Reset the angles if not rolling (Placeholder for stopping the animation)
+        angled1 = 0.0F;
+        angled2 = 0.0F;
+    }
 }
 
 void View::update(float deltaTime) {
@@ -317,6 +338,33 @@ void View::update(float deltaTime) {
             updateDiceScene(deltaTime);
             break;
     }
+    // Update the timers
+   
+    if (timerChangeTurn > 0) {
+        timerChangeTurn -= deltaTime; // Decrease the timerChangeTurn
+        if (timerChangeTurn <= 0) {
+            f_anim = false; // Animation is complete
+            timerChangeTurn = 0;
+        }
+    }
+
+    if (timerDiceShowing > 0) {
+        timerDiceShowing -= deltaTime; // Decrease the timerDiceShowing
+        if (timerDiceShowing <= 0) {
+            setScene(MAIN_SCENE); // Switch back to the main scene
+            timerDiceShowing = 0;
+        }
+    }
+    
+    if (timerDiceRolling > 0) {
+        timerDiceRolling -= deltaTime; // Decrease the timerDiceRolling
+        if (timerDiceRolling <= 0) {
+            f_diceRolling = false; // Animation is complete
+            timerDiceRolling = 0;
+            timerDiceShowing = TIMER_DICE_SHOWING; // Set the duration for showing the dice
+        }
+    }
+
 }
 
 void View::draw(int facetNumber) {

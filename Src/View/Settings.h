@@ -37,9 +37,13 @@ static int cameraOnDice = 0;
 static float scenerySize = 100.0F; // Size of one face of a cube
 static int facetNumber = 20;       // Level of tessellation
 
-static float FOV = 90.0F;          // Field of view for the perspective camera
+static const float FOV = 90.0F;          // Field of view for the perspective camera
 
-static float speedPawn = 1.0F;        // Speed of the pawn movement
+static const float speedPawn = 1.0F;        // Speed of the pawn movement
+
+static const float TIMER_TIMEOUT = 2.0F; // Timeout for the animation
+static const float TIMER_DICE_ROLLING = 5.0F; // Timeout for the dice animation
+static const float TIMER_DICE_SHOWING = 3.0F; // Timeout for the dice showing animation
 
 #ifndef M_PI 
 #define M_PI 3.14159

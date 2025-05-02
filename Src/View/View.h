@@ -12,6 +12,7 @@
 #include <GL/glu.h>
 
 #include "Camera/Camera.h"
+#include "Settings.h"
 
 // General settings for the view
 static float roomLength = scenerySize;
@@ -73,18 +74,35 @@ class View
             return f_anim;
         }
 
+        void switchToDiceScene() {
+            scene = DICE_SCENE;
+            f_anim = true;
+            f_diceRolling = true;
+            timerDiceRolling = TIMER_DICE_ROLLING; // Set the duration for the dice rolling animation
+        }
+
     private:
         std::vector<pos3D> posCells;
         std::vector<pos3D> posPlayers;
 
         currentScene scene;
 
-        float timer = 0;
+        float timerChangeTurn = 0;
+        float timerDiceRolling = 0;
+        float timerDiceShowing = 0;
+
         unsigned long currentPlayer = 0;
 
         bool f_anim = false;
+        bool f_diceRolling = false;
+        bool f_diceShowing = false;
 
         gooseGameModel::Board board_cpy;
+
+        // Angle of rotation for the dices animation
+        float angled1 = 0.0f;
+        float angled2 = 0.0f;
+
 };
 
 #endif // VIEW_H

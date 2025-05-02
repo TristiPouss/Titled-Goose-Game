@@ -40,7 +40,9 @@ void Controller::playTurn() {
     if (view.isAnimating()) {
         return;
     }
+
     game.playTurn();
+    view.switchToDiceScene();
 }
 
 void Controller::resetGame() {
