@@ -234,19 +234,37 @@ void View::updateMainScene() {
         //Handle the case of resetting
         unsigned nextCell = 0;
         if (targetPos != 0) {
-            nextCell = posPlayers[i].caseNumber + 1;
+            float direction = (targetPos > posPlayers[i].caseNumber) ? 1 : -1;
+            nextCell = posPlayers[i].caseNumber + direction;
+            if (nextCell >= DEFAULT_SIZE_BOARD) {
+                nextCell = 0; // Loop back to the start
+            }
         }
 
-        // Move the player towards the next cell position
-        if (posPlayers[i].x != posCells[nextCell].x) {
-            posPlayers[i].x += ((posCells[nextCell].x - posPlayers[i].x) / 10)*speedPawn;
-        }
-        if (posPlayers[i].y != posCells[nextCell].y) {
-            posPlayers[i].y += ((posCells[nextCell].y - posPlayers[i].y) / 10)*speedPawn;
-        }
-        if (posPlayers[i].z != posCells[nextCell].z) {
-            posPlayers[i].z += ((posCells[nextCell].z - posPlayers[i].z) / 10)*speedPawn;
-        }
+        // Move the player towards the next cell position in a curve along the y-axis
+        // 
+        float maxY = (posCells[nextCell].y > posCells[posPlayers[i].caseNumber].y) ? posCells[nextCell].y : posCells[posPlayers[i].caseNumber].y;
+        float midprogressY = maxY + 5.0F; // Midpoint Y position for the curve
+        
+        //
+        float totalDistance = sqrt(pow(posCells[nextCell].x - posCells[posPlayers[i].caseNumber].x, 2) + pow(posCells[nextCell].z - posCells[posPlayers[i].caseNumber].z, 2));
+        float t = 0.1F * speedPawn; // Interpolation factor 
+
+        // Interpolate x and z linearly
+        posPlayers[i].x += (posCells[nextCell].x - posPlayers[i].x) * t;
+        posPlayers[i].z += (posCells[nextCell].z - posPlayers[i].z) * t;
+
+        // Interpolate y with a parabolic curve
+        float dx = posCells[nextCell].x - posPlayers[i].x;
+        float dz = posCells[nextCell].z - posPlayers[i].z;
+        float distance = sqrt(dx * dx + dz * dz);
+        float progress = 1.0F - (distance / totalDistance);
+        
+        if (progress <= 0.5F) // Move on a non-linear movement on the Y axis to mid Y
+            posPlayers[i].y += (midprogressY - posPlayers[i].y) * t;
+        else // Move on a non-linear movement on the Y axis from mid Y to the next cell
+            posPlayers[i].y += (posCells[nextCell].y - posPlayers[i].y) * t;
+
 
         // Detect if the player has reached a new cell
         if (abs(posPlayers[i].x - posCells[nextCell].x) < 0.1 &&
