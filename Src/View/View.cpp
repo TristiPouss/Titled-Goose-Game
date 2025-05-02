@@ -2,6 +2,7 @@
 #include "Geometry/Furnitures.h"
 #include "Settings.h"
 #include <GL/gl.h>
+#include <math.h>
 
 
 
@@ -242,7 +243,7 @@ void View::updateMainScene() {
         }
 
         // Move the player towards the next cell position in a curve along the y-axis
-        // 
+        
         float maxY = (posCells[nextCell].y > posCells[posPlayers[i].caseNumber].y) ? posCells[nextCell].y : posCells[posPlayers[i].caseNumber].y;
         float midprogressY = maxY + 5.0F; // Midpoint Y position for the curve
         
@@ -260,10 +261,14 @@ void View::updateMainScene() {
         float distance = sqrt(dx * dx + dz * dz);
         float progress = 1.0F - (distance / totalDistance);
         
+        // Vary the Y speed based on the progress to the next target (midpoint or next cell) to create a more natural movement
+        float ySpeed = abs(tanh(progress - 0.5F) * 0.5F); // Adjust the speed based on progress
+        if (ySpeed < 0.1F) ySpeed = 0.1F; // Ensure a minimum speed
+
         if (progress <= 0.5F) // Move on a non-linear movement on the Y axis to mid Y
-            posPlayers[i].y += (midprogressY - posPlayers[i].y) * t;
+            posPlayers[i].y += (midprogressY - posPlayers[i].y) * ySpeed;
         else // Move on a non-linear movement on the Y axis from mid Y to the next cell
-            posPlayers[i].y += (posCells[nextCell].y - posPlayers[i].y) * t;
+            posPlayers[i].y += (posCells[nextCell].y - posPlayers[i].y) * ySpeed;
 
 
         // Detect if the player has reached a new cell
