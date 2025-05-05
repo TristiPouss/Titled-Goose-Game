@@ -48,6 +48,9 @@
     <ClCompile Include="..\Src\model\Board.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\controller\Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Src\View\Camera\Camera.h">

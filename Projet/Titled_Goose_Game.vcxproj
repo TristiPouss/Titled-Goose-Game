@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Src\controller\Controller.cpp" />
     <ClCompile Include="..\Src\model\Board.cc" />
     <ClCompile Include="..\Src\model\Cell.cc" />
     <ClCompile Include="..\Src\model\Dice.cc" />
