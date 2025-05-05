@@ -32,6 +32,7 @@ static int normalize = 1;          // Flag to switch between normalized and non-
 static int fond = 1;               // Flag to switch between black and light gray background colors
 static int culling = 0;            // Flag to switch between rendering with and without culling
 static int fullscreen = 0;
+static int texturesEnabled = 1;    // Flag to enable/disable textures
 
 static int facetNumber = 20;       // Level of tessellation
 

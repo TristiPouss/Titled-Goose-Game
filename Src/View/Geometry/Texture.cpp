@@ -89,12 +89,6 @@ void initTexture() {
     textureFenetre = chargementTexturePNG("../Assets/fenetre.png24");
 	textureRedStripes = chargementTexturePNG("../Assets/red_stripes.png24");
 	textureMcqueenFace = chargementTexturePNG("../Assets/mcqueen_face.png24");
-    /*
-	textureLitVoitureBack = chargementTexturePNG("../Assets/lit_voiture_back.png24");
-	textureLitVoitureLeft = chargementTexturePNG("../Assets/lit_voiture_left.png24");
-	textureLitVoitureRight = chargementTexturePNG("../Assets/lit_voiture_right.png24");
-	textureLitVoitureTop = chargementTexturePNG("../Assets/lit_voiture_top.png24");
-    */
 
 
     textureRed = chargementTexturePNG("../Assets/red.png24");
