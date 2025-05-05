@@ -1,4 +1,4 @@
-#include <bits/types/time_t.h>
+#include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -63,6 +63,10 @@ static void display(void) {
     else
         glDisable(GL_CULL_FACE);
     glPolygonMode(GL_FRONT_AND_BACK, (polygonMode) ? GL_FILL : GL_LINE);
+    if (texturesEnabled)
+		glEnable(GL_TEXTURE_2D);
+	else
+		glDisable(GL_TEXTURE_2D);
     if (normalize)
         glEnable(GL_NORMALIZE);
     else
@@ -243,23 +247,30 @@ static void keyboard(unsigned char key, int x, int y) {
     case 'H':
     case 'h':
         printf("Help\n");
-        printf("  - 'n' : previous facetNumber\n");
-        printf("  - 'N' : next facetNumber\n");
-        printf("  - 'k' : zoom in\n");
-        printf("  - 'K' : zoom out\n");
-        printf("  - 'Z' : move camera up\n");
-        printf("  - 'S' : move camera down\n");
-        printf("  - 'Q' : move camera left\n");
-        printf("  - 'D' : move camera right\n");
-        printf("  - 'f' : fullscreen mode\n");
-        printf("  - 'b' : background color toggle\n");
-        printf("  - 'c' : culling toggle\n");
-        printf("  - 'C' : perspective camera toggle\n");
-        printf("  - 'm' : polygon mode toggle\n");
-        printf("  - 'P' : camera on current player toggle\n");
-        printf("  - 'O' : camera on dice toggle\n");
-        printf("  - 'H' : help toggle\n");
-        printf("  - 'V' : play turn\n");
+        printf("  - 'Esc'      : quit game\n");
+        printf("  - 'Space'    : normalize toggle\n");
+        printf("  - 'n'        : previous facetNumber\n");
+        printf("  - 'N'        : next facetNumber\n");
+        printf("  - 'k'        : zoom in\n");
+        printf("  - 'K'        : zoom out\n");
+        printf("  - 'Z'        : move camera up\n");
+        printf("  - 'S'        : move camera down\n");
+        printf("  - 'Q'        : move camera left\n");
+        printf("  - 'D'        : move camera right\n");
+        printf("  - 'f'        : fullscreen mode\n");
+        printf("  - 'b'        : background color toggle\n");
+        printf("  - 'c'        : culling toggle\n");
+        printf("  - 'C'        : perspective camera toggle\n");
+        printf("  - 'm'        : polygon mode toggle\n");
+        printf("  - 'P'        : camera on current player toggle\n");
+        printf("  - 'O'        : camera on dice toggle\n");
+        printf("  - 'H'        : help toggle\n");
+        printf("  - 'V'        : play turn\n");
+        printf("  - 'r'        : reset game\n");
+        printf("  - 'R'        : reset zoom, rotation and modifications to camera\n");
+        printf("  - 'F1 -> F4' : Lights 0 to 3 toggle\n");
+        printf("  - 'F10'      : lighthing toggle\n");
+		printf("  - 'T'        : textures toggle\n");
         glutPostRedisplay();
         break;
     case 'v':
@@ -279,6 +290,11 @@ static void keyboard(unsigned char key, int x, int y) {
         mz = -100.0F;
         zoom = zoomDefault;
        
+        glutPostRedisplay();
+        break;
+    case 'T':
+    case 't':
+        texturesEnabled = !texturesEnabled; // Inverse l'état des textures
         glutPostRedisplay();
         break;
 
