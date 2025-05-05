@@ -14,6 +14,8 @@
 
 * Textures
 * Modélisation
+* Placement des objets dans la scène
+* Scène des dés
 
 ### Paul : 
 
@@ -21,12 +23,16 @@
 * Contrôleur
 * Portage Linux
 * Modélisation de dés avec animation
+* Animations du jeu
+* Refonte de l'architecture du code
 
 ### Tristan :
 
 * Modélisation
 * Caméra
 * Vue
+* Lumières
+* Matériaux
 
 ## Liste commentée des fichiers du zip
 
