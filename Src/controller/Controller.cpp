@@ -1,5 +1,5 @@
 #include "Controller.h"
-#include <bits/types/time_t.h>
+#include <time.h>
 
 
 Controller::Controller() {

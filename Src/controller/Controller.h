@@ -6,7 +6,6 @@
 #include "../model/Game.h"
 #include "../View/View.h"
 #include "../View/Camera/Camera.h"
-#include <bits/types/time_t.h>
 #include <time.h>
 
 #include <GL/glut.h>
