@@ -25,6 +25,7 @@
 ### Tristan :
 
 * Modélisation
+* Caméra
 * Vue
 
 ## Liste commentée des fichiers du zip
@@ -143,3 +144,25 @@ Le projet **Titled-Goose-Game** est une implémentation d'un jeu inspiré du jeu
 4. **Contrôles** :
    - Utilisez les touches du clavier pour interagir avec le jeu.
    - La souris peut être utilisée pour certaines actions spécifiques.
+
+5. **Touches** :
+   - 'Esc' : Quitter le jeu
+   - 'n'   : Augmenter les facettes
+   - 'N'   : Diminuer les facettes
+   - 'k'   : Zoom +
+   - 'K'   : Zoom -
+   - 'Z, Q, S, D'   : Mouvements de camera
+   - 'F'   : Mode plein écran 
+   - 'b'   : Change la couleur de fond
+   - 'c'   : Culling 
+   - 'C'   : Changement de caméra perspective / Orthogonale (fonctionne mal) 
+   - 'm'   : Affichage en fil de fer 
+   - 'P'   : Mettre la caméra sur le joueur actuel 
+   - 'O'   : Caméra sur les dés 
+   - 'H'   : Affichage de l'aide 
+   - 'V'   : Joue le tour
+   - 'r'   : Réinitialise la partie
+   - 'R'   : Réinitialisation du zoom, des rotations et des modifications de camera
+   - 'F1 -> F4' : Lumières 0 à 3 activation/désactivation
+   - 'F10' : Activation/désactivation de l'éclairage
+   - 'T'   : Activation/désactivation des textures
