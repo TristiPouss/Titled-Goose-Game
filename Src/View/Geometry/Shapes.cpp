@@ -70,13 +70,10 @@ void drawCube(float edgeLength, int facetNumber, int normalDirection, GLuint tex
                 break; 
         }
         if (textures && textures[i] != 0) {
-            glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, textures[i]);
         }
        drawPlane(edgeLength, facetNumber, normal, ratioTexture);
-        if (textures && textures[i] != 0) {
-            glDisable(GL_TEXTURE_2D);
-        }
+
 
         glPopMatrix();
         
@@ -131,17 +128,13 @@ void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalD
 
         // Draw the face
         if (facesTextures && facesTextures[i] != 0) {
-            glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, facesTextures[i]);
         }
         drawCenteredPlane(edgeLength, facetNumber, normal, ratioTexture);
-        if (facesTextures && facesTextures[i] != 0) {
-            glDisable(GL_TEXTURE_2D);
-        }
+
         glPopMatrix();
     }
     if (cornersTexture != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, cornersTexture);
     }
     // Draw the rounded edges
@@ -160,13 +153,9 @@ void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalD
         gluSphere(quadric, radius, facetNumber, facetNumber);
         glPopMatrix();
     }
-    if (cornersTexture  != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
 
     // Draw the rounded edges (cylinders)
     if (edgesTexture != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, edgesTexture);
     }
     for (int i = 0; i < 12; i++) {
@@ -190,14 +179,10 @@ void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalD
             case 11: glTranslatef(halfEdge, -halfEdge, -halfEdge); glRotatef(90, 0.0F, 0.0F, 1.0F); break;
         }
         if (edgesTexture != 0) {
-            glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, edgesTexture);
         }
         drawCylinder(radius, radius, edgeLength, facetNumber, facetNumber);
         glPopMatrix();
-    }
-    if (edgesTexture != 0) {
-        glDisable(GL_TEXTURE_2D);
     }
 
     gluDeleteQuadric(quadric);
@@ -209,7 +194,6 @@ void drawCircle(float originX, float originY, float radius, int facetNumber, GLu
     double twicePi = 2.0 * M_PI;
 
     if (textureID != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textureID);
     }
 
@@ -222,10 +206,6 @@ void drawCircle(float originX, float originY, float radius, int facetNumber, GLu
         glVertex2f(y, x);
     }
     glEnd(); // END
-
-    if (textureID != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
 
     glPopMatrix();
 }
@@ -250,15 +230,10 @@ void drawCylinder(float topRadius, float botRadius, float height, int facetNumbe
     gluQuadricDrawStyle(qobj, GLU_FILL);
 
     if (sideTexture != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, sideTexture);
     }
 
     gluCylinder(qobj, topRadius, botRadius, height, facetNumberX, facetNumberY);
-
-    if (sideTexture != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
 
     gluDeleteQuadric(qobj);
     glPopMatrix();
@@ -274,15 +249,10 @@ void drawSphere(float radius, int facetNumber, GLuint texture) {
     gluQuadricDrawStyle(qobj, GLU_FILL);
 
     if (texture != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 
     gluSphere(qobj, radius, facetNumber, facetNumber);
-
-    if (texture != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
 
     gluDeleteQuadric(qobj);
     glPopMatrix();
@@ -292,15 +262,10 @@ void drawTorus(float innerRadius, float outerRadius, int facetNumber, GLuint tex
     glPushMatrix();
 
     if (texture != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 
     glutSolidTorus(innerRadius, outerRadius, facetNumber, facetNumber);
-
-    if (texture != 0) {
-        glDisable(GL_TEXTURE_2D);
-    }
 
     glPopMatrix();
 }
@@ -315,7 +280,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
     glTranslatef(-width/2, height, -depth/2);
     glRotatef(90, 1.0F, 0.0F, 0.0F);
     if (textures && textures[0] != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textures[0]);
     }
     for (int j = 0; j < facetNumber; j++) {
@@ -330,7 +294,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
         glEnd();
         glTranslatef(width/facetNumber, 0.0F, 0.0F);
     }
-    if (textures && textures[0] != 0) glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     // Bottom Face
@@ -338,7 +301,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
     glTranslatef(-width/2, 0, depth/2);
     glRotatef(-90, 1.0F, 0.0F, 0.0F);
     if (textures && textures[1] != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textures[1]);
     }
     for (int j = 0; j < facetNumber; j++) {
@@ -353,7 +315,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
         glEnd();
         glTranslatef(width/facetNumber, 0.0F, 0.0F);
     }
-    if (textures && textures[1] != 0) glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     // Left Face
@@ -361,7 +322,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
     glTranslatef(-width/2, 0, depth/2);
     glRotatef(90, 0.0F, 1.0F, 0.0F);
     if (textures && textures[2] != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textures[2]);
     }
     for (int j = 0; j < facetNumber; j++) {
@@ -376,7 +336,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
         glEnd();
         glTranslatef(depth/facetNumber, 0.0F, 0.0F);
     }
-    if (textures && textures[2] != 0) glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     // Right Face
@@ -384,7 +343,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
     glTranslatef(width/2, 0, -depth/2);
     glRotatef(-90, 0.0F, 1.0F, 0.0F);
     if (textures && textures[3] != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textures[3]);
     }
     for (int j = 0; j < facetNumber; j++) {
@@ -399,7 +357,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
         glEnd();
         glTranslatef(depth/facetNumber, 0.0F, 0.0F);
     }
-    if (textures && textures[3] != 0) glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     // Back Face
@@ -407,7 +364,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
     glTranslatef(width/2, 0, depth/2);
     glRotatef(180, 0.0F, 1.0F, 0.0F);
     if (textures && textures[4] != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textures[4]);
     }
     for (int j = 0; j < facetNumber; j++) {
@@ -422,14 +378,12 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
         glEnd();
         glTranslatef(width/facetNumber, 0.0F, 0.0F);
     }
-    if (textures && textures[4] != 0) glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     // Front Face
     glPushMatrix();
     glTranslatef(-width/2, 0, -depth/2);
     if (textures && textures[5] != 0) {
-        glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textures[5]);
     }
     for (int j = 0; j < facetNumber; j++) {
@@ -444,7 +398,6 @@ void drawCuboid(float width, float height, float depth, int facetNumber, int nor
         glEnd();
         glTranslatef(width/facetNumber, 0.0F, 0.0F);
     }
-    if (textures && textures[5] != 0) glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     glPopMatrix();
