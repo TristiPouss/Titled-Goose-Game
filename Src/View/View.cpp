@@ -86,9 +86,10 @@ void View::drawMainScene(int facetNumber) {
    glTranslatef(0.0, -tableHeight, 0.0);
 
    //room
+   int roomFacetNumber = 300;
    glPushMatrix();
    glRotatef(45, 0.0, 1.0, 0.0);
-   drawCube(roomLength, facetNumber, 0, texturesRoom, 5.0F);
+   drawCube(roomLength, roomFacetNumber, 0, texturesRoom, 5.0F);
    glPopMatrix();    
 
    //table
@@ -100,7 +101,7 @@ void View::drawMainScene(int facetNumber) {
    for (int i = 0; i < 4; i++) {
        glPushMatrix();
        glTranslatef(posPlayers[i].x, posPlayers[i].y, posPlayers[i].z);
-       drawPawn(pawnWidth, facetNumber, texturesPawn[i]);
+       drawPawn(pawnWidth, facetNumber, texturesPawn[i], i);
        glPopMatrix();
    }
 

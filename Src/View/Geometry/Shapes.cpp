@@ -150,7 +150,7 @@ void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalD
             case 6: glTranslatef(halfEdge, halfEdge, halfEdge); break;
             case 7: glTranslatef(-halfEdge, halfEdge, halfEdge); break;
         }
-        gluSphere(quadric, radius, facetNumber, facetNumber);
+        gluSphere(quadric, radius, facetNumber*2, facetNumber*2);
         glPopMatrix();
     }
 
@@ -181,7 +181,7 @@ void drawRoundedCube(float edgeLength,float radius, int facetNumber, int normalD
         if (edgesTexture != 0) {
             glBindTexture(GL_TEXTURE_2D, edgesTexture);
         }
-        drawCylinder(radius, radius, edgeLength, facetNumber, facetNumber);
+        drawCylinder(radius, radius, edgeLength, facetNumber*2, facetNumber*2);
         glPopMatrix();
     }
 
