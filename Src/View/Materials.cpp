@@ -23,15 +23,31 @@ void resetMaterial() {
     glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 }
 
-void setPlasticMaterial() {
+void setPlasticMaterial(int number) {
     // Couleur ambiante (faible reflet de la lumière ambiante)
     GLfloat mat_ambient[] = { 0.8f, 0.8f, 0.8f, 1.0f };
 
     // Couleur diffuse (couleur principale du matériau)
-    GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f }; // brillant
+    GLfloat mat_diffuse[] = { 0.4f, 0.4f, 0.4f, 1.0f }; // brillant
+
+    GLfloat mat_specular[4];
 
     // Couleur spéculaire (reflets brillants)
-    GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    switch (number) {
+    case 0:
+        mat_specular[0] = 1.0f; mat_specular[1] = 0.0f; mat_specular[2] = 0.0f; mat_specular[3] = 1.0f;
+        break;
+    case 1:
+        mat_specular[0] = 0.0f; mat_specular[1] = 1.0f; mat_specular[2] = 0.0f; mat_specular[3] = 1.0f;
+        break;
+    case 2:
+        mat_specular[0] = 0.0f; mat_specular[1] = 0.0f; mat_specular[2] = 1.0f; mat_specular[3] = 1.0f;
+        break;
+    case 3:
+        mat_specular[0] = 1.0f; mat_specular[1] = 1.0f; mat_specular[2] = 0.0f; mat_specular[3] = 1.0f;
+        break;
+    }
+
 
     // Brillance (intensité des reflets spéculaires)
     GLfloat mat_shininess[] = { 128.0f }; // Valeur élevée pour un effet brillant
