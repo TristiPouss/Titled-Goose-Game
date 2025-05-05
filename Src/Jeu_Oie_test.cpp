@@ -64,13 +64,13 @@ static void lightTwilight() {
 }
 
 static void lightNight() {
-	GLfloat light1Diff[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat light1Diff[] = { 0.75, 0.6, 0.9, 1.0 };
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
 	GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
 	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
 	GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
 	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
-	GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
+	GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 0.0 };
 	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 
     GLfloat light2Diff[] = { 0.8, 0.8, 0.6, 1.0 };
