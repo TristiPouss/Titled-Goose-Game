@@ -35,7 +35,6 @@ static int fullscreen = 0;
 static int texturesEnabled = 1;    // Flag to enable/disable textures
 static int timeOfDay = 0;
 
-static float scenerySize = 100.0F; // Size of one face of a cube
 static int facetNumber = 50;       // Level of tessellation
 
 static const float FOV = 90.0F;          // Field of view for the perspective camera
