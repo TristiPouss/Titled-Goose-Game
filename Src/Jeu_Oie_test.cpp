@@ -25,34 +25,81 @@ static void init(void) {
     glEnable(GL_DEPTH_TEST);
 }
 
-static void ambient() {
-    GLfloat light1Pos[] = { 1.0, 1.0, 1.0, 0.0 };
-    glLightfv(GL_LIGHT1, GL_AMBIENT, light1Pos);
-    GLfloat light1Ambient[] = { 1.0, 1.0, 1.0 };
+static void lightDay() {
+    GLfloat light1Diff[] = { 1.0, 1.0, 0.8, 1.0 };
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
+    GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
     glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
-}
+    GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
+    GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
+    glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
 
-static void spot_top() {
-    GLfloat diff[] = { 1.0, 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, diff);
-    GLfloat pos[] = { 0.0, 80.0, 0.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_POSITION, pos);
-    GLfloat dir[] = { 0.0, -80.0, 0.0 };
+    GLfloat light2Diff[] = { 0.25, 0.61, 1.0, 1.0 };
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diff);
+    GLfloat light2Ambient[] = { 0.0, 0.0, 0.0 };
+    glLightfv(GL_LIGHT2, GL_AMBIENT, light2Ambient);
+    GLfloat light2Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+    glLightfv(GL_LIGHT2, GL_SPECULAR, light2Spec);
+    GLfloat light2Pos[] = { 0.0, roomLength, 0.0, 1.0 };
+    glLightfv(GL_LIGHT2, GL_POSITION, light2Pos);
+    GLfloat dir[] = { 0.0, -roomLength, 0.0 };
     glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
-    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 90.0);
+    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 60.0);
 }
 
-static void diffuse() {
-    GLfloat light3Pos[] = { 1.0, 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT3, GL_DIFFUSE, light3Pos);
-    GLfloat light3Diffuse[] = { 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT3, GL_DIFFUSE, light3Diffuse);
+static void lightTwilight() {
+	GLfloat light1Diff[] = { 0.98, 0.88, 0.74, 1.0 };
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
+	GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
+	GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
+	GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
+
+    GLfloat vid[] = { 0.0, 0.0, 0.0 };
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, vid);
+    glLightfv(GL_LIGHT2, GL_AMBIENT, vid);
+}
+
+static void lightNight() {
+	GLfloat light1Diff[] = { 0.0, 0.0, 0.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
+	GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
+	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
+	GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
+	GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
+	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
+
+    GLfloat light2Diff[] = { 0.8, 0.8, 0.6, 1.0 };
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diff);
+    GLfloat light2Ambient[] = { 0.0, 0.0, 0.0 };
+    glLightfv(GL_LIGHT2, GL_AMBIENT, light2Ambient);
+    GLfloat light2Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+    glLightfv(GL_LIGHT2, GL_SPECULAR, light2Spec);
+    GLfloat light2Pos[] = { 0.0, roomLength, 0.0, 1.0 };
+    glLightfv(GL_LIGHT2, GL_POSITION, light2Pos);
+    GLfloat dir[] = { 0.0, -roomLength, 0.0 };
+    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
+    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 32.0);
 }
 
 static void initLight() {
-    ambient();
-    diffuse();
-    spot_top();
+    switch (timeOfDay) {
+	case 0:
+		lightDay();
+		break;
+	case 1:
+		lightTwilight();
+        break;
+	case 2:
+		lightNight();
+		break;
+    }
+    
+    
 }
 /* Fonction executee lors d'un rafraichissement */
 /* de la fenetre de dessin                      */
@@ -118,6 +165,7 @@ static void display(void) {
     
     // Light init
     initLight();
+
     // Scene
     main_game.display(facetNumber);
 
@@ -240,6 +288,13 @@ static void keyboard(unsigned char key, int x, int y) {
         main_game.switchCameraOnDice();
         glutPostRedisplay();
         break;
+    case 'g':
+    case 'G':
+		timeOfDay++;
+		if (timeOfDay > 2)
+			timeOfDay = 0;
+		glutPostRedisplay();
+		break;
     case 0x20:
         normalize = !normalize;
         glutPostRedisplay();

@@ -24,17 +24,18 @@ static int wPy = 50;               // Vertical position of the window
 static int anim = 0;               // Flag to enable/disable animation
 static int polygonMode = 1;        // Flag to switch between wireframe and fill display modes
 static int materialLightMode = 1;
-static int light1 = 0;
+static int light1 = 1;
 static int light2 = 1;
 static int light3 = 1;
-static int light4 = 0;
+static int light4 = 1;
 static int normalize = 1;          // Flag to switch between normalized and non-normalized modes
 static int fond = 1;               // Flag to switch between black and light gray background colors
 static int culling = 0;            // Flag to switch between rendering with and without culling
 static int fullscreen = 0;
 static int texturesEnabled = 1;    // Flag to enable/disable textures
+static int timeOfDay = 0;
 
-static int facetNumber = 20;       // Level of tessellation
+static int facetNumber = 50;       // Level of tessellation
 
 static const float FOV = 90.0F;          // Field of view for the perspective camera
 

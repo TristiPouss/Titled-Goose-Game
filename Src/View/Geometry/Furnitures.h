@@ -11,6 +11,7 @@
 #include <GL/glu.h>
 
 #include "Texture.h"
+#include "../Materials.h"
 
 #include "../../model/Cell.h"
 
@@ -21,7 +22,7 @@ void tableTop(float tableTopHeight, float tableTopWidth, int facetNumber);
 
 void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNumber);
 
-void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0);
+void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID = 0, int number = 0);
 
 void drawDice(float diceEdgeLength, float diceRadius, int facetNumber);
 

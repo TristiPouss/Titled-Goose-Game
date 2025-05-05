@@ -2,6 +2,9 @@
 #include "Shapes.h"
 
 void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 5)
+		facetNumber = 5;
 	glPushMatrix();
 	glScalef(tableLegWidth, 1.0F, tableLegWidth);
 	drawCube(tableLegHeight - 1.0F, facetNumber, 1, texturesTableLeg);
@@ -9,6 +12,9 @@ void tableLeg(float tableLegHeight, float tableLegWidth, int facetNumber) {
 }
 
 void tableTop(float tableTopLength, float tableTopWidth, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 5)
+		facetNumber = 5;
 	glPushMatrix();
 	glScalef(1.0F, tableTopWidth / tableTopLength, 1.0F);
 	drawCube(tableTopLength, facetNumber, 1, texturesTableTop);
@@ -42,13 +48,21 @@ void drawTable(float verticalEdgeLength, float horizontalEdgeLength, int facetNu
 }
 
 void drawDice(float diceEdgeLength, float diceRadius, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 5)
+		facetNumber = 5;
 	glPushMatrix();
 	drawRoundedCube(diceEdgeLength, diceRadius, facetNumber, 1, texturesDiceFaces, textureEdgeDice, textureCornerDice, 1);
 	glPopMatrix();
 }
 
-void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
+void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID, int number) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 20)
+		facetNumber = 20;
 	glPushMatrix();
+
+	setPlasticMaterial(number);
 
 	float verticalEdgeLength = horizontalEdgeLength * 2.5;
 
@@ -56,7 +70,7 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 	float headRadius = horizontalEdgeLength / 2;
 	float headHeight = verticalEdgeLength - headRadius;
 	glTranslatef(0.0F, headHeight, 0.0F);
-	drawSphere(headRadius, facetNumber, textureID);
+	drawSphere(headRadius, facetNumber*2, textureID);
 	glTranslatef(0.0F, -headHeight, 0.0F);
 
 	// Base Cylinder
@@ -74,13 +88,20 @@ void drawPawn(float horizontalEdgeLength, int facetNumber, GLuint textureID) {
 	glTranslatef(0.0F, -baseHeight, 0.0F);
 
 	// Base Cylinder
-	drawCylinder(baseRadius, baseRadius, baseHeight / 7, facetNumber, facetNumber, textureID, textureID, textureID);
+	drawCylinder(baseRadius, baseRadius, baseHeight / 7, facetNumber*2, facetNumber * 2, textureID, textureID, textureID);
+
+	resetMaterial();
 
 	glPopMatrix();
 }
 
 void drawLitVoiture(float horizontalEdgeLength, float depthEdgeLength, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 8)
+		facetNumber = 8;
 	glPushMatrix();
+
+	setWoodMaterial();
 
 	float verticalEdgeLength = horizontalEdgeLength * 0.3;
 	float thinEdge = horizontalEdgeLength * 0.01;
@@ -115,6 +136,8 @@ void drawLitVoiture(float horizontalEdgeLength, float depthEdgeLength, int facet
 	drawCube(depthEdgeLength, facetNumber, 1, texturesFront, 1);
 	glPopMatrix();
 
+	resetMaterial();
+
 	// Top Side
 	glPushMatrix();
 	glTranslatef(-horizontalEdgeLength/12, verticalEdgeLength / 2 - thinEdge / 2, 0.0F);
@@ -133,6 +156,9 @@ void drawLitVoiture(float horizontalEdgeLength, float depthEdgeLength, int facet
 }
 
 void drawCubeStack(float l, int facetNumber, GLuint *texture1, GLuint *texture2, GLuint *texture3) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	glPushMatrix();
 
 	glTranslatef(-l * 0.75, 0.0F, 0.0F); 
@@ -152,6 +178,9 @@ void drawCubeStack(float l, int facetNumber, GLuint *texture1, GLuint *texture2,
 }
 
 void drawKaplaTowerSpiral(float l, int nbKapla, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	float L = l/4;
 	float h = l/10;
 
@@ -167,6 +196,9 @@ void drawKaplaTowerSpiral(float l, int nbKapla, int facetNumber) {
 }
 
 void drawKaplaTower(float l, int height, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	float h = l/4;
 	float L = l/10;
 	float offset = L;
@@ -186,6 +218,9 @@ void drawKaplaTower(float l, int height, int facetNumber) {
 }
 
 void drawCastle(float l, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	float L = l/3;
 	float h = L/2;
 	float r = L/3;
@@ -200,16 +235,17 @@ void drawCastle(float l, int facetNumber) {
 	drawCuboid(l,h,L,facetNumber, 1, texturesYellow, 1.0F);
 	
 	glTranslatef(-L, h, 0.0F);
-	drawCylinder(r, r, L*2, facetNumber, facetNumber, textureRed, textureRed, textureRed);
+	drawCylinder(r, r, L*2, facetNumber * 3, facetNumber * 3, textureRed, textureRed, textureRed);
 	glTranslatef(L*2, 0.0F, 0.0F);
-	drawCylinder(0, h, L, facetNumber, facetNumber, textureBlue, textureBlue, textureBlue);
+	drawCylinder(0, h, L, facetNumber * 3, facetNumber * 3, textureBlue, textureBlue, textureBlue);
 	glTranslatef(-L*2, L*2, 0.0F);
-	drawCylinder(0, h, L, facetNumber, facetNumber, textureYellow, textureYellow, textureYellow);
+	drawCylinder(0, h, L, facetNumber * 3, facetNumber * 3, textureYellow, textureYellow, textureYellow);
 
 	glPopMatrix();
 }
 
 void drawCell(float l, int facetNumber, gooseGameModel::CellType type) {
+	facetNumber = 8;
 	float x = l / 10;
 	GLuint texture = 0;
 
@@ -233,6 +269,9 @@ void drawCell(float l, int facetNumber, gooseGameModel::CellType type) {
 }
 
 void drawShelf(float l, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	float L = l/4;
 	float x = L/4;
 
@@ -253,6 +292,9 @@ void drawShelf(float l, int facetNumber) {
 }
 
 void drawDoor(float h, int facetNumber) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	float l = h/2;
 	float L = l/10;
 
@@ -264,6 +306,9 @@ void drawDoor(float h, int facetNumber) {
 }
 
 void drawPoster(float width, float height, int facetNumber, GLuint texture) {
+	facetNumber = facetNumber / 10;
+	if (facetNumber < 4)
+		facetNumber = 4;
 	GLuint textures[6] = {0,0,0,0,0,texture};
     float L = width/50;
 	glPushMatrix();
