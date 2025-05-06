@@ -77,43 +77,43 @@ void initCubeTextureSingle(GLuint textureID, GLuint textures[6]) {
 }
 
 void initTexture() {
-    textureWall = chargementTexturePNG("../Assets/greysand.png24");
-    textureFloor = chargementTexturePNG("../Assets/wood.png24");
-    textureTest = chargementTexturePNG("../Assets/Test.png");
-    textureWood = chargementTexturePNG("../Assets/bg_wood.png24");
-    textureTableFeet = chargementTexturePNG("../Assets/trunk_side.png24");
-    textureTablePlate = chargementTexturePNG("../Assets/bg_wood.png24");
-    textureKaaris = chargementTexturePNG("../Assets/kaaris.png24");
-    textureEvanescence = chargementTexturePNG("../Assets/evanescence.png24");
-    texturePulp = chargementTexturePNG("../Assets/pulp.png24");
-    textureFenetre = chargementTexturePNG("../Assets/fenetre.png24");
-	textureRedStripes = chargementTexturePNG("../Assets/red_stripes.png24");
-	textureMcqueenFace = chargementTexturePNG("../Assets/mcqueen_face.png24");
+    textureWall = chargementTexturePNG("../Bin/Assets/greysand.png24");
+    textureFloor = chargementTexturePNG("../Bin/Assets/wood.png24");
+    textureTest = chargementTexturePNG("../Bin/Assets/Test.png");
+    textureWood = chargementTexturePNG("../Bin/Assets/bg_wood.png24");
+    textureTableFeet = chargementTexturePNG("../Bin/Assets/trunk_side.png24");
+    textureTablePlate = chargementTexturePNG("../Bin/Assets/bg_wood.png24");
+    textureKaaris = chargementTexturePNG("../Bin/Assets/kaaris.png24");
+    textureEvanescence = chargementTexturePNG("../Bin/Assets/evanescence.png24");
+    texturePulp = chargementTexturePNG("../Bin/Assets/pulp.png24");
+    textureFenetre = chargementTexturePNG("../Bin/Assets/fenetre.png24");
+	textureRedStripes = chargementTexturePNG("../Bin/Assets/red_stripes.png24");
+	textureMcqueenFace = chargementTexturePNG("../Bin/Assets/mcqueen_face.png24");
 
 
-    textureRed = chargementTexturePNG("../Assets/red.png24");
-    textureGreen = chargementTexturePNG("../Assets/green.png24");
-    textureBlue = chargementTexturePNG("../Assets/blue.png24");
-    textureYellow = chargementTexturePNG("../Assets/yellow.png24");
-    texturePurple = chargementTexturePNG("../Assets/purple.png24");
+    textureRed = chargementTexturePNG("../Bin/Assets/red.png24");
+    textureGreen = chargementTexturePNG("../Bin/Assets/green.png24");
+    textureBlue = chargementTexturePNG("../Bin/Assets/blue.png24");
+    textureYellow = chargementTexturePNG("../Bin/Assets/yellow.png24");
+    texturePurple = chargementTexturePNG("../Bin/Assets/purple.png24");
 
-    textureCubePurple = chargementTexturePNG("../Assets/cube_purple.png24");
-    textureCubeRed = chargementTexturePNG("../Assets/cube_red.png24");
-    textureCubeGreen = chargementTexturePNG("../Assets/cube_green.png24");
-    textureCubeBlue = chargementTexturePNG("../Assets/cube_blue.png24");
-    textureCubeYellow = chargementTexturePNG("../Assets/cube_yellow.png24");
-	textureCubeWhite = chargementTexturePNG("../Assets/cube_white.png24");
+    textureCubePurple = chargementTexturePNG("../Bin/Assets/cube_purple.png24");
+    textureCubeRed = chargementTexturePNG("../Bin/Assets/cube_red.png24");
+    textureCubeGreen = chargementTexturePNG("../Bin/Assets/cube_green.png24");
+    textureCubeBlue = chargementTexturePNG("../Bin/Assets/cube_blue.png24");
+    textureCubeYellow = chargementTexturePNG("../Bin/Assets/cube_yellow.png24");
+	textureCubeWhite = chargementTexturePNG("../Bin/Assets/cube_white.png24");
 
     //Init dice 
-    textureEdgeDice = chargementTexturePNG("../Assets/edgeDice.png24");
-    textureCornerDice = chargementTexturePNG("../Assets/edgeDice.png24");
+    textureEdgeDice = chargementTexturePNG("../Bin/Assets/edgeDice.png24");
+    textureCornerDice = chargementTexturePNG("../Bin/Assets/edgeDice.png24");
 
-    texturesDiceFaces[0] = chargementTexturePNG("../Assets/diceRed2.png24");
-    texturesDiceFaces[1] = chargementTexturePNG("../Assets/diceRed5.png24");
-    texturesDiceFaces[2] = chargementTexturePNG("../Assets/diceRed1.png24");
-    texturesDiceFaces[3] = chargementTexturePNG("../Assets/diceRed6.png24");
-    texturesDiceFaces[4] = chargementTexturePNG("../Assets/diceRed4.png24");
-    texturesDiceFaces[5] = chargementTexturePNG("../Assets/diceRed3.png24");
+    texturesDiceFaces[0] = chargementTexturePNG("../Bin/Assets/diceRed2.png24");
+    texturesDiceFaces[1] = chargementTexturePNG("../Bin/Assets/diceRed5.png24");
+    texturesDiceFaces[2] = chargementTexturePNG("../Bin/Assets/diceRed1.png24");
+    texturesDiceFaces[3] = chargementTexturePNG("../Bin/Assets/diceRed6.png24");
+    texturesDiceFaces[4] = chargementTexturePNG("../Bin/Assets/diceRed4.png24");
+    texturesDiceFaces[5] = chargementTexturePNG("../Bin/Assets/diceRed3.png24");
 
     /* For a cube, we have the following corresponding table: 
     0 - Front
