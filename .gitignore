@@ -5,7 +5,12 @@
 /.vs
 /Projet/.vs/
 /Temp
-/Bin
+/Bin/*
 /.cache
 .vscode
 /build
+
+# Sauf
+
+!/Bin/Assets/
+!/Bin/Assets/**
