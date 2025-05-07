@@ -373,7 +373,6 @@ void View::update(float deltaTime) {
     }
 
     if (timerChangeTimeOfDay > 0) {
-        lights.updateTransition(deltaTime);
         timerChangeTimeOfDay -= deltaTime;
         if (timerChangeTimeOfDay <= 0) {
             f_changeTimeOfDay = false;
@@ -384,6 +383,9 @@ void View::update(float deltaTime) {
 
 void View::draw(int facetNumber) {    
     
+    // BUG : la lumière a l'air de se foutre en face de la cam
+    lights.updateTransition();
+
     // Draw the current scene
     switch (scene) {
         case MAIN_SCENE:
