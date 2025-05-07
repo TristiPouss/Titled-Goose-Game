@@ -52,6 +52,22 @@ void Lights::updateTransition() {
         glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, interpolatedLight.light2SpotCutoff);
 
     }
+    else
+    {
+        // GL_LIGHT1
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, lightConfigs[currentLight].light1Diffuse);
+        glLightfv(GL_LIGHT1, GL_AMBIENT, lightConfigs[currentLight].light1Ambient);
+        glLightfv(GL_LIGHT1, GL_SPECULAR, lightConfigs[currentLight].light1Specular);
+        glLightfv(GL_LIGHT1, GL_POSITION, lightConfigs[currentLight].light1Position);
+
+        // GL_LIGHT2
+        glLightfv(GL_LIGHT2, GL_DIFFUSE, lightConfigs[currentLight].light2Diffuse);
+        glLightfv(GL_LIGHT2, GL_AMBIENT, lightConfigs[currentLight].light2Ambient);
+        glLightfv(GL_LIGHT2, GL_SPECULAR, lightConfigs[currentLight].light2Specular);
+        glLightfv(GL_LIGHT2, GL_POSITION, lightConfigs[currentLight].light2Position);
+        glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, lightConfigs[currentLight].light2SpotDirection);
+        glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, lightConfigs[currentLight].light2SpotCutoff);
+    }
 }
 
 void Lights::startTransition() {
