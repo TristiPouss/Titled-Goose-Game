@@ -333,6 +333,7 @@ void View::updateDiceScene(float deltaTime) {
 }
 
 void View::update(float deltaTime) {
+
     // Update the view based on the current scene
     switch (scene) {
         case MAIN_SCENE:
@@ -382,8 +383,7 @@ void View::update(float deltaTime) {
 }
 
 void View::draw(int facetNumber) {    
-    
-    // BUG : la lumière a l'air de se foutre en face de la cam
+
     lights.updateTransition();
 
     // Draw the current scene
