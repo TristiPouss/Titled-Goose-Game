@@ -249,6 +249,8 @@ void drawCell(float l, int facetNumber, gooseGameModel::CellType type) {
 	float x = l / 10;
 	GLuint texture = 0;
 
+	setPlasticMaterial();
+
 	switch (type) {
 		case gooseGameModel::CellType::GOOSE:
 			texture = textureGreen;
@@ -266,6 +268,8 @@ void drawCell(float l, int facetNumber, gooseGameModel::CellType type) {
 
 	drawCylinder(l, l, x, facetNumber, facetNumber);
 	drawCylinder(l - x, l - x, x + x, facetNumber, facetNumber, texture, texture, texture);
+
+	resetMaterial();
 }
 
 void drawShelf(float l, int facetNumber) {
