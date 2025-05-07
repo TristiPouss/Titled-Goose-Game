@@ -1,17 +1,10 @@
 #include "View.h"
-#include "Camera/Camera.h"
-#include "Geometry/Furnitures.h"
-#include "Settings.h"
-#include <GL/gl.h>
-#include <cstdlib>
-#include <math.h>
-
-
 
 View::View() {
     // Initialize the view
     scene = MAIN_SCENE;
     cam = Camera();
+	lights = Lights();
     posCells.resize(DEFAULT_SIZE_BOARD); // Assuming 40 cells on the board
     posPlayers.resize(4); // Assuming 4 players
     init();
@@ -77,10 +70,12 @@ void View::init() {
         posPlayers[i].z = posCells[0].z + pawnWidth * signZ;
         posPlayers[i].caseNumber = 0;
     }
+
+    changeDayTime();
 }
 
 void View::drawMainScene(int facetNumber) {
-   
+
     // Draw the main scene
    glPushMatrix();
    glTranslatef(0.0, -tableHeight, 0.0);
@@ -377,10 +372,17 @@ void View::update(float deltaTime) {
         }
     }
 
+    if (timerChangeTimeOfDay > 0) {
+        lights.updateTransition(deltaTime);
+        timerChangeTimeOfDay -= deltaTime;
+        if (timerChangeTimeOfDay <= 0) {
+            f_changeTimeOfDay = false;
+        }
+    }
+
 }
 
 void View::draw(int facetNumber) {    
-    
     
     // Draw the current scene
     switch (scene) {
@@ -417,4 +419,10 @@ void View::showDiceFace(int value) {
         default:
             break;
     }
+}
+
+void View::changeDayTime() {
+	// Change the time of day
+    lights.startTransition();
+    timerChangeTimeOfDay = TIMER_CHANGE_TIME_OF_DAY;
 }

@@ -12,6 +12,7 @@
 #include <GL/glu.h>
 
 #include "Camera/Camera.h"
+#include "Lights.h"
 #include "Settings.h"
 
 typedef struct {
@@ -44,6 +45,7 @@ class View
         
         void showDiceFace(int value);
 
+        void changeDayTime();
 
         void setCurrentPlayer(unsigned long player) {
             currentPlayer = player;
@@ -97,11 +99,13 @@ class View
             cam.initCamera(wTx, wTy);
         }
 
+		void initLights() {
+			lights.init();
+		}
+
         Camera cam;
+        Lights lights;
     private:
-
-         
-
 
         std::vector<pos3D> posCells;
         std::vector<pos3D> posPlayers;
@@ -112,12 +116,14 @@ class View
         float timerChangeTurn = 0;
         float timerDiceRolling = 0;
         float timerDiceShowing = 0;
+		float timerChangeTimeOfDay = 0;
 
         unsigned long currentPlayer = 0;
 
         bool f_anim = false;
         bool f_diceRolling = false;
         bool f_diceShowing = false;
+		bool f_changeTimeOfDay = false;
 
         gooseGameModel::Board board_cpy;
         int dicesValues[2] = { 1, 1 }; // Values of the two dices
