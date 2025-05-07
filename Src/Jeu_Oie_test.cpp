@@ -88,29 +88,6 @@ static void display(void) {
         glScalef(zoom, zoom, zoom);
     }
 
-    // La c'est pour tester avec l'ancienne lumière voir la différence avec l'update de la fonction draw
-
-        /*GLfloat light1Diff[] = { 1.0, 1.0, 0.8, 1.0 };
-        glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
-        GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
-        glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
-        GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-        glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
-        GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
-        glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
-
-        GLfloat light2Diff[] = { 0.25, 0.61, 1.0, 1.0 };
-        glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diff);
-        GLfloat light2Ambient[] = { 0.0, 0.0, 0.0 };
-        glLightfv(GL_LIGHT2, GL_AMBIENT, light2Ambient);
-        GLfloat light2Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-        glLightfv(GL_LIGHT2, GL_SPECULAR, light2Spec);
-        GLfloat light2Pos[] = { 0.0, roomLength, 0.0, 1.0 };
-        glLightfv(GL_LIGHT2, GL_POSITION, light2Pos);
-        GLfloat dir[] = { 0.0, -roomLength, 0.0 };
-        glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
-        glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 60.0);*/
-
     // Scene
     main_game.display(facetNumber);
 
