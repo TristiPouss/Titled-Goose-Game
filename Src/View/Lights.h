@@ -85,7 +85,7 @@ class Lights {
 
         void interpolate(const LightConfig& from, const LightConfig& to, float t, LightConfig& result);
 
-        void updateTransition(float deltaTime);
+        void updateTransition();
 
         void startTransition();
         
