@@ -38,6 +38,9 @@ class Camera {
 public:
     Camera() {
         isCameraPerspect = true;
+        f_cameraOnCurrentPlayer = false;
+        f_cameraOnDice = false;
+        f_cameraOnIsometric = true;
     
         // Initialize the camera to the isometric view
         currentViewCamera = isometricCamera;

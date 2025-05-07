@@ -12,7 +12,7 @@ extern GLfloat full_mat[4];
 
 void resetMaterial();
 
-void setPlasticMaterial(int number);
+void setPlasticMaterial(int number = -1);
 
 void setWoodMaterial();
 

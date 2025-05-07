@@ -153,6 +153,7 @@
     <ClCompile Include="..\Src\model\Game.cc" />
     <ClCompile Include="..\Src\model\Player.cc" />
     <ClCompile Include="..\Src\View\Geometry\Texture.cpp" />
+    <ClCompile Include="..\Src\View\Lights.cpp" />
     <ClCompile Include="..\Src\View\Materials.cpp" />
     <ClCompile Include="..\Src\View\View.cpp" />
     <ClInclude Include="..\Include\PNG\ChargePngFile.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="..\Include\PNG\Png\zconf.in.h" />
     <ClInclude Include="..\Include\PNG\Png\zlib.h" />
     <ClInclude Include="..\Include\PNG\Png\zutil.h" />
+    <ClInclude Include="..\Src\controller\Controller.h" />
     <ClInclude Include="..\Src\model\Board.h" />
     <ClInclude Include="..\Src\model\Cell.h" />
     <ClInclude Include="..\Src\model\Dice.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="..\Src\View\Geometry\Furnitures.h" />
     <ClInclude Include="..\Src\View\Geometry\Shapes.h" />
     <ClInclude Include="..\Src\View\Geometry\Texture.h" />
+    <ClInclude Include="..\Src\View\Lights.h" />
     <ClInclude Include="..\Src\View\Materials.h" />
     <ClInclude Include="..\Src\View\Settings.h" />
     <ClCompile Include="..\Src\Jeu_Oie_test.cpp" />

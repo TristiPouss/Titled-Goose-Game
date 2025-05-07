@@ -26,8 +26,6 @@ static int polygonMode = 1;        // Flag to switch between wireframe and fill 
 static int materialLightMode = 1;
 static int light1 = 1;
 static int light2 = 1;
-static int light3 = 1;
-static int light4 = 1;
 static int normalize = 1;          // Flag to switch between normalized and non-normalized modes
 static int fond = 1;               // Flag to switch between black and light gray background colors
 static int culling = 0;            // Flag to switch between rendering with and without culling
@@ -39,10 +37,10 @@ static int facetNumber = 50;       // Level of tessellation
 
 static const float FOV = 90.0F;          // Field of view for the perspective camera
 
-
 static const float TIMER_TIMEOUT = 2.0F; // Timeout for the animation
-static const float TIMER_DICE_ROLLING = 5.0F; // Timeout for the dice animation
+static const float TIMER_DICE_ROLLING = 2.0F; // Timeout for the dice animation
 static const float TIMER_DICE_SHOWING = 3.0F; // Timeout for the dice showing animation
+static const float TIMER_CHANGE_TIME_OF_DAY = 100.0F; // Timeout for every tick of transition between day times
 
 #ifndef M_PI 
 #define M_PI 3.14159
