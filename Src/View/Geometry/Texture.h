@@ -33,6 +33,8 @@ extern GLuint textureTableFeet;
 extern GLuint textureTablePlate;
 extern GLuint textureKaaris;
 extern GLuint textureEvanescence;
+extern GLuint textureTitledGooseGame;
+extern GLuint textureChassette;
 extern GLuint texturePulp;
 extern GLuint textureFenetre;
 extern GLuint textureRedStripes;

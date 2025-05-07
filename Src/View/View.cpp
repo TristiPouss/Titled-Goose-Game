@@ -144,6 +144,8 @@ void View::drawMainScene(int facetNumber) {
    glRotatef(45, 0.0, 1.0, 0.0);
    glTranslatef(roomLength/4 , 0.0F, roomLength/2);
    drawDoor(50, facetNumber);
+   glTranslatef(0.0F, 20.0F, -1.25);
+   drawPoster(15, 25, facetNumber, textureTitledGooseGame);
    glPopMatrix();
 
    //poster
@@ -163,6 +165,8 @@ void View::drawMainScene(int facetNumber) {
    glTranslatef(roomLength/2, roomLength/4, -roomLength/5);
    glRotatef(90, 0.0, 1.0, 0.0);
    drawPoster(20, 20, facetNumber, textureEvanescence);
+   glTranslatef(-roomLength / 2.5, -10.0F, 0.0F);
+   drawPoster(40, 40, facetNumber, textureChassette);
    glPopMatrix();
 
    //Window

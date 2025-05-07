@@ -25,6 +25,8 @@ GLuint textureTablePlate;
 GLuint textureTable;
 GLuint textureKaaris;
 GLuint textureEvanescence;
+GLuint textureTitledGooseGame;
+GLuint textureChassette;
 GLuint texturePulp;
 GLuint textureFenetre;
 GLuint textureRedStripes;
@@ -84,6 +86,8 @@ void initTexture() {
     textureTableFeet = chargementTexturePNG("../Bin/Assets/trunk_side.png24");
     textureTablePlate = chargementTexturePNG("../Bin/Assets/bg_wood.png24");
     textureKaaris = chargementTexturePNG("../Bin/Assets/kaaris.png24");
+	textureTitledGooseGame = chargementTexturePNG("../Bin/Assets/titled_goose_game.png24");
+	textureChassette = chargementTexturePNG("../Bin/Assets/chassette.png24");
     textureEvanescence = chargementTexturePNG("../Bin/Assets/evanescence.png24");
     texturePulp = chargementTexturePNG("../Bin/Assets/pulp.png24");
     textureFenetre = chargementTexturePNG("../Bin/Assets/fenetre.png24");
