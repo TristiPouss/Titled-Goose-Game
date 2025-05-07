@@ -54,6 +54,9 @@
     <ClCompile Include="..\Src\View\Materials.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\View\Lights.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Src\View\Camera\Camera.h">
@@ -147,6 +150,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Src\View\Materials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\controller\Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Src\View\Lights.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
