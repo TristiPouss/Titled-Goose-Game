@@ -12,6 +12,7 @@
 #include "View/Settings.h"
 #include "View/Geometry/Texture.h"
 #include "View/View.h"
+#include "View/Lights.h"
 
 #include "controller/Controller.h"
 
@@ -25,82 +26,6 @@ static void init(void) {
     glEnable(GL_DEPTH_TEST);
 }
 
-static void lightDay() {
-    GLfloat light1Diff[] = { 1.0, 1.0, 0.8, 1.0 };
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
-    GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
-    glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
-    GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
-    GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
-    glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
-
-    GLfloat light2Diff[] = { 0.25, 0.61, 1.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diff);
-    GLfloat light2Ambient[] = { 0.0, 0.0, 0.0 };
-    glLightfv(GL_LIGHT2, GL_AMBIENT, light2Ambient);
-    GLfloat light2Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_SPECULAR, light2Spec);
-    GLfloat light2Pos[] = { 0.0, roomLength, 0.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_POSITION, light2Pos);
-    GLfloat dir[] = { 0.0, -roomLength, 0.0 };
-    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
-    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 60.0);
-}
-
-static void lightTwilight() {
-	GLfloat light1Diff[] = { 0.98, 0.88, 0.74, 1.0 };
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
-	GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
-	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
-	GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
-	GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
-	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
-
-    GLfloat vid[] = { 0.0, 0.0, 0.0 };
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, vid);
-    glLightfv(GL_LIGHT2, GL_AMBIENT, vid);
-}
-
-static void lightNight() {
-	GLfloat light1Diff[] = { 0.75, 0.6, 0.9, 1.0 };
-	glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
-	GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
-	glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
-	GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-	glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
-	GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 0.0 };
-	glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
-
-    GLfloat light2Diff[] = { 0.8, 0.8, 0.6, 1.0 };
-    glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diff);
-    GLfloat light2Ambient[] = { 0.0, 0.0, 0.0 };
-    glLightfv(GL_LIGHT2, GL_AMBIENT, light2Ambient);
-    GLfloat light2Spec[] = { 1.0, 1.0, 1.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_SPECULAR, light2Spec);
-    GLfloat light2Pos[] = { 0.0, roomLength, 0.0, 1.0 };
-    glLightfv(GL_LIGHT2, GL_POSITION, light2Pos);
-    GLfloat dir[] = { 0.0, -roomLength, 0.0 };
-    glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
-    glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 32.0);
-}
-
-static void initLight() {
-    switch (timeOfDay) {
-	case 0:
-		lightDay();
-		break;
-	case 1:
-		lightTwilight();
-        break;
-	case 2:
-		lightNight();
-		break;
-    }
-    
-    
-}
 /* Fonction executee lors d'un rafraichissement */
 /* de la fenetre de dessin                      */
 
@@ -109,39 +34,39 @@ static void display(void) {
         glEnable(GL_CULL_FACE);
     else
         glDisable(GL_CULL_FACE);
+
     glPolygonMode(GL_FRONT_AND_BACK, (polygonMode) ? GL_FILL : GL_LINE);
+
     if (texturesEnabled)
 		glEnable(GL_TEXTURE_2D);
 	else
 		glDisable(GL_TEXTURE_2D);
+
     if (normalize)
         glEnable(GL_NORMALIZE);
     else
         glDisable(GL_NORMALIZE);
+
     if (fond)
         glClearColor(0.8F, 0.8F, 0.8F, 1.0F);
     else
         glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
+
     if (materialLightMode)
         glEnable(GL_LIGHTING);
     else
         glDisable(GL_LIGHTING);
+
     if (light1)
         glEnable(GL_LIGHT1);
     else
         glDisable(GL_LIGHT1);
+
     if (light2)
         glEnable(GL_LIGHT2);
     else
         glDisable(GL_LIGHT2);
-    if (light3)
-        glEnable(GL_LIGHT3);
-    else
-        glDisable(GL_LIGHT3);
-    if (light4)
-        glEnable(GL_LIGHT4);
-    else
-        glDisable(GL_LIGHT4);
+
     glPolygonMode(GL_FRONT_AND_BACK, (polygonMode == 1) ? GL_FILL : GL_LINE);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -162,9 +87,29 @@ static void display(void) {
         
         glScalef(zoom, zoom, zoom);
     }
-    
-    // Light init
-    initLight();
+
+    // La c'est pour tester avec l'ancienne lumière voir la différence avec l'update de la fonction draw
+
+        /*GLfloat light1Diff[] = { 1.0, 1.0, 0.8, 1.0 };
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, light1Diff);
+        GLfloat light1Ambient[] = { 0.0, 0.0, 0.0 };
+        glLightfv(GL_LIGHT1, GL_AMBIENT, light1Ambient);
+        GLfloat light1Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+        glLightfv(GL_LIGHT1, GL_SPECULAR, light1Spec);
+        GLfloat light1Pos[] = { roomLength / 2, roomLength / 2, roomLength / 2, 1.0 };
+        glLightfv(GL_LIGHT1, GL_POSITION, light1Pos);
+
+        GLfloat light2Diff[] = { 0.25, 0.61, 1.0, 1.0 };
+        glLightfv(GL_LIGHT2, GL_DIFFUSE, light2Diff);
+        GLfloat light2Ambient[] = { 0.0, 0.0, 0.0 };
+        glLightfv(GL_LIGHT2, GL_AMBIENT, light2Ambient);
+        GLfloat light2Spec[] = { 1.0, 1.0, 1.0, 1.0 };
+        glLightfv(GL_LIGHT2, GL_SPECULAR, light2Spec);
+        GLfloat light2Pos[] = { 0.0, roomLength, 0.0, 1.0 };
+        glLightfv(GL_LIGHT2, GL_POSITION, light2Pos);
+        GLfloat dir[] = { 0.0, -roomLength, 0.0 };
+        glLightfv(GL_LIGHT2, GL_SPOT_DIRECTION, dir);
+        glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, 60.0);*/
 
     // Scene
     main_game.display(facetNumber);
@@ -290,10 +235,8 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'g':
     case 'G':
-		timeOfDay++;
-		if (timeOfDay > 2)
-			timeOfDay = 0;
-		glutPostRedisplay();
+		main_game.view.lights.startTransition();
+        printf("%i\n", main_game.view.lights.getCurrentLight());
 		break;
     case 0x20:
         normalize = !normalize;
@@ -396,14 +339,6 @@ static void special(int specialKey, int x, int y) {
         break;
     case GLUT_KEY_F2:
         light2 = !light2;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_F3:
-        light3 = !light3;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_F4:
-        light4 = !light4;
         glutPostRedisplay();
         break;
     }
