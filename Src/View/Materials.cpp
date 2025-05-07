@@ -46,6 +46,9 @@ void setPlasticMaterial(int number) {
     case 3:
         mat_specular[0] = 1.0f; mat_specular[1] = 1.0f; mat_specular[2] = 0.0f; mat_specular[3] = 1.0f;
         break;
+	default:
+		mat_specular[0] = 1.0f; mat_specular[1] = 1.0f; mat_specular[2] = 1.0f; mat_specular[3] = 1.0f;
+		break;
     }
 
 
