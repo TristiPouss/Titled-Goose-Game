@@ -199,6 +199,7 @@ void drawCircle(float originX, float originY, float radius, int facetNumber, GLu
 
     glBegin(GL_TRIANGLE_FAN); // BEGIN CIRCLE
     glVertex2f(originX, originY); // center of circle
+    glNormal3f(0.0F, 0.0F, -1.0F);
     for (int i = 0; i <= facetNumber; i++) {
         float x = originX + (radius * cos(i * twicePi / facetNumber));
         float y = originY + (radius * sin(i * twicePi / facetNumber));
