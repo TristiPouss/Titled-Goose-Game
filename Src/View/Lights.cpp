@@ -39,7 +39,7 @@ void Lights::interpolate(const LightConfig& from, const LightConfig& to, float t
     result.light2SpotCutoff = from.light2SpotCutoff + t * (to.light2SpotCutoff - from.light2SpotCutoff);
 }
 
-void Lights::updateTransition(float deltaTime) {
+void Lights::updateTransition() {
     if (transitioning) {
         transitionProgress += 0.01f; // Incrément progressif (ajustez la vitesse ici)
         if (transitionProgress >= 1.0f) {
@@ -67,8 +67,6 @@ void Lights::updateTransition(float deltaTime) {
         glLightf(GL_LIGHT2, GL_SPOT_CUTOFF, interpolatedLight.light2SpotCutoff);
 
     }
-
-
 }
 
 void Lights::startTransition() {
