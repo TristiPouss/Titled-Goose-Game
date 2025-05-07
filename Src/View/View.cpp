@@ -95,7 +95,7 @@ void View::drawMainScene(int facetNumber) {
    //pawn
    for (int i = 0; i < 4; i++) {
        glPushMatrix();
-       glTranslatef(posPlayers[i].x, posPlayers[i].y, posPlayers[i].z);
+       glTranslatef(posPlayers[i].x, posPlayers[i].y + cellWidth/5, posPlayers[i].z);
        drawPawn(pawnWidth, facetNumber, texturesPawn[i], i);
        glPopMatrix();
    }
