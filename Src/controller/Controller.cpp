@@ -40,6 +40,10 @@ void Controller::playTurn() {
     if (view.isAnimating()) {
         return;
     }
+    // Change light and time of day
+	if (game.getCurrentPlayer() == 0) {
+		view.changeDayTime();
+	}
 
     game.playTurn();
     auto dices = game.getDicesValues();
