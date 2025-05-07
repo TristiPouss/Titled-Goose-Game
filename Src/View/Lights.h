@@ -45,10 +45,10 @@ static LightConfig lightConfigs[3] = {
     // Twilight
     {
         // GL_LIGHT1
-        { 0.98, 0.88, 0.74, 1.0 },
-        { 0.0, 0.0, 0.0, 1.0 },
-        { 1.0, 1.0, 1.0, 1.0 },
-        { 0.0, roomLength / 2, 0.0, 1.0 },
+        { 0.98, 0.88, 0.74, 1.0 }, // Diffuse
+		{ 0.0, 0.0, 0.0, 1.0 },    // Ambient
+		{ 1.0, 1.0, 1.0, 1.0 },    // Specular
+		{ 0.0, roomLength / 2, 0.0, 1.0 }, // Position
 
         // GL_LIGHT2
         { 0.0, 0.0, 0.0, 1.0 }, // Diffuse
@@ -61,7 +61,7 @@ static LightConfig lightConfigs[3] = {
     // Night
     {
         // GL_LIGHT1
-        { 0.75, 0.6, 0.9, 1.0 },
+        { 0.75, 0.6, 0.8, 1.0 },
         { 0.0, 0.0, 0.0, 1.0 },
         { 1.0, 1.0, 1.0, 1.0 },
         { 0.0, roomLength / 2, 0.0, 1.0 },
