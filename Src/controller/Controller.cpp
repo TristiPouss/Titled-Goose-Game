@@ -27,24 +27,18 @@ void Controller::update(time_t frameTime) {
 
     // Update the current player in the view at the end of the frame in case of animation
     // This ensure that the camera is set to the right player
-    if (!view.isAnimating()) view.setCurrentPlayer(game.getCurrentPlayer());
+    if (!view.isAnimating() && game.getState() == gooseGameModel::stateGame::PLAYING) { 
+        this->playTurn();
+        view.setCurrentPlayer(game.getCurrentPlayer());
+        // Change light and time of day
+        if (game.getCurrentPlayer() == 0) {
+            view.changeDayTime();
+        }
+    };
 }
 
 
 void Controller::playTurn() {
-    // Play the current turn in the game
-    if (game.getState() == gooseGameModel::stateGame::WAITING) {
-       game.launchGame();
-       return;
-    }
-    if (view.isAnimating()) {
-        return;
-    }
-    // Change light and time of day
-	if (game.getCurrentPlayer() == 0) {
-		view.changeDayTime();
-	}
-
     game.playTurn();
     auto dices = game.getDicesValues();
     auto dice1 = std::get<0>(dices);
@@ -52,6 +46,11 @@ void Controller::playTurn() {
     view.setDicesValues(dice1, dice2);
     
     view.switchToDiceScene();
+}
+
+void Controller::launchGame() {
+    // Start the game
+    game.launchGame();
 }
 
 void Controller::resetGame() {
