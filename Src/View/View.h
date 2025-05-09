@@ -48,7 +48,7 @@ class View
         void changeDayTime();
 
         void setCurrentPlayer(unsigned long player) {
-            currentPlayer = player;
+            if (!f_anim) currentPlayer = player;
         }
 
         void setBoard(gooseGameModel::Board board) {
@@ -111,6 +111,7 @@ class View
         float timerDiceRolling = 0;
         float timerDiceShowing = 0;
 		float timerChangeTimeOfDay = 0;
+        
 
         unsigned long currentPlayer = 0;
 

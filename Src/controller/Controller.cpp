@@ -29,12 +29,11 @@ void Controller::update(time_t frameTime) {
     // This ensure that the camera is set to the right player
     if (!view.isAnimating() && game.getState() == gooseGameModel::stateGame::PLAYING) { 
         view.setCurrentPlayer(game.getCurrentPlayer());
-        this->playTurn();
-    
-        // Change light and time of day
-        if (game.getCurrentPlayer() == 0) {
+         // Change light and time of day
+         if (game.getCurrentPlayer() == 0) {
             view.changeDayTime();
         }
+        this->playTurn();
     };
 }
 
