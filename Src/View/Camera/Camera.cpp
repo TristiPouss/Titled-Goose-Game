@@ -37,7 +37,8 @@ void Camera::initCamera(int wx, int wy) {
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
     } else {
-        gluPerspective(FOV, ratio, 0.1, (dist + ray)*100);
+        ang = (f_cameraOnCurrentPlayer) ? 2 * FOV/3: FOV;
+        gluPerspective(ang, ratio, 0.1, (dist + ray)*100);
         computeDist();
        
         glMatrixMode(GL_MODELVIEW);
