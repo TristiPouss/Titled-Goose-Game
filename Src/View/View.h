@@ -63,13 +63,7 @@ class View
             return f_anim;
         }
 
-        void switchToDiceScene() {
-            scene = DICE_SCENE;
-            f_anim = true;
-            f_diceRolling = true;
-            cam.switchCameraOnDice();
-            timerDiceRolling = TIMER_DICE_ROLLING; // Set the duration for the dice rolling animation
-        }
+        void switchToDiceScene();
 
         void switchCameraOnCurrentPlayer() {
             cam.switchCameraOnCurrentPlayer();

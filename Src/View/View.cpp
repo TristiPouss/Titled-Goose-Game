@@ -432,3 +432,11 @@ void View::changeDayTime() {
     lights.startTransition();
     timerChangeTimeOfDay = TIMER_CHANGE_TIME_OF_DAY;
 }
+
+void View::switchToDiceScene(){
+    scene = DICE_SCENE;
+    f_anim = true;
+    f_diceRolling = true;
+    cam.switchCameraOnDice();
+    timerDiceRolling = TIMER_DICE_ROLLING; // Set the duration for the dice rolling animation
+}
