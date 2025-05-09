@@ -75,22 +75,26 @@ public:
             currentViewCamera = isometricCamera;
             f_cameraOnIsometric = true;
             f_cameraOnCurrentPlayer = false;
+            f_cameraOnDice = false;
             return;
         }
         f_cameraOnCurrentPlayer = true;
         f_cameraOnDice = false;
+        f_cameraOnIsometric = false;
     }
 
     void switchCameraOnDice() {
         if (f_cameraOnDice) {
             currentViewCamera = isometricCamera;
+            f_cameraOnCurrentPlayer = false;
+            f_cameraOnDice = false;
             f_cameraOnIsometric = true;
         } else {
             currentViewCamera = diceCamera;
             f_cameraOnIsometric = false;
+            f_cameraOnCurrentPlayer = false;
+            f_cameraOnDice = true;
         }
-        f_cameraOnDice = !f_cameraOnDice;
-        f_cameraOnCurrentPlayer = false;
     }
 
     bool isCameraIsometric() {
