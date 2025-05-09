@@ -42,6 +42,35 @@ static const float TIMER_DICE_ROLLING = 2.0F; // Timeout for the dice animation
 static const float TIMER_DICE_SHOWING = 3.0F; // Timeout for the dice showing animation
 static const float TIMER_CHANGE_TIME_OF_DAY = 100.0F; // Timeout for every tick of transition between day times
 
+static int f_help = 1;            // Flag to enable/disable help display
+static char* helpText[] = {
+    "  - 'Esc'      : quit game",
+    "  - 'Space'    : normalize toggle",
+    "  - 'm'        : polygon mode toggle",
+    "  - 'n'        : previous facetNumber",
+    "  - 'N'        : next facetNumber ",
+    "  - 'P'        : camera on current player toggle ",
+    "  - 'O'        : camera on dice toggle ",
+    "  - 'C'        : perspective camera toggle ()",
+    "  - 'k'        : zoom out ",
+    "  - 'K'        : zoom in ",
+    "  - 'Z'        : move camera forward",
+    "  - 'S'        : move camera backward ",
+    "  - 'Q'        : move camera left ",
+    "  - 'D'        : move camera right ",
+    "  - 'Arrows'   : rotate around the camera's look point",
+    "  - 'f'        : fullscreen mode ",
+    "  - 'b'        : background color toggle ",
+    "  - 'c'        : culling toggle ",
+    "  - 'H'        : help toggle",
+    "  - 'V'        : play turn",
+    "  - 'r'        : reset game ",
+    "  - 'R'        : reset zoom, rotation and modifications to camera ",
+    "  - 'F1, F2'   : Lights 1 and 2 toggle",
+    "  - 'F10'      : lighthing toggle",
+    "  - 'T'        : textures toggle"
+};
+
 #ifndef M_PI 
 #define M_PI 3.14159
 #endif

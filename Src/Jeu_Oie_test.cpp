@@ -26,6 +26,45 @@ static void init(void) {
     glEnable(GL_DEPTH_TEST);
 }
 
+void renderText(float x, float y, const char* text) {
+    glRasterPos2f(x, y); // Position du texte
+    for (const char* c = text; *c != '\0'; c++) {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_10, *c); // Police et caractère
+    }
+}
+
+void drawHUD() {
+    // Sauvegarder les états OpenGL
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    gluOrtho2D(0, INIT_wTx, 0, INIT_wTy); // Projection orthographique (fenêtre en pixels)
+
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glLoadIdentity();
+
+    glDisable(GL_DEPTH_TEST); // Désactiver le test de profondeur pour le HUD
+    glDisable(GL_LIGHTING);   // Désactiver l'éclairage pour le HUD
+
+    // Dessiner du texte ou des éléments du HUD
+    glColor3f(1.0f, 1.0f, 1.0f); // Couleur blanche
+	for (int i = 0; i < sizeof(helpText) / sizeof(helpText[0]); i++) {
+        renderText(10.0f, INIT_wTy / 2 - (INIT_wTy / 50 * i), helpText[i]);
+	}
+
+    // Restaurer les états OpenGL
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}
+
+
 /* Fonction executee lors d'un rafraichissement */
 /* de la fenetre de dessin                      */
 
@@ -92,6 +131,9 @@ static void display(void) {
     main_game.display(facetNumber);
 
     glPopMatrix();
+
+	// Draw HUD
+    if(f_help) drawHUD();
 
     glFlush();
     glutSwapBuffers();
@@ -221,6 +263,8 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'H':
     case 'h':
+		f_help = !f_help;
+
         printf("Help\n");
         printf("  - 'Esc'      : quit game\n");
         printf("  - 'Space'    : normalize toggle\n");
@@ -233,6 +277,7 @@ static void keyboard(unsigned char key, int x, int y) {
         printf("  - 'Q'        : move camera left\n");
         printf("  - 'D'        : move camera right\n");
         printf("  - 'f'        : fullscreen mode\n");
+        printf("  - 'g'        : change time of day\n");
         printf("  - 'b'        : background color toggle\n");
         printf("  - 'c'        : culling toggle\n");
         printf("  - 'C'        : perspective camera toggle\n");
