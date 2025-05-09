@@ -254,6 +254,10 @@ void View::updateMainScene(float deltaTime) {
         
         // Check if the player is already at the target cell position
         if (posPlayers[i].caseNumber == targetPos) {
+            if (currentPlayer == i && f_anim && timerChangeTurn == 0) {
+                cam.setCameraPlayerPosition(posPlayers[i].x, posPlayers[i].y, posPlayers[i].z);
+                timerChangeTurn = TIMER_TIMEOUT;
+            }
             continue; // Player is already at the target position
         }
         f_anim = true; // Set animation flag to true
