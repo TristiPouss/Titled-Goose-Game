@@ -365,6 +365,11 @@ void View::update(float deltaTime) {
             setScene(MAIN_SCENE); // Switch back to the main scene
             switchCameraOnDice();
             timerDiceShowing = 0;
+            if (f_changeTimeOfDay) {
+                f_changeTimeOfDay = false;
+                timerChangeTimeOfDay = TIMER_CHANGE_TIME_OF_DAY;
+                lights.startTransition();
+            }
         }
     }
     
@@ -429,6 +434,13 @@ void View::showDiceFace(int value) {
 
 void View::changeDayTime() {
 	// Change the time of day
-    lights.startTransition();
-    timerChangeTimeOfDay = TIMER_CHANGE_TIME_OF_DAY;
+   f_changeTimeOfDay = true; 
+}
+
+void View::switchToDiceScene(){
+    scene = DICE_SCENE;
+    f_anim = true;
+    f_diceRolling = true;
+    cam.switchCameraOnDice();
+    timerDiceRolling = TIMER_DICE_ROLLING; // Set the duration for the dice rolling animation
 }

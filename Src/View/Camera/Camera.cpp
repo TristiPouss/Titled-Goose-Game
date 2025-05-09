@@ -17,6 +17,10 @@ void Camera::setCameraPlayerPosition(float x, float y, float z) {
     currentViewCamera.eye[1] = y + pawnWidth * 2;
     currentViewCamera.eye[2] = z;
 
+    currentViewCamera.up[0] = 0.0;
+    currentViewCamera.up[1] = 0.0;
+    currentViewCamera.up[2] = 1.0;
+
 }
 
 void Camera::initCamera(int wx, int wy) {

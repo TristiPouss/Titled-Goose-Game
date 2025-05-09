@@ -250,7 +250,7 @@ static void keyboard(unsigned char key, int x, int y) {
         break;
     case 'v':
     case 'V':
-        main_game.playTurn();
+        main_game.launchGame();
         glutPostRedisplay();
         break;
     case 'r':

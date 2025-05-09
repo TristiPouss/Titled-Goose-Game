@@ -48,7 +48,7 @@ class View
         void changeDayTime();
 
         void setCurrentPlayer(unsigned long player) {
-            currentPlayer = player;
+            if (!f_anim) currentPlayer = player;
         }
 
         void setBoard(gooseGameModel::Board board) {
@@ -63,13 +63,7 @@ class View
             return f_anim;
         }
 
-        void switchToDiceScene() {
-            scene = DICE_SCENE;
-            f_anim = true;
-            f_diceRolling = true;
-            cam.switchCameraOnDice();
-            timerDiceRolling = TIMER_DICE_ROLLING; // Set the duration for the dice rolling animation
-        }
+        void switchToDiceScene();
 
         void switchCameraOnCurrentPlayer() {
             cam.switchCameraOnCurrentPlayer();
@@ -117,6 +111,7 @@ class View
         float timerDiceRolling = 0;
         float timerDiceShowing = 0;
 		float timerChangeTimeOfDay = 0;
+        
 
         unsigned long currentPlayer = 0;
 

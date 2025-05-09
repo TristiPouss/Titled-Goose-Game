@@ -23,6 +23,8 @@ public:
     void playTurn();
     void resetGame();
 
+    void launchGame();
+
     //Camera control
 
     void switchCameraPerspect() {
