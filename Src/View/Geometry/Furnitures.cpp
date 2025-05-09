@@ -266,7 +266,7 @@ void drawCell(float l, int facetNumber, gooseGameModel::CellType type) {
 			break;
 	}
 
-	drawCylinder(l, l, x, facetNumber, facetNumber);
+	drawCylinder(l, l, x, facetNumber, facetNumber, textureCubeWhite, textureCubeWhite, textureCubeWhite);
 	drawCylinder(l - x, l - x, x + x, facetNumber, facetNumber, texture, texture, texture);
 
 	resetMaterial();

@@ -16,6 +16,7 @@
 * Modélisation
 * Placement des objets dans la scène
 * Scène des dés
+* README
 
 ### Paul : 
 
@@ -37,7 +38,7 @@
 ## Liste commentée des fichiers du zip
 
 ### Dossier `Src`
-- **Jeu_Oie_test.cpp** : Fichier principal du projet. Contient l'initialisation de la scène 3D, la gestion des lumières et des événements claviers/souris.
+- **Jeu_Oie_test.cpp** : Fichier principal du projet. Contient l'initialisation de la scène 3D, les contrôles clavier et les appels au controller.
 
 #### Sous-dossier `model/`
 - **Board.cc / Board.h** : 
@@ -54,87 +55,52 @@
   - Implémente et déclare la classe `Player`, qui représente un joueur dans le jeu, avec des propriétés comme le nom, la position, et l'état.
 
 #### Sous-dossier `tests/`
-- **CMakeLists.txt** : Fichier de configuration pour la compilation des tests.
-- **unit_test.cc** : Contient des tests unitaires pour valider les fonctionnalités principales du projet.
+- **CMakeLists.txt** : 
+  - Fichier de configuration pour la compilation des tests.
+- **unit_test.cc** : 
+  - Contient des tests unitaires pour valider les fonctionnalités du model.
 
 #### Sous-dossier `View/`
-##### Fichiers principaux
-- **Colors.h** : Définit des constantes pour les couleurs utilisées dans la vue (par exemple, `white`, `grey`, `darkGrey`).
-- **Settings.h** : Contient des paramètres globaux pour la vue, comme la résolution de la fenêtre, les options d'affichage, et les drapeaux pour les animations.
+- **Colors.h** : 
+  - Définit des constantes pour les couleurs utilisées dans la vue (par exemple, `white`, `grey`, `darkGrey`).
+- **Settings.h** : 
+  - Contient des paramètres globaux pour la vue, comme la résolution de la fenêtre, les options d'affichage, et les drapeaux pour les animations.
+- **Light.cpp / Light.h** : 
+  - Implémente les différentes lumières utilisées dans le jeu.
+  - Elles simulent plusieurs heures de la journée.
+- **Materials.cpp / Materials.h** : 
+  - Implémente les différents matériaux utilisés comme `WallMaterial`, `WoodMaterial`.
+- **SceneSettings.h** : 
+  - Définit des constantes pour la construction de la scène.
+- **View.cpp / View.h** : 
+  - Gère l'entièreté de la vue. La construction des différentes scènes (`MainScene` et `DiceScene`) ainsi que leurs animations (déplacement des pions et animations des dés).
 
-#### Sous-dossier `Camera/`
+#### Sous-sous-dossier `Camera/`
 - **Camera.cpp / Camera.h** : 
-  - Implémente et déclare la classe `Camera`, qui gère la position et l'orientation de la caméra dans la scène 3D.
+  - Implémente et déclare la classe `Camera`, qui gère la position et l'orientation des différentes caméras dans la scène 3D.
+  - On a une camera libre qui peut se déplacer, une camera qui suit le joueur actif et une camera vue du dessus.
 
-#### Sous-dossier `Geometry/`
+#### Sous-sous-dossier `Geometry/`
 - **Furnitures.cpp / Furnitures.h** : 
-  - Définit et implémente des objets géométriques spécifiques (par exemple, des meubles ou des éléments de décor).
+  - Définit et implémente des objets spécifiques (des meubles ou des éléments de décor).
+  - Leurs tailles, leur nombre de facettes et leurs textures sont variables.
 - **Shapes.cpp / Shapes.h** : 
   - Contient des fonctions pour dessiner des formes géométriques de base (cube, cylindre, sphère, etc.).
+  - Leurs tailles et leurs nombres de facettes sont variables.
 - **Texture.cpp / Texture.h** : 
   - Gère les textures appliquées aux objets 3D.
 
-## Liste commentée des classes développées
+#### Sous-dossier `controller/`
+- **Controller.cpp / Controller.h** : 
+  - Gère l'interaction entre le modèle, la vue, et l'utilisateur.
+  - Initialisation du jeu, gestion des tours des joueurs, et mise à jour de l'affichage.
 
-### Classes principales
-
-- **Board** (fichiers `Board.cc / Board.h`) :
-  - Représente le plateau de jeu.
-  - Gère les cellules et les interactions entre les joueurs et le plateau.
-  - Fournit des méthodes pour ajouter des joueurs, déplacer des joueurs, et accéder aux cellules.
-
-- **Cell** (fichiers `Cell.cc / Cell.h`) :
-  - Classe de base représentant une case du plateau.
-  - Définie comme une classe virtuelle avec des dérivées spécifiques :
-    - **GooseCell** : Représente une case "Oie" qui permet au joueur d'avancer.
-    - **TrapCell** : Représente une case "Piège" qui bloque le joueur pour un certain nombre de tours.
-    - **TeleportCell** : Représente une case "Téléportation" qui déplace le joueur vers une autre case.
-
-- **Dice** (fichiers `Dice.cc / Dice.h`) :
-  - Simule un dé pour le jeu.
-  - Fournit des méthodes pour lancer le dé et obtenir une valeur aléatoire.
-
-- **Game** (fichiers `Game.cc / Game.h`) :
-  - Gère la logique principale du jeu, comme les tours des joueurs, les règles, et l'état du jeu.
-  - Fournit des méthodes pour ajouter des joueurs, lancer le jeu, et gérer les tours.
-
-- **Player** (fichiers `Player.cc / Player.h`) :
-  - Représente un joueur dans le jeu.
-  - Contient des propriétés comme le nom, la position sur le plateau, et l'état (par exemple, bloqué ou non).
-  - Fournit des méthodes pour déplacer le joueur et gérer son état.
-
-### Classes liées à la vue
-
-- **Camera** (fichiers `Camera.cpp / Camera.h`) :
-  - Gère la position et l'orientation de la caméra dans la scène 3D.
-
-- **Settings** (fichier `Settings.h`) :
-  - Contient les paramètres globaux pour la vue, comme la résolution de la fenêtre, les options d'affichage, et les drapeaux pour les animations.
-
-### Classes liées à la géométrie
-
-- **Furnitures** (fichiers `Furnitures.cpp / Furnitures.h`) :
-  - Définit et implémente des objets géométriques spécifiques (par exemple, des meubles ou des éléments de décor).
-
-- **Shapes** (fichiers `Shapes.cpp / Shapes.h`) :
-  - Contient des fonctions pour dessiner des formes géométriques de base (cube, cylindre, sphère, etc.).
-
-- **Texture** (fichiers `Texture.cpp / Texture.h`) :
-  - Gère les textures appliquées aux objets 3D.
-
-### Classes utilitaires
-
-- **Image** :
-  - Classe représentant une image, utilisée pour charger et manipuler les fichiers PNG.
-
-- **PngFile** :
-  - Classe pour la gestion des fichiers PNG, incluant le chargement et la sauvegarde.
 
 ## Description du sujet
 
 Le projet **Titled-Goose-Game** est une implémentation d'un jeu inspiré du jeu de l'oie, avec des fonctionnalités comme des textures personnalisées, des animations de dés, et une compatibilité multiplateforme (Windows et Linux).
 
-## Documentation d'utilisation
+## Utilisation
 
 1. **Installation** :
    - Clonez le dépôt ou extrayez les fichiers du zip.
@@ -149,7 +115,6 @@ Le projet **Titled-Goose-Game** est une implémentation d'un jeu inspiré du jeu
 
 4. **Contrôles** :
    - Utilisez les touches du clavier pour interagir avec le jeu.
-   - La souris peut être utilisée pour certaines actions spécifiques.
 
 5. **Touches** :
    - 'Esc' : Quitter le jeu
